@@ -1,0 +1,234 @@
+@charset "UTF-8";
+
+body,
+h1 , h2 , h3 , h4 , h5 , h6 ,
+ul , ol , li ,
+dl , dt , dd,
+p{
+  margin : 0 ;
+  padding : 0 ;
+  line-height: 1;
+}
+ul , ol{
+  list-style : none ;
+}
+h1 , h2 , h3 , h4 , h5 , h6{
+  font-weight : normal ;
+}
+section{
+	padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+/*//////////////////////////////////////
+
+            共通
+
+///////////////////////////////////////*/
+.section_wrapper{
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  max-width: 1920px;
+}
+.twitter_top_wrapper{
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: 0;
+}
+.twitter-profile_image{
+  width: 40px;
+  height: 40px;
+  border-radius: 80px;
+}
+
+/*//////////////////////////////////////
+
+            左ページ
+
+///////////////////////////////////////*/
+
+.twitter_top_box{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0 ;
+}
+.twitter_image{
+  width: 60px;
+  height: 60px;
+  padding-top: 20px;
+  margin-left: 140px;
+}
+.twitter_logo{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.twitter_top_menu{
+  margin: 0 auto;
+  margin-left: 140px;
+}
+.twitter_top_menu-inner {
+  margin-top: 32px;
+}
+.twitter_top_menu-inner a{
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  margin: auto;
+  padding: 5px;
+}
+.twitter_top_menu-image{
+  width: 40px;
+  height: 40px;
+  margin-bottom: -10px;
+  margin-right: 20px;
+}
+/*//////////////////////////
+
+      ボタン
+
+//////////////////////////*/
+.tweet_button-first{
+  margin-top: 64px;
+  margin-left: 100px;
+}
+.button_inner-first{
+  padding: 20px 120px;
+  font-size: 18px;
+  font-weight: bold;
+  color:white;
+  text-align: center;
+  text-decoration: none;
+  background-color: deepskyblue ;
+  border-radius: 80px;
+  border: none;
+}
+/*//////////////////////////
+
+      右ページ
+
+//////////////////////////*/
+.twitter_top_partition{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0 auto;
+  margin-right: 8px;
+  border: 1px solid grey;
+}
+.twitter_top_inwrapper{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.twitter_top_title{
+  display: flex;
+  width: 100%;
+  height: 80px;
+  top: 0;
+  padding: 0;
+  border-bottom: 1px solid gray;
+}
+.twitter_top_title p{
+  font-size: 24px;
+  font-weight: bold;
+  padding-left: 16px;
+  margin: auto 0;
+}
+.twitter_top_input-field{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+.twitter_top_input-field-top{
+  display: flex;
+  padding:20px 0 0 10px;
+}
+.tweet_profile{
+  padding-right: 10px;
+}
+.twitter-profile_image2{
+  width: 60px;
+  height: 60px;
+  border-radius: 80px;
+}
+.tweet_area{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+.tweet_text{
+  border: none;
+  width: 100vh;
+  height: auto;
+  font-size: 20px;
+  box-sizing: border-box;
+  outline: none;
+}
+.button_inner-second{
+  display: flex;
+  padding: 15px 25px;
+  font-size: 14px;
+  font-weight: bold;
+  color:white;
+  text-align: center;
+  text-decoration: none;
+  background-color: deepskyblue ;
+  border-radius: 80px;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  margin-top: 16px;
+}
+.space{
+  width: 100%;
+  height: 20px;
+  background-color: lightgray;
+}
+.twitter_top_inbox{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.top_inbox_inner{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 0 0 10px;
+}
+.twitter_username{
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 16px;
+}
+.twitter_id,
+#tweet_time{
+  font-size: 18px;
+  margin-left: 8px;
+  color: lightslategrey;
+}
+.tweet_area_under{
+  padding-left: 72px;
+}
+
+textarea {
+  resize: none;
+}
