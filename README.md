@@ -2,7 +2,7 @@
 
 1.phpコンテナに入る
 ```
-docker exec -it docker_test_php bash
+docker exec -it twitter bash
 ```
 
 2.laravelをインストール
@@ -12,7 +12,7 @@ composer global require laravel/installer
 
 3.laravelのプロジェクト作成
 ```
-composer create-project --prefer-dist laravel/laravel test_docker
+composer create-project --prefer-dist laravel/laravel twitter
 ```
 
 .envを書き換える
@@ -20,7 +20,7 @@ composer create-project --prefer-dist laravel/laravel test_docker
 DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
-DB_DATABASE=docker_test
+DB_DATABASE=twitter
 DB_USERNAME=docker
 DB_PASSWORD=docker
 ```

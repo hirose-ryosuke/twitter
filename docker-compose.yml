@@ -2,7 +2,7 @@ version: '3'
 
 services:
   php:
-    container_name: docker_test_php
+    container_name: twitter_php
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
@@ -11,7 +11,7 @@ services:
 
   nginx:
     image: nginx
-    container_name: docker_test_nginx
+    container_name: twitter_nginx
     ports:
     - 80:80
     volumes:
@@ -22,10 +22,10 @@ services:
 
   db:
     image: mysql:5.7.26
-    container_name: docker_test_db
+    container_name: twitter_db
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: docker_test
+      MYSQL_DATABASE: twitter
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       TZ: 'Asia/Tokyo'
