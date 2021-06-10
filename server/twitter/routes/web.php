@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('top');
+Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+
+Route::group(['middleware' => ['auth']], function () {
+  Route::get('/', 'LinkController@index');
+
+  Route::post('/create', 'LinkController@create');
 });
-Route::get('/', 'LinkController@index');
