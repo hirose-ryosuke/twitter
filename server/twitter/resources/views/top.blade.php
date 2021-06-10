@@ -43,13 +43,16 @@
                         </div>
                         <div class="twitter_top_input-field">
                             <div class="twitter_top_input-field-top">
-                                <div class="tweet_profile"><img class="twitter-profile_image2" src="{{ asset('image/profile.jpg') }}" alt=""></div>
-                                <form method="POST" action="create" class="tweet_area">
+                                <div class="tweet_profile">
+                                    <img class="twitter-profile_image2" src="{{ asset('image/profile.jpg') }}" alt="">
+                                </div>
+                                <form method="POST" action="/create" class="tweet_area">
                                     @csrf
                                     <div class="tweet_area">
                                         <textarea class="tweet_text" id="tweet" name="tweet" placeholder="hello"></textarea>
                                     </div>
-                                        <p><input class="button_inner-second" type="submit" action="create"></p>
+                                        <!-- Todo ボタンに変える -->
+                                        <p><input class="button_inner-second" type="submit"></p>
                                 </form>
                             </div>
                             
