@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,20 +9,9 @@
     <title>Twitter TOP</title>
 </head>
 <body>
-    <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+    
+    @section('top')
         <section class="section_wrapper">
             <div class="twitter_top_wrapper">
                 <div class="twitter_top_box">
@@ -30,7 +20,7 @@
                         <li class="twitter_top_menu-inner"><a href="/"><img class="twitter_top_menu-image" src="{{ asset('image/outline_home_black_24dp.png') }}" alt="">ホーム</a></li>
                         <li class="twitter_top_menu-inner"><a href=""><img class="twitter_top_menu-image" src="{{ asset('image/outline_info_black_24dp.png') }}" alt="">お知らせ</a></li>
                         <li class="twitter_top_menu-inner"><a href=""><img class="twitter_top_menu-image" src="{{ asset('image/outline_email_black_24dp.png') }}" alt="">メッセージ</a></li>
-                        <li class="twitter_top_menu-inner"><a href=""><img class="twitter_top_menu-image twitter-profile_image" src="{{ asset('image/profile.jpg') }}" alt="">プロフィール</a></li>
+                        <li class="twitter_top_menu-inner"><a href="/edit-page/{{$user_id}}"><img class="twitter_top_menu-image twitter-profile_image" src="{{ asset('image/profile_image.JPG') }}" alt="">プロフィール</a></li>
                     </ul>
                     <!-- <div class="tweet_button-first">
                         <button class="button_inner-first">Tweet</button>
@@ -51,8 +41,9 @@
                                     <div class="tweet_area">
                                         <textarea class="tweet_text" id="tweet" name="tweet" placeholder="hello"></textarea>
                                     </div>
-                                        <!-- Todo ボタンに変える -->
-                                        <p><input class="button_inner-second" type="submit"></p>
+                                    <div class="tweet_button-first">
+                                        <button class="button_inner-first" type="submit">投稿</button>
+                                    </div>
                                 </form>
                             </div>
                             
@@ -60,21 +51,29 @@
                     </div>
                     <div class="space">.</div>
                     <div class="twitter_top_inbox">
-                    @foreach($twitters as $twitter)
+                        @foreach($tweets as $twitter)
+                        <form method="POST" action="/delete/{{$twitter->id}}">
                             <div class="top_inbox_inner">
-                                <img class="twitter-profile_image2" src="{{ asset('image/profile.jpg') }}" alt="">
-                                <p class="twitter_username">hirose</p>
-                                <p class="twitter_id">@jjj</p>
-                                <span id="tweet_time"></span>
-                                <div class="tweet_area tweet_area_under">
-                                    <div class="tweet_text"  placeholder="hello" id="tweet2" readonly >{{$twitter->tweet}}</div>
-                                </div>
+                                <img class="twitter-profile_image2" src="{{ asset('image/profile_image.JPG') }}" alt="">
+                                <p class="twitter_username" >{{$twitter->user->name}}</p>
+                                <p class="mention" >{{$twitter->user->mention}}</p>
+                                <p class="tweet_date" >{{$twitter->created_at}}</p>
+                                    <div class="tweet_area tweet_area_under">
+                                        @csrf
+                                        <div class="tweet_text"  placeholder="hello" id="tweet2" readonly >{{$twitter->tweet}}
+                                        </div>
+                                        <div class="delete_button">
+                                            <button class="delete_button_inner"  type="submit">削除</button>
+                                        </div>
+                                    </div>
                             </div>
-                    @endforeach
+                        </form>
+                        @endforeach
+                        </div>
                     </div>
-                </div>
             </div>
         </section>
+    @endsection
     </div>
 </body>
 </html>

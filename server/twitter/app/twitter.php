@@ -3,13 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
-class twitter extends Model
+class Twitter extends Model
 {
     protected $guarded = ['id'];
-    
+
     public function user()
     {
-        return $this->hasMany('App\User');
+        return $this->belongsTo('App\User');
+    }
+    
+    public function getCreatedAtAttribute($value)
+    {
+
+        $carbon = new Carbon($value);
+        return $carbon->isoFormat('YYYY年MM月DD日 H時m分s秒  ');
     }
 }

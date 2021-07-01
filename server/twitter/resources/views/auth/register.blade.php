@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+<head>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -24,6 +26,24 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="age" type="text" class="form-control @error('age') is-invalid @enderror" name="age" value="{{ old('age') }}" required autocomplete="age" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row ">
+                            <label for="sex" class="col-md-4 col-form-label text-md-right">{{ __('Sex') }}</label>
+
+                            <div class="col-md-6 radio">
+                                <input id="sex" type="radio" class="form-control @error('sex') is-invalid @enderror" name="sex" value="man" required autocomplete="sex" autofocus checked>man
+                                <input id="sex" type="radio" class="form-control @error('sex') is-invalid @enderror" name="sex" value="woman" required autocomplete="sex" autofocus>woman
+                            </div>
+                        </div>
+                        
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
