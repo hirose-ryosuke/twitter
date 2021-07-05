@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,4 +22,5 @@ Route::group(['middleware' => ['auth']], function () {
   Route::post('/delete/{id}', 'LinkController@delete');
   Route::get('/edit-page/{id}', 'UsersController@editPage');
   Route::post('/edit', 'UsersController@edit');
+  
 });

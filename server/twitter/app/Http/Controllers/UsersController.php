@@ -2,26 +2,29 @@
 
 namespace app\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
 use App\Twitter;
 use App\User;
 use Auth;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 class UsersController extends Controller
 {
-    protected function validator(array $twitter)
+    protected function validator(Request $request)
     {
-        return Validator::make($twitter, [
+        $params=$request->all();
+        return Validator::make($params,[
             'name' => ['required', 'string', 'max:10'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed','alpha_num',],
             'age' => ['required','digits:2'],
             'sex' => ['required', 'string',],
-            'mention'=>['unique:users',]
+            'mention'=>['unique:users']
             
         ]);
     }
@@ -41,10 +44,12 @@ class UsersController extends Controller
             'name' => $request->name,
             'mention' => $request->mention,
             'email' => $request->email,
-            'password' => $hash,
-
+            'password' =>$request->password,
+            
+            
         ]);
         return redirect('/');
         
     }
+    
 }
