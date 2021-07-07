@@ -15,19 +15,6 @@ use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
-    protected function validator(Request $request)
-    {
-        $params=$request->all();
-        return Validator::make($params,[
-            'name' => ['required', 'string', 'max:10'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed','alpha_num',],
-            'age' => ['required','digits:2'],
-            'sex' => ['required', 'string',],
-            'mention'=>['unique:users']
-            
-        ]);
-    }
     public function editPage($id)
     {
         $twitter = Twitter::find($id);
@@ -40,15 +27,22 @@ class UsersController extends Controller
     {  
         $hash = Hash::make('password');
 
+        $validatedData = $request->validate([
+            'name' => ['string', 'max:10'],
+            'email' => ['string', 'email', 'max:255', 'unique:users'],
+            'password' => ['string', 'min:8', 'confirmed', 'alpha_num',],
+            'age' => ['digits:2'],
+            'sex' => ['string',],
+            'mention' => ['unique:users']
+        ]);
+
         User::find($request->id)->update([
             'name' => $request->name,
             'mention' => $request->mention,
             'email' => $request->email,
             'password' =>$request->password,
-            
-            
         ]);
-        return redirect('/');
+        return redirect('/edit-page/1');
         
     }
     

@@ -26,11 +26,11 @@
                             id="users_image">
                         </p>
                         <p>
-                            name：<input id="name" type="text" name="name" value="<?php echo e($twitter->user->name); ?>"required>
+                            name：<input id="name" type="text" name="name" value="<?php echo e($twitter->user->name); ?>">
                         </p>
                         
                         <p>
-                            E-mail：<input id="email" type="text" name="email" value="<?php echo e($twitter->user->email); ?>"required>
+                            E-mail：<input id="email" type="text" name="email" value="<?php echo e($twitter->user->email); ?>">
                             <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -45,7 +45,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
                         <p>
-                            mention：<input id="mention" type="text" name="mention" value="<?php echo e($twitter->user->mention); ?>"required>
+                            mention：<input id="mention" type="text" name="mention" value="<?php echo e($twitter->user->mention); ?>">
                             <?php $__errorArgs = ['mention'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -60,7 +60,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
                         <p>
-                            password：<input id="password" type="text"  name="password" required autocomplete="new-password"  required>
+                            password：<input id="password" type="text"  name="password"  autocomplete="new-password"  >
                             <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -75,7 +75,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
                         <p>
-                            password：<input id="password-confirm" type="text"  name="password_confirmation" required autocomplete="new-password">
+                            password：<input id="password-confirm" type="text"  name="password_confirmation"  autocomplete="new-password">
                         </p>
                         <input type="submit" name="edit" value="変更" class="edit_button">
                     </form>

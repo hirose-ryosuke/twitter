@@ -26,11 +26,11 @@
                             id="users_image">
                         </p>
                         <p>
-                            name：<input id="name" type="text" name="name" value="{{$twitter->user->name}}"required>
+                            name：<input id="name" type="text" name="name" value="{{$twitter->user->name}}">
                         </p>
                         
                         <p>
-                            E-mail：<input id="email" type="text" name="email" value="{{$twitter->user->email}}"required>
+                            E-mail：<input id="email" type="text" name="email" value="{{$twitter->user->email}}">
                             @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -38,7 +38,7 @@
                                 @enderror
                         </p>
                         <p>
-                            mention：<input id="mention" type="text" name="mention" value="{{$twitter->user->mention}}"required>
+                            mention：<input id="mention" type="text" name="mention" value="{{$twitter->user->mention}}">
                             @error('mention')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
                                 @enderror
                         </p>
                         <p>
-                            password：<input id="password" type="text"  name="password" required autocomplete="new-password"  required>
+                            password：<input id="password" type="text"  name="password"  autocomplete="new-password"  >
                             @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                                 @enderror
                         </p>
                         <p>
-                            password：<input id="password-confirm" type="text"  name="password_confirmation" required autocomplete="new-password">
+                            password：<input id="password-confirm" type="text"  name="password_confirmation"  autocomplete="new-password">
                         </p>
                         <input type="submit" name="edit" value="変更" class="edit_button">
                     </form>
