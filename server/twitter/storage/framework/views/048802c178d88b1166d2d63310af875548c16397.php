@@ -17,20 +17,21 @@
             <div class="profile_box">
                 
                 <div class="profile_partition">
-                    <form method="POST" action="/edit" enctype="multipart/">
+                    <form route="/users/{$user->id}/edit" method="POST" action="/edit" enctype="multipart/">
                     <?php echo csrf_field(); ?>
 
-                        <input type="hidden" name="id" value="<?php echo e($twitter->id); ?>">
+                        
                         <p> 
                             Profile_image:<input type="file" name="users_image" class="input-file"
-                            id="users_image">
+                            id="image_url">
                         </p>
+                        <img src="<?php echo e(asset('storage/avatar/' . $user->image_path)); ?>"alt="">
                         <p>
-                            name：<input id="name" type="text" name="name" value="<?php echo e($twitter->user->name); ?>">
+                            name：<input id="name" type="text" name="name" value="<?php echo e($user->name); ?>"required>
                         </p>
                         
                         <p>
-                            E-mail：<input id="email" type="text" name="email" value="<?php echo e($twitter->user->email); ?>">
+                            E-mail：<input id="email" type="text" name="email" value="<?php echo e($user->email); ?>"required>
                             <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -45,7 +46,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
                         <p>
-                            mention：<input id="mention" type="text" name="mention" value="<?php echo e($twitter->user->mention); ?>">
+                            mention：<input id="mention" type="text" name="mention" value="<?php echo e($user->mention); ?>"required>
                             <?php $__errorArgs = ['mention'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

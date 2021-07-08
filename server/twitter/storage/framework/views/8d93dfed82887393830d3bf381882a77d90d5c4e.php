@@ -19,7 +19,7 @@
                         <li class="twitter_top_menu-inner"><a href="/"><img class="twitter_top_menu-image" src="<?php echo e(asset('image/outline_home_black_24dp.png')); ?>" alt="">ホーム</a></li>
                         <li class="twitter_top_menu-inner"><a href=""><img class="twitter_top_menu-image" src="<?php echo e(asset('image/outline_info_black_24dp.png')); ?>" alt="">お知らせ</a></li>
                         <li class="twitter_top_menu-inner"><a href=""><img class="twitter_top_menu-image" src="<?php echo e(asset('image/outline_email_black_24dp.png')); ?>" alt="">メッセージ</a></li>
-                        <li class="twitter_top_menu-inner"><a href="/edit-page/<?php echo e($user_id); ?>"><img class="twitter_top_menu-image twitter-profile_image" src="<?php echo e(asset('storage/app/public/users_image.JPG')); ?>" alt="">プロフィール</a></li>
+                        <li class="twitter_top_menu-inner"><a href="/edit-page/<?php echo e($user_id); ?>"><img class="twitter_top_menu-image twitter-profile_image" src="(asset<?php echo e(('storage/app/public/image_url')); ?>)" alt="">プロフィール</a></li>
                     </ul>
                     <!-- <div class="tweet_button-first">
                         <button class="button_inner-first">Tweet</button>
@@ -53,7 +53,7 @@
                         <?php $__currentLoopData = $tweets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $twitter): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <form method="POST" action="/delete/<?php echo e($twitter->id); ?>">
                             <div class="top_inbox_inner">
-                                <img class="twitter-profile_image2" src="<?php echo e(asset('image/users_image.JPG')); ?>" alt="">
+                                <img class="twitter-profile_image2" src="<?php echo e(asset('storage/image_url.jpg')); ?>" alt="">
                                 <p class="twitter_username" ><?php echo e($twitter->user->name); ?></p>
                                 <p class="mention" ><?php echo e($twitter->user->mention); ?></p>
                                 <p class="tweet_date" ><?php echo e($twitter->created_at); ?></p>
