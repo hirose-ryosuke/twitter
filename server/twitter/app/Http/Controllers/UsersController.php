@@ -11,21 +11,25 @@ use Carbon\Carbon;
 use App\Twitter;
 use App\User;
 use Auth;
+
 use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
     public function editPage($id)
-    {
-        $twitter = Twitter::find($id);
-        return view('profile', [
-            "twitter" => $twitter
-        ]);
+    {       
+        
+        $user = User::find('id');
+        return view('profile');
     }
-    
-    public function edit(Request $request)
+
+    public function update(Request $request,User $user)
+    {
+        return view('profile', compact('user'));
+    }
+
+    public function edit(Request $request,User $user)
     {  
-        $hash = Hash::make('password');
 
         $validatedData = $request->validate([
             'name' => ['string', 'max:10'],
@@ -35,15 +39,23 @@ class UsersController extends Controller
             'sex' => ['string',],
             'mention' => ['unique:users']
         ]);
+        $password = Hash::make('password');
 
-        User::find($request->id)->update([
+        $user_id = Auth::user()->id();
+        User::find($user_id)->update([
             'name' => $request->name,
             'mention' => $request->mention,
             'email' => $request->email,
             'password' =>$request->password,
         ]);
-        return redirect('/edit-page/1');
+        // return redirect('/edit-page/1');
         
+        $filename = userIDとランダムの文字列の組み合わせ;
+        $path = $request->file('image')->store('public/image_url');
+        $user->image_path = 'string';
+        $user->save();
+
+        return view('/edit-page', compact('user'))->with('filename', basename($path));
     }
     
 }

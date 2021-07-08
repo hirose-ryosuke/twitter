@@ -20,7 +20,10 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/', 'LinkController@index');
   Route::post('/create', 'LinkController@create');
   Route::post('/delete/{id}', 'LinkController@delete');
-  Route::get('/edit-page/{id}', 'UsersController@editPage');
   Route::post('/edit', 'UsersController@edit');
+  Route::get('/edit-page/{id}', 'UsersController@editPage');
+  Route::get('/users/{user}/edit', 'UserController@update');
+  Route::post('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+
   
 });

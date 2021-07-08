@@ -72,7 +72,6 @@ class RegisterController extends Controller
     {   
         $str = '1234567890abcdefghijklmnopqrstuvwxyz';
         $mention = substr(str_shuffle($str),0,10);
-        \Log::debug($mention);
         
         return User::create([
             'name' => $data['name'],
@@ -81,7 +80,7 @@ class RegisterController extends Controller
             'age' => $data['age'],
             'sex' => $data['sex'],
             'mention' => $mention,
-            'users_image'=> 'users_image'
+            'image_path'=>'dddd',
         ]);
     }
     

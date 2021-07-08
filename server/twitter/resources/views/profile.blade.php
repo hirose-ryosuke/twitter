@@ -17,20 +17,21 @@
             <div class="profile_box">
                 
                 <div class="profile_partition">
-                    <form method="POST" action="/edit" enctype="multipart/">
+                    <form route="/users/{$user->id}/edit" method="POST" action="/edit" enctype="multipart/">
                     @csrf
 
-                        <input type="hidden" name="id" value="{{$twitter->id}}">
+                        
                         <p> 
                             Profile_image:<input type="file" name="users_image" class="input-file"
-                            id="users_image">
+                            id="image_url">
                         </p>
+                        <img src="{{ asset('storage/avatar/' . $user->image_path) }}"alt="">
                         <p>
-                            name：<input id="name" type="text" name="name" value="{{$twitter->user->name}}">
+                            name：<input id="name" type="text" name="name" value="{{$user->name}}"required>
                         </p>
                         
                         <p>
-                            E-mail：<input id="email" type="text" name="email" value="{{$twitter->user->email}}">
+                            E-mail：<input id="email" type="text" name="email" value="{{$user->email}}"required>
                             @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -38,7 +39,7 @@
                                 @enderror
                         </p>
                         <p>
-                            mention：<input id="mention" type="text" name="mention" value="{{$twitter->user->mention}}">
+                            mention：<input id="mention" type="text" name="mention" value="{{$user->mention}}"required>
                             @error('mention')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
