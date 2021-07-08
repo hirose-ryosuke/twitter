@@ -1,2 +1,3 @@
 /docker/db
 server/twitter/storage/framework/sessions
+server/twitter/storage/framework/cache
