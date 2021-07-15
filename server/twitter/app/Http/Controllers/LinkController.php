@@ -13,9 +13,11 @@ class LinkController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $tweets = Twitter::with('user')->where('user_id',$user_id)->orderBy('created_at','desc')->get();
         
-        return view ('top', compact("tweets", "user_id"));
+        $tweets = Twitter::with('user')->where('user_id',$user_id)->orderBy('created_at','desc')->get();
+        $user = User::where('id', $user_id)->first();
+
+        return view('top', compact("tweets","user_id","user"));
     }
     public function create(Request $request)
     {

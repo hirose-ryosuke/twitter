@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Controllers\Auth;
 
 class RegisterController extends Controller
 {
@@ -70,6 +70,8 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {   
+        
+
         $str = '1234567890abcdefghijklmnopqrstuvwxyz';
         $mention = substr(str_shuffle($str),0,10);
         
@@ -80,7 +82,7 @@ class RegisterController extends Controller
             'age' => $data['age'],
             'sex' => $data['sex'],
             'mention' => $mention,
-            'image_path'=>'dddd',
+            
         ]);
     }
     

@@ -18,19 +18,14 @@ class UsersController extends Controller
 {
     public function editPage($id)
     {       
-        
-        $user = User::find('id');
-        return view('profile');
+        $user = User::all();
+        $user_id = Auth::id();
+        return view('profile',compact('user', 'user_id'));
     }
 
-    public function update(Request $request,User $user)
-    {
-        return view('profile', compact('user'));
-    }
-
-    public function edit(Request $request,User $user)
+    public function edit(Request $request)
     {  
-
+        $item =User::all();
         $validatedData = $request->validate([
             'name' => ['string', 'max:10'],
             'email' => ['string', 'email', 'max:255', 'unique:users'],
@@ -47,15 +42,20 @@ class UsersController extends Controller
             'mention' => $request->mention,
             'email' => $request->email,
             'password' =>$request->password,
+            
         ]);
-        // return redirect('/edit-page/1');
-        
-        $filename = userIDとランダムの文字列の組み合わせ;
-        $path = $request->file('image')->store('public/image_url');
-        $user->image_path = 'string';
-        $user->save();
-
-        return view('/edit-page', compact('user'))->with('filename', basename($path));
+        return view('/edit-page/{{$user->id}}',['item' => $item]);
     }
-    
-}
+    public function image(Request $request) {
+
+        // バリデーション省略
+        $originalImg = file('image');
+        \Log::debug($originalImg);
+        if($originalImg->isValid()) {
+            $filePath = $originalImg->store('public');
+            $users->image_path = str_replace('public/image/', '', $filePath);
+            $users->save();
+            return redirect("/edit/{$users->id}");
+        }
+    }
+};

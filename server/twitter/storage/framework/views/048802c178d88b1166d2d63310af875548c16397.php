@@ -17,21 +17,22 @@
             <div class="profile_box">
                 
                 <div class="profile_partition">
-                    <form route="/users/{$user->id}/edit" method="POST" action="/edit" enctype="multipart/">
+                    <form route="/users/{$user->id}/edit" method="POST" action="/edit" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
-
-                        
+                        <label for="image">Profile_image:</label>
                         <p> 
-                            Profile_image:<input type="file" name="users_image" class="input-file"
-                            id="image_url">
+                            <input type="file" name="image" class="input-file"
+                            id="image">
                         </p>
-                        <img src="<?php echo e(asset('storage/avatar/' . $user->image_path)); ?>"alt="">
+                        <input type="submit" name="edit" value="変更" class="edit_button">
+                        <label for="name">name：</label>
                         <p>
-                            name：<input id="name" type="text" name="name" value="<?php echo e($user->name); ?>"required>
+                            <input id="name" type="text" name="name" value="<?php echo e($user->name); ?>">
                         </p>
-                        
+                        <label for="email">E-mail</label>
                         <p>
-                            E-mail：<input id="email" type="text" name="email" value="<?php echo e($user->email); ?>"required>
+                            ：<input id="email" type="text" name="email" value="<?php echo e($user->email); ?>">
+                            
                             <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -40,13 +41,14 @@ $message = $__bag->first($__errorArgs[0]); ?>
                                     <span class="invalid-feedback" role="alert">
                                         <strong><?php echo e($message); ?></strong>
                                     </span>
-                                <?php unset($message);
+                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
+                        <label for="mention">mention：</label>
                         <p>
-                            mention：<input id="mention" type="text" name="mention" value="<?php echo e($user->mention); ?>"required>
+                            <input id="mention" type="text" name="mention" value="<?php echo e($user->mention); ?>">
                             <?php $__errorArgs = ['mention'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -55,13 +57,14 @@ $message = $__bag->first($__errorArgs[0]); ?>
                                     <span class="invalid-feedback" role="alert">
                                         <strong><?php echo e($message); ?></strong>
                                     </span>
-                                <?php unset($message);
+                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
+                        <label for="password">password：</label>
                         <p>
-                            password：<input id="password" type="text"  name="password"  autocomplete="new-password"  >
+                            <input id="password" type="text"  name="password"  autocomplete="new-password"  >
                             <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -70,15 +73,16 @@ $message = $__bag->first($__errorArgs[0]); ?>
                                     <span class="invalid-feedback" role="alert">
                                         <strong><?php echo e($message); ?></strong>
                                     </span>
-                                <?php unset($message);
+                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
+                        <label for="password_confirmation">password：</label>
                         <p>
-                            password：<input id="password-confirm" type="text"  name="password_confirmation"  autocomplete="new-password">
+                            <input id="password-confirm" type="text"  name="password_confirmation"  autocomplete="new-password">
                         </p>
-                        <input type="submit" name="edit" value="変更" class="edit_button">
+                        
                     </form>
                     
                 </div>  

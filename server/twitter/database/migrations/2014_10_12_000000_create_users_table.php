@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('age');
             $table->string('sex');
             $table->string('mention')->unique();
-            $table->string('image_path')->default('ss');
+            
         });
     }
 

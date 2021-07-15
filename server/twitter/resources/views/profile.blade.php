@@ -17,47 +17,51 @@
             <div class="profile_box">
                 
                 <div class="profile_partition">
-                    <form route="/users/{$user->id}/edit" method="POST" action="/edit" enctype="multipart/">
+                    <form route="/users/{$user->id}/edit" method="POST" action="/edit" enctype="multipart/form-data">
                     @csrf
-
-                        
+                        <label for="image">Profile_image:</label>
                         <p> 
-                            Profile_image:<input type="file" name="users_image" class="input-file"
-                            id="image_url">
+                            <input type="file" name="image" class="input-file"
+                            id="image">
                         </p>
-                        <img src="{{ asset('storage/avatar/' . $user->image_path) }}"alt="">
+                        <input type="submit" name="edit" value="変更" class="edit_button">
+                        <label for="name">name：</label>
                         <p>
-                            name：<input id="name" type="text" name="name" value="{{$user->name}}"required>
+                            <input id="name" type="text" name="name" value="{{$user->name}}">
                         </p>
-                        
+                        <label for="email">E-mail</label>
                         <p>
-                            E-mail：<input id="email" type="text" name="email" value="{{$user->email}}"required>
+                            ：<input id="email" type="text" name="email" value="{{$user->email}}">
+                            
                             @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                            @enderror
                         </p>
+                        <label for="mention">mention：</label>
                         <p>
-                            mention：<input id="mention" type="text" name="mention" value="{{$user->mention}}"required>
+                            <input id="mention" type="text" name="mention" value="{{$user->mention}}">
                             @error('mention')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                            @enderror
                         </p>
+                        <label for="password">password：</label>
                         <p>
-                            password：<input id="password" type="text"  name="password"  autocomplete="new-password"  >
+                            <input id="password" type="text"  name="password"  autocomplete="new-password"  >
                             @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                            @enderror
                         </p>
+                        <label for="password_confirmation">password：</label>
                         <p>
-                            password：<input id="password-confirm" type="text"  name="password_confirmation"  autocomplete="new-password">
+                            <input id="password-confirm" type="text"  name="password_confirmation"  autocomplete="new-password">
                         </p>
-                        <input type="submit" name="edit" value="変更" class="edit_button">
+                        
                     </form>
                     
                 </div>  

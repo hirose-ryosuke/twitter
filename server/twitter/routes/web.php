@@ -21,9 +21,8 @@ Route::group(['middleware' => ['auth']], function () {
   Route::post('/create', 'LinkController@create');
   Route::post('/delete/{id}', 'LinkController@delete');
   Route::post('/edit', 'UsersController@edit');
-  Route::get('/edit-page/{id}', 'UsersController@editPage');
-  Route::get('/users/{user}/edit', 'UserController@update');
-  Route::post('/users/{user}/edit', 'UserController@edit')->name('users.edit');
-
+  Route::get('/edit-page/{user_id}', 'UsersController@editPage');
+  Route::post('/users/{user}/prof', 'UserController@edit');
+  
   
 });
