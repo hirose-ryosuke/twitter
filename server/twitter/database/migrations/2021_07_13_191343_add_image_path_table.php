@@ -14,7 +14,8 @@ class AddImagePathTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('image_path')->default("default_image.png");  //カラム追加
+            $table->string('product_image')->default("image/default_image.png");  //カラム追加
+            
         });
     }
 
@@ -22,7 +23,7 @@ class AddImagePathTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-+           $table->dropColumn('image_path');  //カラムの削除
++           $table->dropColumn('product_image');  //カラムの削除
         });
     }
 }

@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::post('/delete/{id}', 'LinkController@delete');
   Route::post('/edit', 'UsersController@edit');
   Route::get('/edit-page/{user_id}', 'UsersController@editPage');
-  Route::post('/users/{user}/prof', 'UserController@edit');
+  Route::post('/edit-page/{user_id}', 'UsersController@image')->name('image_route');
   
   
 });

@@ -17,20 +17,24 @@
             <div class="profile_box">
                 
                 <div class="profile_partition">
-                    <form route="/users/{$user->id}/edit" method="POST" action="/edit" enctype="multipart/form-data">
+                    <form route="image_route "method="POST"  enctype="multipart/form-data"
+                    accept="image/png, image/jpeg,image/jpg">
                     <?php echo csrf_field(); ?>
-                        <label for="image">Profile_image:</label>
-                        <p> 
+                    <p> 
+                            <label for="image">Profile_image:</label>
                             <input type="file" name="image" class="input-file"
                             id="image">
                         </p>
                         <input type="submit" name="edit" value="変更" class="edit_button">
-                        <label for="name">name：</label>
+                    </form>
+
+                    <form action="/edit"    method="POST">
                         <p>
+                            <label for="name">name：</label>
                             <input id="name" type="text" name="name" value="<?php echo e($user->name); ?>">
                         </p>
-                        <label for="email">E-mail</label>
                         <p>
+                            <label for="email">E-mail</label>
                             ：<input id="email" type="text" name="email" value="<?php echo e($user->email); ?>">
                             
                             <?php $__errorArgs = ['email'];
@@ -46,8 +50,8 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
-                        <label for="mention">mention：</label>
                         <p>
+                            <label for="mention">mention：</label>
                             <input id="mention" type="text" name="mention" value="<?php echo e($user->mention); ?>">
                             <?php $__errorArgs = ['mention'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -62,8 +66,8 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
-                        <label for="password">password：</label>
                         <p>
+                            <label for="password">password：</label>
                             <input id="password" type="text"  name="password"  autocomplete="new-password"  >
                             <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -78,11 +82,11 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
-                        <label for="password_confirmation">password：</label>
                         <p>
+                            <label for="password_confirmation">password：</label>
                             <input id="password-confirm" type="text"  name="password_confirmation"  autocomplete="new-password">
                         </p>
-                        
+                        <input type="submit" name="edit" value="変更" class="edit_button">
                     </form>
                     
                 </div>  

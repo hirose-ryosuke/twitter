@@ -18,14 +18,17 @@ class UsersController extends Controller
 {
     public function editPage($id)
     {       
-        $user = User::all();
-        $user_id = Auth::id();
-        return view('profile',compact('user', 'user_id'));
+        $user_id = Auth::user()->id;
+        $user = User::where('id',$user_id)->first();
+        return view('profile',compact("user", "user_id"));
     }
 
     public function edit(Request $request)
     {  
-        $item =User::all();
+        $password = Hash::make('password');
+        $user_id = Auth::user()->id;
+        $user = User::where('id',$user_id)->first();
+
         $validatedData = $request->validate([
             'name' => ['string', 'max:10'],
             'email' => ['string', 'email', 'max:255', 'unique:users'],
@@ -34,28 +37,33 @@ class UsersController extends Controller
             'sex' => ['string',],
             'mention' => ['unique:users']
         ]);
-        $password = Hash::make('password');
-
-        $user_id = Auth::user()->id();
         User::find($user_id)->update([
             'name' => $request->name,
             'mention' => $request->mention,
             'email' => $request->email,
-            'password' =>$request->password,
-            
+            'password' =>$password,
         ]);
-        return view('/edit-page/{{$user->id}}',['item' => $item]);
+        
+        return view("profile",compact('item','user_id','user','password'));
     }
     public function image(Request $request) {
+        $user_id = Auth::user()->id;
+        $user = User::where('id',$user_id)->first();
+        $password = Hash::make('password');
 
-        // バリデーション省略
-        $originalImg = file('image');
-        \Log::debug($originalImg);
-        if($originalImg->isValid()) {
-            $filePath = $originalImg->store('public');
-            $users->image_path = str_replace('public/image/', '', $filePath);
-            $users->save();
-            return redirect("/edit/{$users->id}");
-        }
+        $request->validate([
+			'image' => 'file|image|mimes:png,jpeg,png']);
+        $productImage = $request->file('image');
+        
+        //一意のファイル名を自動生成しつつ保存し、かつファイルパス（$productImagePath）を生成
+        //ここでstore()メソッドを使っているが、これは画像データをstorageに保存している
+        $productImagePath = $productImage->store('image',"public");
+        //userIdとproductImageが存在すれば以下の項目をMProductテーブルに保存
+        
+        User::find($user_id)->update([
+                'product_image' => $productImagePath,
+            ]);
+        \Log::debug($productImagePath);
+        return view("profile",compact('password','productImagePath','productImage','user','user_id'));
     }
 };
