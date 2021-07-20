@@ -50,20 +50,20 @@ class UsersController extends Controller
         $user_id = Auth::user()->id;
         $user = User::where('id',$user_id)->first();
         $password = Hash::make('password');
-
+        
         $request->validate([
 			'image' => 'file|image|mimes:png,jpeg,png']);
         $productImage = $request->file('image');
-        
-        //一意のファイル名を自動生成しつつ保存し、かつファイルパス（$productImagePath）を生成
-        //ここでstore()メソッドを使っているが、これは画像データをstorageに保存している
-        $productImagePath = $productImage->store('image',"public");
-        //userIdとproductImageが存在すれば以下の項目をMProductテーブルに保存
+        $image_name = $request->file('image')->getClientOriginalName();
+        $image_path = $user_id.'.'.$image_name;
+        $productImagePath = $productImage->storeAs('public/image',$image_path);
         
         User::find($user_id)->update([
-                'product_image' => $productImagePath,
-            ]);
+            'product_image' => $productImagePath,
+        ]);
+
         \Log::debug($productImagePath);
-        return view("profile",compact('password','productImagePath','productImage','user','user_id'));
+
+        return view("profile",compact('password','user','user_id'));
     }
 };

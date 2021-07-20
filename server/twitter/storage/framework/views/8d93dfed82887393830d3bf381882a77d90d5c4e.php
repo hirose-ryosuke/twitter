@@ -19,7 +19,7 @@
                         <li class="twitter_top_menu-inner"><a href="/"><img class="twitter_top_menu-image" src="<?php echo e(asset('image/outline_home_black_24dp.png')); ?>" alt="">ホーム</a></li>
                         <li class="twitter_top_menu-inner"><a href=""><img class="twitter_top_menu-image" src="<?php echo e(asset('image/outline_info_black_24dp.png')); ?>" alt="">お知らせ</a></li>
                         <li class="twitter_top_menu-inner"><a href=""><img class="twitter_top_menu-image" src="<?php echo e(asset('image/outline_email_black_24dp.png')); ?>" alt="">メッセージ</a></li>
-                        <li class="twitter_top_menu-inner"><a href="/edit-page/<?php echo e($user_id); ?>"><img class="twitter_top_menu-image twitter-profile_image" name="default_image" src="storage/<?php echo e($user->product_image); ?>" alt="">プロフィール</a></li>
+                        <li class="twitter_top_menu-inner"><a href="/edit-page/<?php echo e($user_id); ?>"><img class="twitter_top_menu-image twitter-profile_image" src="storage/<?php echo e($user->product_image); ?>" alt="">プロフィール</a></li>
                     </ul>
                     <!-- <div class="tweet_button-first">
                         <button class="button_inner-first">Tweet</button>
