@@ -15,12 +15,11 @@
         <a href="/" class="return_button">戻る</a>
         <div class="profile_wrapper">
             <div class="profile_box">
-                
                 <div class="profile_partition">
-                    <form route="image_route "method="POST"  enctype="multipart/form-data"
-                    accept="image/png, image/jpeg,image/jpg">
+                    <form route="image_route "method="POST"  enctype="multipart/form-data" accept="image/png, image/jpeg,image/jpg">
                     @csrf
-                    <p> 
+                    <img class="profile_images_size twitter_top_menu-image twitter-profile_image " src="{{asset('/storage/'.$user->product_image)}}" alt="">
+                        <p> 
                             <label for="image">Profile_image:</label>
                             <input type="file" name="image" class="input-file"
                             id="image">
@@ -29,13 +28,14 @@
                     </form>
 
                     <form action="/edit"    method="POST">
+                        @csrf
                         <p>
                             <label for="name">name：</label>
                             <input id="name" type="text" name="name" value="{{$user->name}}">
                         </p>
                         <p>
-                            <label for="email">E-mail</label>
-                            ：<input id="email" type="text" name="email" value="{{$user->email}}">
+                            <label for="email">E-mail：</label>
+                            <input id="email" type="text" name="email" value="{{$user->email}}">
                             
                             @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -53,8 +53,8 @@
                             @enderror
                         </p>
                         <p>
-                            <label for="password">password：</label>
-                            <input id="password" type="text"  name="password"  autocomplete="new-password"  >
+                            <label for="password">新しいパスワード：</label>
+                            <input id="password" type="text"  name="password"  autocomplete="new-password" >
                             @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
                             @enderror
                         </p>
                         <p>
-                            <label for="password_confirmation">password：</label>
+                            <label for="password_confirmation">新しいパスワード(確認)：</label>
                             <input id="password-confirm" type="text"  name="password_confirmation"  autocomplete="new-password">
                         </p>
                         <input type="submit" name="edit" value="変更" class="edit_button">

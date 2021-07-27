@@ -284,7 +284,7 @@ section{
 .profile_box{
   display: flex;
   flex-direction: column;
-  width: calc((100% - 320px)/2);
+  width: calc((100% - 160px)/2);
   height: 90%;
   margin: 0 auto;
   border: solid 2px ;
@@ -319,4 +319,8 @@ section{
   font-size: 24px;
   padding:0 8px;
   
+}
+.profile_images_size{
+  width: 100px;
+  height: 100px;
 }

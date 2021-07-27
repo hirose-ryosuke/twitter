@@ -20,7 +20,7 @@
                         <li class="twitter_top_menu-inner"><a href="/"><img class="twitter_top_menu-image" src="{{ asset('image/outline_home_black_24dp.png') }}" alt="">ホーム</a></li>
                         <li class="twitter_top_menu-inner"><a href=""><img class="twitter_top_menu-image" src="{{ asset('image/outline_info_black_24dp.png') }}" alt="">お知らせ</a></li>
                         <li class="twitter_top_menu-inner"><a href=""><img class="twitter_top_menu-image" src="{{ asset('image/outline_email_black_24dp.png') }}" alt="">メッセージ</a></li>
-                        <li class="twitter_top_menu-inner"><a href="/edit-page/{{$user_id}}"><img class="twitter_top_menu-image twitter-profile_image" src="storage/{{$user->product_image}}" alt="">プロフィール</a></li>
+                        <li class="twitter_top_menu-inner"><a href="/edit-page/{{$user_id}}"><img class="twitter_top_menu-image twitter-profile_image" src="{{asset('/storage/'.$user->product_image)}}" alt="">プロフィール</a></li>
                     </ul>
                     <!-- <div class="tweet_button-first">
                         <button class="button_inner-first">Tweet</button>
@@ -54,14 +54,13 @@
                         @foreach($tweets as $twitter)
                         <form method="POST" action="/delete/{{$twitter->id}}">
                             <div class="top_inbox_inner">
-                                <img class="twitter-profile_image2" src="storage/{{$user->product_image}}"alt="">
+                                <img class="twitter-profile_image2" src="{{asset('/storage/'.$user->product_image)}}"alt="">
                                 <p class="twitter_username" >{{$twitter->user->name}}</p>
                                 <p class="mention" >{{$twitter->user->mention}}</p>
                                 <p class="tweet_date" >{{$twitter->created_at}}</p>
                                     <div class="tweet_area tweet_area_under">
                                         @csrf
-                                        <div class="tweet_text"  placeholder="hello" id="tweet2" readonly >{{$twitter->tweet}}
-                                        </div>
+                                        <div class="tweet_text"  placeholder="hello" id="tweet2" readonly >{{$twitter->tweet}}</div>
                                         <div class="delete_button">
                                             <button class="delete_button_inner"  type="submit">削除</button>
                                         </div>
@@ -69,8 +68,8 @@
                             </div>
                         </form>
                         @endforeach
-                        </div>
                     </div>
+                </div>
             </div>
         </section>
     @endsection

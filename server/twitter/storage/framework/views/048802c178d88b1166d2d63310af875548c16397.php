@@ -15,12 +15,12 @@
         <a href="/" class="return_button">戻る</a>
         <div class="profile_wrapper">
             <div class="profile_box">
-                
                 <div class="profile_partition">
                     <form route="image_route "method="POST"  enctype="multipart/form-data"
                     accept="image/png, image/jpeg,image/jpg">
                     <?php echo csrf_field(); ?>
-                    <p> 
+                    <img class="profile_images_size twitter_top_menu-image twitter-profile_image " src="<?php echo e(asset('/storage/'.$user->product_image)); ?>" alt="">
+                        <p> 
                             <label for="image">Profile_image:</label>
                             <input type="file" name="image" class="input-file"
                             id="image">
@@ -29,6 +29,7 @@
                     </form>
 
                     <form action="/edit"    method="POST">
+                        <?php echo csrf_field(); ?>
                         <p>
                             <label for="name">name：</label>
                             <input id="name" type="text" name="name" value="<?php echo e($user->name); ?>">
@@ -67,7 +68,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
                         <p>
-                            <label for="password">password：</label>
+                            <label for="password">新しいパスワード：</label>
                             <input id="password" type="text"  name="password"  autocomplete="new-password"  >
                             <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -83,7 +84,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                         </p>
                         <p>
-                            <label for="password_confirmation">password：</label>
+                            <label for="password_confirmation">新しいパスワード(確認)：</label>
                             <input id="password-confirm" type="text"  name="password_confirmation"  autocomplete="new-password">
                         </p>
                         <input type="submit" name="edit" value="変更" class="edit_button">

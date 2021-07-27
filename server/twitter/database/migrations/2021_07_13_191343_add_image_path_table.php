@@ -14,7 +14,7 @@ class AddImagePathTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('product_image')->default("image/default_image.png");  //カラム追加
+            $table->string('product_image')->default("default_image.png");  //カラム追加
             
         });
     }

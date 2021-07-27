@@ -27,14 +27,11 @@ class UsersController extends Controller
     {  
         $password = Hash::make('password');
         $user_id = Auth::user()->id;
-        $user = User::where('id',$user_id)->first();
 
         $validatedData = $request->validate([
             'name' => ['string', 'max:10'],
             'email' => ['string', 'email', 'max:255', 'unique:users'],
             'password' => ['string', 'min:8', 'confirmed', 'alpha_num',],
-            'age' => ['digits:2'],
-            'sex' => ['string',],
             'mention' => ['unique:users']
         ]);
         User::find($user_id)->update([
@@ -44,26 +41,42 @@ class UsersController extends Controller
             'password' =>$password,
         ]);
         
-        return view("profile",compact('item','user_id','user','password'));
+        return redirect("/edit-page/{$user_id}");
     }
     public function image(Request $request) {
         $user_id = Auth::user()->id;
+        //ユーザーID取得//
+
         $user = User::where('id',$user_id)->first();
-        $password = Hash::make('password');
-        
+        //IDからテーブル情報取得//
+
+        $delImageName = User::find($user_id)->product_image;
+        //ユーザーIDから削除する画像選択//
+
+        Storage::delete('public/' . $user->product_image);
+        //元画像データ削除//
+
         $request->validate([
 			'image' => 'file|image|mimes:png,jpeg,png']);
+        //取得可能なデータの指定//
+
         $productImage = $request->file('image');
         $image_name = $request->file('image')->getClientOriginalName();
+        //新規画像データ、データ名取得//
+
         $image_path = $user_id.'.'.$image_name;
-        $productImagePath = $productImage->storeAs('public/image',$image_path);
-        
+        //取得データの名前変更//
+
+        $productImagePath = $productImage->storeAs('public',$image_path);
+        //新規画像データの保存先選択//
+
+        $new_productImagePath =str_replace('%public/%','',$image_path);
+        //保存する際にディレクトリ名消去//
+
         User::find($user_id)->update([
-            'product_image' => $productImagePath,
+            'product_image' => $new_productImagePath,
         ]);
-
-        \Log::debug($productImagePath);
-
-        return view("profile",compact('password','user','user_id'));
+        //新規画像を保存//
+        return redirect("/edit-page/{$user_id}");
     }
 };
