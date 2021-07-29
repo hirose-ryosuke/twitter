@@ -53,16 +53,13 @@
                         <?php $__currentLoopData = $tweets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $twitter): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <form method="POST" action="/delete/<?php echo e($twitter->id); ?>">
                             <div class="top_inbox_inner">
-                                <img class="twitter-profile_image2" src="<?php echo e(asset('/storage/'.$user->product_image)); ?>"alt=""
-                                >
+                                <img class="twitter-profile_image2" src="<?php echo e(asset('/storage/'.$user->product_image)); ?>"alt="">
                                 <p class="twitter_username" ><?php echo e($twitter->user->name); ?></p>
                                 <p class="mention" ><?php echo e($twitter->user->mention); ?></p>
                                 <p class="tweet_date" ><?php echo e($twitter->created_at); ?></p>
                                     <div class="tweet_area tweet_area_under">
                                         <?php echo csrf_field(); ?>
-                                        <div class="tweet_text"  placeholder="hello" id="tweet2" readonly ><?php echo e($twitter->tweet); ?>
-
-                                        </div>
+                                        <div class="tweet_text"  placeholder="hello" id="tweet2" readonly ><?php echo e($twitter->tweet); ?></div>
                                         <div class="delete_button">
                                             <button class="delete_button_inner"  type="submit">削除</button>
                                         </div>
@@ -70,8 +67,8 @@
                             </div>
                         </form>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </div>
                     </div>
+                </div>
             </div>
         </section>
     <?php $__env->stopSection(); ?>

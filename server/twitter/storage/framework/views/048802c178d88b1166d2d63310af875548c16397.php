@@ -16,8 +16,7 @@
         <div class="profile_wrapper">
             <div class="profile_box">
                 <div class="profile_partition">
-                    <form route="image_route "method="POST"  enctype="multipart/form-data"
-                    accept="image/png, image/jpeg,image/jpg">
+                    <form route="image_route "method="POST"  enctype="multipart/form-data" accept="image/png, image/jpeg,image/jpg">
                     <?php echo csrf_field(); ?>
                     <img class="profile_images_size twitter_top_menu-image twitter-profile_image " src="<?php echo e(asset('/storage/'.$user->product_image)); ?>" alt="">
                         <p> 
@@ -35,8 +34,8 @@
                             <input id="name" type="text" name="name" value="<?php echo e($user->name); ?>">
                         </p>
                         <p>
-                            <label for="email">E-mail</label>
-                            ：<input id="email" type="text" name="email" value="<?php echo e($user->email); ?>">
+                            <label for="email">E-mail：</label>
+                            <input id="email" type="text" name="email" value="<?php echo e($user->email); ?>">
                             
                             <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -69,7 +68,7 @@ unset($__errorArgs, $__bag); ?>
                         </p>
                         <p>
                             <label for="password">新しいパスワード：</label>
-                            <input id="password" type="text"  name="password"  autocomplete="new-password"  >
+                            <input id="password" type="text"  name="password"  autocomplete="new-password" >
                             <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
