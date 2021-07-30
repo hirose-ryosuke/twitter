@@ -47,13 +47,13 @@ return [
             'hash' => false,
         ],
     ],
-    'providers' => [
-        'users' => [
-            // EloquentModelを指定するケース
-            'driver' => 'eloquent',
-            'model' => Path\To\EloquentModel\User::class,
-        ],
-    ],
+    // 'providers' => [
+    //     'users' => [
+    //         // EloquentModelを指定するケース
+    //         'driver' => 'eloquent',
+    //         'model' => Path\To\EloquentModel\User::class,
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
-    public function editPage($id)
+    public function editPage()
     {       
         $user_id = Auth::user()->id;
         $user = User::where('id',$user_id)->first();
@@ -41,42 +41,45 @@ class UsersController extends Controller
             'password' =>$password,
         ]);
         
-        return redirect("/edit-page/{$user_id}");
+        return redirect("/edit-page");
     }
     public function image(Request $request) {
-        $user_id = Auth::user()->id;
         //ユーザーID取得//
+        $user_id = Auth::user()->id;
 
-        $user = User::where('id',$user_id)->first();
         //IDからテーブル情報取得//
+        $user = User::where('id',$user_id)->first();
 
-        $delImageName = User::find($user_id)->product_image;
         //ユーザーIDから削除する画像選択//
+        $delImageName = User::find($user_id)->product_image;
+        //
+        if ($delImageName != 'default_image.png') {
+            //元画像データ削除//
+            Storage::delete('public/' . $user->product_image);
+        }
 
-        Storage::delete('public/' . $user->product_image);
-        //元画像データ削除//
-
+        //取得可能なデータの指定//
         $request->validate([
 			'image' => 'file|image|mimes:png,jpeg,png']);
-        //取得可能なデータの指定//
 
+        //新規画像データ、データ名取得//
         $productImage = $request->file('image');
         $image_name = $request->file('image')->getClientOriginalName();
-        //新規画像データ、データ名取得//
 
-        $image_path = $user_id.'.'.$image_name;
         //取得データの名前変更//
+        $image_path = $user_id.'.'.$image_name;
 
-        $productImagePath = $productImage->storeAs('public',$image_path);
         //新規画像データの保存先選択//
+        $productImagePath = $productImage->storeAs('public',$image_path);
 
-        $new_productImagePath =str_replace('%public/%','',$image_path);
         //保存する際にディレクトリ名消去//
+        $new_productImagePath =str_replace('%public/%','',$image_path);
 
         User::find($user_id)->update([
             'product_image' => $new_productImagePath,
         ]);
+
         //新規画像を保存//
-        return redirect("/edit-page/{$user_id}");
+        return redirect("/edit-page");
     }
 };
