@@ -42,7 +42,8 @@ class User extends Authenticatable
         return $this->hasMany('App\twitter');
     }
 
-    
+
+
     public function follows() {
         return $this->belongsToMany(User::class, 'user_follow', 'user_id', 'following_user_id');
     }
@@ -56,14 +57,17 @@ class User extends Authenticatable
 
     public function follow($user_id)
     {
+        \Log::debug($user_id);
         // すでにフォロー済みではないか？
-        $existing = $this->is_following();
+        $existing = $this->is_following($user_id);
+        \Log::debug($existing);
         // フォローする相手がユーザ自身ではないか？
         $myself = $this->id == $user_id;
+        \Log::debug($myself);
     
         // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
         if (!$existing && !$myself) {
-            $this->user_follow()->attach($user_id);
+            $this->follows()->attach($user_id);
         }
     }
     
@@ -76,7 +80,7 @@ class User extends Authenticatable
     
         // すでにフォロー済み、かつフォロー相手がユーザ自身ではない場合、フォローを外す
         if ($existing && !$myself) {
-            $this->user_follow()->detach($user_id);
+            $this->follows()->detach($user_id);
         }
     }
     

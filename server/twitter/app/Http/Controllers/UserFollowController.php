@@ -54,8 +54,8 @@ class UserFollowController extends Controller
     //フォローする//
     public function store($id)
     {   
-        // Auth::user()->follow($id);
-        \Log::debug($id);
+        \Auth::user()->follow($id);
+        // \Log::debug($test);
 
         return back();
     }
