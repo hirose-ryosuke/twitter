@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','age','sex','mention','product_image'
+        'name', 'email', 'password','age','sex','mention','product_image','following_user_id','user_id'
     ];
 
     /**
@@ -41,4 +41,43 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\twitter');
     }
+
+    
+    public function follows() {
+        return $this->belongsToMany(User::class, 'user_follow', 'user_id', 'following_user_id');
+    }
+    public function followers() {
+        return $this->belongsToMany(User::class, 'user_follow','following_user_id','user_id');
+    }
+        public function is_following($user_id)
+    {
+        return $this->follows()->where('following_user_id', $user_id)->exists();
+    }
+
+    public function follow($user_id)
+    {
+        // すでにフォロー済みではないか？
+        $existing = $this->is_following();
+        // フォローする相手がユーザ自身ではないか？
+        $myself = $this->id == $user_id;
+    
+        // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
+        if (!$existing && !$myself) {
+            $this->user_follow()->attach($user_id);
+        }
+    }
+    
+    public function unfollow($user_id)
+    {
+        // すでにフォロー済みではないか？
+        $existing = $this->is_following($user_id);
+        // フォローを外す相手がユーザ自身ではないか？
+        $myself = $this->id == $user_id;
+    
+        // すでにフォロー済み、かつフォロー相手がユーザ自身ではない場合、フォローを外す
+        if ($existing && !$myself) {
+            $this->user_follow()->detach($user_id);
+        }
+    }
+    
 }

@@ -22,5 +22,11 @@ Route::group(['middleware' => ['auth']], function () {
   Route::post('/delete/{id}', 'LinkController@delete');
   Route::post('/edit', 'UsersController@edit');
   Route::get('/edit-page', 'UsersController@editPage');
-  Route::post('/edit-page', 'UsersController@image')->name('image_route');
+  Route::post('/edit-page', 'UsersController@image');
+  Route::get('/users', 'UserFollowController@index');
+  Route::get('/users-follow', 'UserFollowController@following');
+  Route::get('/users-follower', 'UserFollowController@followering');
+  
+  Route::post('/follow', 'UserFollowController@store')->name('follow');
+  Route::delete('/unfollow', 'UserFollowController@destroy')->name('unfollow');
 });

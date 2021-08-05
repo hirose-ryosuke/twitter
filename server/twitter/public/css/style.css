@@ -76,21 +76,29 @@ section{
   margin-left: 140px;
 }
 .twitter_top_menu-inner {
-  margin-top: 32px;
+  margin-top: 8px;
 }
 .twitter_top_menu-inner a{
+  display: block;
   font-size: 24px;
   font-weight: bold;
   color: black;
   text-decoration: none;
-  margin: auto;
+  cursor: pointer;
   padding: 5px;
+  border: none;
 }
 .twitter_top_menu-image{
   width: 40px;
   height: 40px;
-  margin-bottom: -10px;
-  margin-right: 20px;
+  margin-right: 16px;
+}
+.return_button{
+  display: block;
+  text-decoration: none;
+  color: black;
+  font-size: 24px;
+  padding:16px 0 0 16px;
 }
 /*//////////////////////////
 
@@ -184,6 +192,26 @@ section{
   outline: none;
   resize: none;
 }
+.follow,
+.following,
+.followering{
+  display: flex;
+}
+.follow_number,
+.follower_number{
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  margin-right: 8px;
+}
+.follow_label,
+.follower_label{
+  font-weight: bold;
+  margin-right: 16px;
+}
 .space{
   position: relative;
   width: 100%;
@@ -203,7 +231,8 @@ section{
   top: 0;
   left: 0;
 }
-.twitter_top_inbox{
+.twitter_top_inbox,
+.following_inwrapper{
   display: flex;
   width: 100%;
   height: 100%;
@@ -211,32 +240,39 @@ section{
   margin: 0;
   padding: 0;
 }
-.top_inbox_inner{
+.top_inbox_inner,
+.following_inwrapper_inner{
   display: flex;
   flex-wrap: wrap;
   padding: 20px 0 0 10px;
   border: 1px solid gray;
   border-top: none;
 }
-.twitter_username{
+.twitter_username,
+.following_username{
   font-size: 18px;
   font-weight: bold;
   margin-left: 16px;
 }
 .mention,
-.tweet_date{
+.tweet_date,
+.following_mention{
   font-size: 18px;
   margin-left: 10px;
   color: lightslategrey;
 }
-.tweet_area_under{
+.tweet_area_under,
+.following_inpartition{
   padding-left: 72px;
+  margin-left: auto;
 }
-.delete_button{
+.delete_button,
+.follow_button{
   display: flex;
   margin-left: auto;
 }
-.delete_button_inner{
+.delete_button_inner,
+.follow_button_inner{
   display: flex;
   padding: 16px 24px;
   font-size: 14px;
@@ -250,7 +286,6 @@ section{
   cursor: pointer;
   margin-left: auto;
 }
-
 .radio{
   display: flex;
   flex-direction: row;
@@ -258,21 +293,29 @@ section{
 #sex{
   display: flex;
 }
-
 /*/////////////////////
-      Profile
-/////////////////////*/
 
-.section_profile{
+
+      Profile:following:followering
+            共通項目
+
+
+/////////////////////*/
+.section_profile,
+.section_following{
   width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
 }
-.section_profile h2 {
-  font-size: 32px;
+.section_profile h2,
+.section_following h2{
+  padding-top: 16px;
+  padding-left: 16px;
+  font-size: 24px;
 }
-.profile_wrapper{
+.profile_wrapper,
+.following_wrapper{
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -281,7 +324,8 @@ section{
   padding: 16px 0 0 0;
   background-color: white;
 }
-.profile_box{
+.profile_box,
+.following_box{
   display: flex;
   flex-direction: column;
   width: calc((100% - 160px)/2);
@@ -290,14 +334,17 @@ section{
   border: solid 2px ;
   background-color: rgb(105, 175, 233);
 }
-.profile_partition{
+.profile_partition,
+.following_partition{
   display: flex;
   flex-direction: column;
-  width:100%;
-  height: 100%;
-  margin: 0 auto;
-  padding: 24px 0 0 32px;
+  width:90%;
+  height: 90%;
+  margin: auto;
 }
+/*/////////////////////
+      Profile
+/////////////////////*/
 .profile_partition p{
   display: block;
   color: white;
@@ -313,14 +360,35 @@ section{
   margin-top: 16px;
   cursor: pointer;
 }
-.return_button{
-  text-decoration: none;
-  color: black;
-  font-size: 24px;
-  padding:0 8px;
-  
-}
+
 .profile_images_size{
   width: 100px;
   height: 100px;
+}
+/*/////////////////////
+      following:followering
+/////////////////////*/
+.following_inwrapper{
+  background-color: white;
+}
+.following_inwrapper_inner{
+  border-top:solid 1px;
+}
+.following-profile_image{
+  width: 100px;
+  height: 100px;
+  border-radius: 80px;
+}
+.following_inbox{
+  display: flex;
+  flex-direction: column;
+}
+.following_username{
+  margin-top: 16px;
+}
+.following_mention{
+  margin-top: 8px;
+}
+.follow_button{
+padding-top: 40px;
 }

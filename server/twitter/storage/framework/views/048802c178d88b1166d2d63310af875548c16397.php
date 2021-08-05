@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>" type="text/css">
     <title>Twitter Profile</title>
 </head>
 <body>
@@ -27,7 +27,7 @@
                         <input type="submit" name="edit" value="変更" class="edit_button">
                     </form>
 
-                    <form action="/edit"    method="POST">
+                    <form action="/edit" method="POST">
                         <?php echo csrf_field(); ?>
                         <p>
                             <label for="name">name：</label>

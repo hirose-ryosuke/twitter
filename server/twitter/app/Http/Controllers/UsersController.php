@@ -82,4 +82,5 @@ class UsersController extends Controller
         //新規画像を保存//
         return redirect("/edit-page");
     }
+    
 };
