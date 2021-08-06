@@ -44,11 +44,11 @@
                                 </div>
                                 <div class="follow">
                                     <div class="following">
-                                        <a href="/users-follow" name="follow_number" class="follow_number">20</a>
+                                        <a href="/users-follow" name="follow_number" class="follow_number"><?php echo e($follow_count); ?></a>
                                         <label for="follow_number" class="follow_label">フォロー中</label>
                                     </div>
                                     <div class="followering">
-                                        <a href="/users-follower" name="follower_number" class="follower_number">20</a>
+                                        <a href="/users-follower" name="follower_number" class="follower_number"><?php echo e($follower_count); ?></a>
                                         <label for="follower_number" class="follower_label">フォロワー</label>
                                     </div>
                                 </div>

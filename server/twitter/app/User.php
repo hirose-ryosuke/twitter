@@ -45,26 +45,23 @@ class User extends Authenticatable
 
 
     public function follows() {
-        return $this->belongsToMany(User::class, 'user_follow', 'user_id', 'following_user_id');
+        return $this->belongsToMany(self::class, 'user_follow', 'user_id', 'following_user_id');
     }
+
     public function followers() {
-        return $this->belongsToMany(User::class, 'user_follow','following_user_id','user_id');
+        return $this->belongsToMany(self::class, 'user_follow','following_user_id','user_id');
     }
         public function is_following($user_id)
     {
-        return $this->follows()->where('following_user_id', $user_id)->exists();
+        return (boolean) $this->follows()->where('following_user_id', $user_id)->exists();
     }
 
     public function follow($user_id)
     {
-        \Log::debug($user_id);
         // すでにフォロー済みではないか？
         $existing = $this->is_following($user_id);
-        \Log::debug($existing);
         // フォローする相手がユーザ自身ではないか？
         $myself = $this->id == $user_id;
-        \Log::debug($myself);
-    
         // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
         if (!$existing && !$myself) {
             $this->follows()->attach($user_id);
@@ -77,11 +74,27 @@ class User extends Authenticatable
         $existing = $this->is_following($user_id);
         // フォローを外す相手がユーザ自身ではないか？
         $myself = $this->id == $user_id;
-    
         // すでにフォロー済み、かつフォロー相手がユーザ自身ではない場合、フォローを外す
         if ($existing && !$myself) {
             $this->follows()->detach($user_id);
         }
+    }
+
+
+    
+    public function followCounts() {
+        return $this->belongsToMany(self::class, 'user_follow','following_user_id');
+    }
+    //フォロー中カウント//
+    public function getFollowCount($user_id)
+    {
+        \Log::debug($user_id);
+        return $this->followCounts()->where('following_user_id', $user_id)->count();
+    }
+    //フォロワーカウント//
+    public function getFollowerCount($user_id)
+    {
+        return $this->follows()->where('user_id', $user_id)->count();
     }
     
 }

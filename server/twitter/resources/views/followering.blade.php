@@ -11,7 +11,7 @@
 <body>
 
     <section class="section_following">
-            <h2>フォロワー</h2>
+            <h2 class="follow_h2">フォロワー</h2>
             <a href="/" class="return_button">戻る</a>
             <a href="/users-follow" class="return_button">フォロー中</a>
             <a href="/users" class="return_button">他のユーザー</a>
@@ -19,17 +19,17 @@
                 <div class="following_box">
                     <div class="following_partition">
                         <div class="following_inwrapper">
-                            @foreach (auth()->user()->followers as $users)
+                            @foreach (auth()->user()->followers as $user)
                             @csrf
                                 <div class="following_inwrapper_inner">
-                                    <img class="following-profile_image" src="{{asset('/storage/'.$users->product_image)}}"alt="">
+                                    <img class="following-profile_image" src="{{asset('/storage/'.$user->product_image)}}"alt="">
                                     <div class="following_inbox">
-                                        <p class="following_username" >{{ $users->name }}</p>
-                                        <p class="following_mention" >{{ '@'.$users->mention }}</p>
+                                        <p class="following_username" >{{ $user->name }}</p>
+                                        <p class="following_mention" >{{ '@'.$user->mention }}</p>
                                     </div>
                                     <div class="following_inpartition">
                                         <div class="follow_button">
-                                            <button class="follow_button_inner"  type="submit">フォロワー</button>
+                                            @include('follow_button',['user'=>$user])
                                         </div>
                                     </div>
                                 </div>

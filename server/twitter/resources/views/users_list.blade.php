@@ -10,7 +10,7 @@
 </head>
 <body>
     <section class="section_following">
-        <h2>他のユーザ</h2>
+        <h2 class="follow_h2">他のユーザ</h2>
         <a href="/" class="return_button">戻る</a>
         <a href="/users-follow"  class="return_button">フォロー中</a>
         <a href="/users-follower" class="return_button">フォロワー</a>
@@ -27,9 +27,8 @@
                                     <p class="following_mention" >{{ '@'.$user->mention }}</p>
                                 </div>
                                 <div class="following_inpartition">
-                                @include('follow_button',['user'=>$user])
                                     <div class="follow_button">
-                                        <button class="follow_button_inner"  type="submit">フォロー中</button>
+                                        @include('follow_button',['user'=>$user])
                                     </div>
                                 </div>
                             </div>

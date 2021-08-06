@@ -24,27 +24,29 @@ class UserFollowController extends Controller
         $all_users -> product_image =$users->product_image;
         $all_users -> name =$users->name;
         $all_users -> mention =$users->mention;
+
         return view("/users_list",compact("all_users","user_id","user","users"));
     }
     //フォロー中ページ//
     public function following(Request $request){
         $user_id = Auth::user()->id;
         $all_users = User::where('id','!=',$user_id)->get();
+        $user = User::where('id',$user_id)->first();
 
         $users = new User;
         $all_users -> product_image =$users->product_image;
         $all_users -> name =$users->name;
         $all_users -> mention =$users->mention;
 
-        return view("/following",compact("all_users","user_id","users"));
+        return view("/following",compact("all_users","user_id","users","user"));
     }
     //フォロワーページ//
     public function followering(Request $request){
         $user_id = Auth::user()->id;
         $all_users = User::where('id','!=',$user_id)->get();
         $user = User::where('id',$user_id)->first();
+
         $users = new User;
-        $all_users -> pid =$users->id;
         $all_users -> product_image =$users->product_image;
         $all_users -> name =$users->name;
         $all_users -> mention =$users->mention;
@@ -55,7 +57,6 @@ class UserFollowController extends Controller
     public function store($id)
     {   
         \Auth::user()->follow($id);
-        // \Log::debug($test);
 
         return back();
     }
@@ -65,14 +66,5 @@ class UserFollowController extends Controller
         Auth::user()->unfollow($id);
         return back();
     }
-    //ユーザーのカウント//
-    public function counts($user) {
-        $count_followings = $user->followings()->count();
-        $count_followers = $user->followers()->count();
-
-        return [
-            'count_followings' => $count_followings,
-            'count_followers' => $count_followers,
-        ];
-    }
+    
 }

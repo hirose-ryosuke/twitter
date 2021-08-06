@@ -10,30 +10,30 @@
 </head>
 <body>
     <section class="section_following">
-        <h2>フォロー中</h2>
+        <h2 class="follow_h2">フォロー中</h2>
         <a href="/" class="return_button">戻る</a>
         <a href="/users-follower" class="return_button">フォロワー</a>
         <a href="/users" class="return_button">他のユーザー</a>
         <div class="following_wrapper">
             <div class="following_box">
                 <div class="following_partition">
-                    <div class="following_inwrapper">
-                        @foreach (auth()->user()->follows as $users)
-                        @csrf
-                            <div class="following_inwrapper_inner">
-                                <img class="following-profile_image" src="{{asset('/storage/'.$users->product_image)}}"alt="">
-                                <div class="following_inbox">
-                                    <p class="following_username" >{{ $users->name }}</p>
-                                    <p class="following_mention" >{{ '@'.$users->mention }}</p>
-                                </div>
-                                <div class="following_inpartition">
-                                    <div class="follow_button">
-                                        <button class="follow_button_inner"  type="submit">フォロー中</button>
+                <div class="following_inwrapper">
+                            @foreach (auth()->user()->follows as $user)
+                            @csrf
+                                <div class="following_inwrapper_inner">
+                                    <img class="following-profile_image" src="{{asset('/storage/'.$user->product_image)}}"alt="">
+                                    <div class="following_inbox">
+                                        <p class="following_username" >{{ $user->name }}</p>
+                                        <p class="following_mention" >{{ '@'.$user->mention }}</p>
+                                    </div>
+                                    <div class="following_inpartition">
+                                        <div class="follow_button">
+                                            @include('follow_button',['user'=>$user])
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
                 </div>
             </div>
         </div>
