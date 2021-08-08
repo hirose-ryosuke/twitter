@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,60 +41,40 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\twitter');
     }
-
-
-
-    public function follows() {
-        return $this->belongsToMany(self::class, 'user_follow', 'user_id', 'following_user_id');
-    }
-
-    public function followers() {
-        return $this->belongsToMany(self::class, 'user_follow','following_user_id','user_id');
-    }
-        public function is_following($user_id)
+    public function FollowModel()
     {
-        return (boolean) $this->follows()->where('following_user_id', $user_id)->exists();
+        return $this->hasMany('App\Follow');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(self::class, 'follows', 'followed_id', 'following_id');
+    }
+
+    public function follows()
+    {
+        return $this->belongsToMany(self::class, 'follows', 'following_id', 'followed_id');
     }
 
     public function follow($user_id)
     {
-        // すでにフォロー済みではないか？
-        $existing = $this->is_following($user_id);
-        // フォローする相手がユーザ自身ではないか？
-        $myself = $this->id == $user_id;
-        // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
-        if (!$existing && !$myself) {
-            $this->follows()->attach($user_id);
-        }
+        return $this->follows()->attach($user_id);
     }
-    
+
     public function unfollow($user_id)
     {
-        // すでにフォロー済みではないか？
-        $existing = $this->is_following($user_id);
-        // フォローを外す相手がユーザ自身ではないか？
-        $myself = $this->id == $user_id;
-        // すでにフォロー済み、かつフォロー相手がユーザ自身ではない場合、フォローを外す
-        if ($existing && !$myself) {
-            $this->follows()->detach($user_id);
-        }
+        return $this->follows()->detach($user_id);
     }
 
+    public function isFollowing($user_id)
+    {
+        return (boolean) $this->follows()->where('followed_id', $user_id)->exists();
+    }
 
+    public function isFollowed($user_id)
+    {
+        return (boolean) $this->followers()->where('following_id', $user_id)->exists();
+    }
     
-    public function followCounts() {
-        return $this->belongsToMany(self::class, 'user_follow','following_user_id');
-    }
-    //フォロー中カウント//
-    public function getFollowCount($user_id)
-    {
-        \Log::debug($user_id);
-        return $this->followCounts()->where('following_user_id', $user_id)->count();
-    }
-    //フォロワーカウント//
-    public function getFollowerCount($user_id)
-    {
-        return $this->follows()->where('user_id', $user_id)->count();
-    }
     
 }

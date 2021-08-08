@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/users-follow', 'UserFollowController@following');
   Route::get('/users-follower', 'UserFollowController@followering');
   Route::group(['prefix' => 'users/{id}'], function () {
-      Route::post('follow', 'UserFollowController@store')->name('follow');
-      Route::delete('unfollow', 'UserFollowController@destroy')->name('unfollow');
+    Route::post('follow', 'UserFollowController@store')->name('follow');
+        Route::delete('unfollow', 'UserFollowController@destroy')->name('unfollow');
   });
 });

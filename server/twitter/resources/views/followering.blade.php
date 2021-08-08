@@ -28,6 +28,11 @@
                                         <p class="following_mention" >{{ '@'.$user->mention }}</p>
                                     </div>
                                     <div class="following_inpartition">
+                                        @if (auth()->user()->isFollowed($user->id))
+                                            <div class="follow_verification">
+                                                <span class="verification_message">フォローされています</span>
+                                            </div>
+                                        @endif
                                         <div class="follow_button">
                                             @include('follow_button',['user'=>$user])
                                         </div>
