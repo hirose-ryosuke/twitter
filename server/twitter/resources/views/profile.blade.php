@@ -18,7 +18,7 @@
                 <div class="profile_partition">
                     <form route="image_route "method="POST"  enctype="multipart/form-data" accept="image/png, image/jpeg,image/jpg">
                     @csrf
-                    <img class="profile_images_size twitter_top_menu-image twitter-profile_image " src="{{asset('/storage/'.$user->product_image)}}" alt="">
+                    <img class="profile_images_size twitter_top_menu-image twitter-profile_image " src="{{asset('/storage/images/'.$user->product_image)}}" alt="">
                         <p> 
                             <label for="image">Profile_image:</label>
                             <input type="file" name="image" class="input-file"

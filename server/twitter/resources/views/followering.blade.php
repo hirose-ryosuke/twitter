@@ -22,7 +22,7 @@
                             @foreach (auth()->user()->followers as $user)
                             @csrf
                                 <div class="following_inwrapper_inner">
-                                    <img class="following-profile_image" src="{{asset('/storage/'.$user->product_image)}}"alt="">
+                                    <img class="following-profile_image" src="{{asset('/storage/images/'.$user->product_image)}}"alt="">
                                     <div class="following_inbox">
                                         <p class="following_username" >{{ $user->name }}</p>
                                         <p class="following_mention" >{{ '@'.$user->mention }}</p>

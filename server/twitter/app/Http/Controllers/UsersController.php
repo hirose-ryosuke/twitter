@@ -55,7 +55,7 @@ class UsersController extends Controller
         //
         if ($delImageName != 'default_image.png') {
             //元画像データ削除//
-            Storage::delete('public/' . $user->product_image);
+            Storage::delete('public/images' . $user->product_image);
         }
 
         //取得可能なデータの指定//
@@ -70,10 +70,10 @@ class UsersController extends Controller
         $image_path = $user_id.'.'.$image_name;
 
         //新規画像データの保存先選択//
-        $productImagePath = $productImage->storeAs('public',$image_path);
+        $productImagePath = $productImage->storeAs('public/images',$image_path);
 
         //保存する際にディレクトリ名消去//
-        $new_productImagePath =str_replace('%public/%','',$image_path);
+        $new_productImagePath =str_replace('%public/images%','',$image_path);
 
         User::find($user_id)->update([
             'product_image' => $new_productImagePath,
