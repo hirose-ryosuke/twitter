@@ -6,13 +6,12 @@ use Illuminate\Http\Request;
 use App\Twitter;
 use App\User;
 use App\Follow;
-
 use Auth;
 use Carbon\Carbon;
 
 class LinkController extends Controller
 {
-    public function index(Follow $follow)
+    public function index(Follow $follow,Twitter $twitter)
     {
         $user_id = Auth::user()->id;
         $user = User::where('id', $user_id)->first();
@@ -31,7 +30,12 @@ class LinkController extends Controller
         $is_followed = $login_user->isFollowed($login_user->id);
         $follow_count = $follow->getFollowCount($login_user->id);
         $follower_count = $follow->getFollowerCount($login_user->id);
+
+
         
+        
+
+
         return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets"));
     }
     public function create(Request $request)
@@ -51,5 +55,4 @@ class LinkController extends Controller
         $twitter = Twitter::find($request->id)->delete();
         return redirect('/');
     }
-
 }

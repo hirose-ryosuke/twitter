@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Twitter;
 use App\User;
+use App\Email;
+
+use Mail;
 use Auth;
 
 use Illuminate\Support\Facades\Storage;
@@ -20,7 +25,8 @@ class UsersController extends Controller
     {       
         $user_id = Auth::user()->id;
         $user = User::where('id',$user_id)->first();
-        return view('profile',compact("user", "user_id"));
+        $email = Email::where('id',$user_id)->get();
+        return view('profile',compact("user", "user_id","email"));
     }
 
     public function edit(Request $request)
@@ -43,6 +49,8 @@ class UsersController extends Controller
         
         return redirect("/edit-page");
     }
+
+    //プロフィール画像の変更//
     public function image(Request $request) {
         //ユーザーID取得//
         $user_id = Auth::user()->id;
@@ -83,4 +91,79 @@ class UsersController extends Controller
         return redirect("/edit-page");
     }
 
+    //メールアドレス変更処理~確認メール送信//
+    public function userEmailChange(Request $request,User $users)
+    {
+        $user_id = Auth::user()->id;
+        $users = User::where('id',$user_id)->first();
+        // バリデーションチェック
+        $this->validate($request, User::$editEmailRules);
+        // 対象レコード取得
+        $auth = Auth::user();
+        // リクエストデータ受取
+        $new_email = $request->input('email');
+        // メール照合用トークン生成
+        $update_token = hash_hmac(
+        'sha256',
+        str::random(40).$new_email,
+        env('APP_KEY')
+        );
+        //前のメールアドレス//
+        $user_email =$users->email;
+        // 変更データ一時保存DBへレコード保存
+        $change_email = new  Email;
+        $change_email->user_id = $auth->id;
+        $change_email->new_email = $new_email;
+        $change_email->update_token = $update_token;
+        $change_email->save();
+
+        $domain =config('app.env');
+
+        
+        // 変更前後でメールアドレスが同じか確認
+        $email_check = true;
+        if ($user_email == $new_email) {
+            $email_check = false;}
+            
+        // メールアドレスが変更されていない時にエラーとして処理をかえす
+        $validator = Validator::make(['email' => $email_check],
+        ['email' => 'accepted']);
+
+        if ($validator->fails()) {
+            return  redirect('/edit-page')
+            ->with('flash_message', 'メールアドレスが変更されていません。');
+        }
+
+        // !!!!一時保存DBのデータを引き渡してメールをおくる
+        Mail::send('emails.changeEmail', ['url' =>
+        "{$domain}/edit-page/userEmailUpdate/?token={$update_token}"],function ($message) use ($user_email) {
+            $message->to($user_email)->subject('メールアドレス確認');
+        });
+        //確認メールの送信のお知らせ//
+        return redirect('/edit-page')->with('flash_message', '確認メールを送信しました。');
+    }
+     //確認完了~メールアドレスを更新、一時保存データの削除//
+    public function userEmailUpdate(Request $request)
+    {
+        // メールからのアクセス
+        // http://127.0.0.1:8000/edit-page/userEmailUpdate/?token=????????
+        // トークン受け取り
+        $token = $request->input('token');
+        // トークン照合
+        $email_change = DB::table('change_email')
+        ->where('update_token', '=', $token)
+        ->first();
+        // 照合一致で一時保存DBのメールアドレスをDBメールアドレスに上書
+        $user = User::find($email_change->user_id);
+        $user->email = $email_change->new_email;
+        $user->save();
+        // 一時保存DBレコード削除
+        DB::table('change_email')
+        ->where('update_token', '=', $token)
+        ->delete();
+        // 変更完了通知
+        // (----あとで作成----)
+        // リダイレクト
+        return redirect('/edit-page');
+    }
 };

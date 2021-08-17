@@ -1,48 +1,48 @@
-
+@extends('layouts.app')
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+@include('head')  
     <title>Follower List</title>
 </head>
 <body>
-
+@section('content')
     <section class="section_following">
-            <h2 class="follow_h2">フォロワー</h2>
-            <a href="/" class="return_button">戻る</a>
-            <a href="/users-follow" class="return_button">フォロー中</a>
-            <a href="/users" class="return_button">他のユーザー</a>
             <div class="following_wrapper">
+                @include('nav')
                 <div class="following_box">
                     <div class="following_partition">
+                    <h2>フォロワー</h2>
                         <div class="following_inwrapper">
                             @foreach (auth()->user()->followers as $user)
                             @csrf
-                                <div class="following_inwrapper_inner">
-                                    <img class="following-profile_image" src="{{asset('/storage/images/'.$user->product_image)}}"alt="">
+                            <div class="following_inwrapper_inner">
+                                <div class="profile_container">
+                                    <div class="image_container">
+                                        <img class="following-profile_image" src="{{asset('/storage/images/'.$user->product_image)}}"alt="">
+                                    </div>
                                     <div class="following_inbox">
                                         <p class="following_username" >{{ $user->name }}</p>
                                         <p class="following_mention" >{{ '@'.$user->mention }}</p>
-                                    </div>
-                                    <div class="following_inpartition">
                                         @if (auth()->user()->isFollowed($user->id))
                                             <div class="follow_verification">
                                                 <span class="verification_message">フォローされています</span>
                                             </div>
                                         @endif
-                                        <div class="follow_button">
-                                            @include('follow_button',['user'=>$user])
-                                        </div>
                                     </div>
                                 </div>
+                                <div class="following_inpartition">
+                                    <div class="follow_button follow_button2">
+                                        @include('follow_button',['user'=>$user])
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
             </div>
     </section>
+@endsection
 </body>
 </html>

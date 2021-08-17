@@ -15,6 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'users';
     protected $fillable = [
         'name', 'email', 'password','age','sex','mention','product_image','following_user_id','user_id'
     ];
@@ -36,7 +37,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+    public static $editEmailRules = array(
+
+        'email' => 'required|email'
+    );
     public function twitter()
     {
         return $this->hasMany('App\twitter');
@@ -44,6 +48,13 @@ class User extends Authenticatable
     public function FollowModel()
     {
         return $this->hasMany('App\Follow');
+    }
+    public function Email()
+    {
+        return $this->hasMany('App\Email');
+    }
+    public function nices() {
+        return $this->hasMany('App\Nice');
     }
 
     public function followers()

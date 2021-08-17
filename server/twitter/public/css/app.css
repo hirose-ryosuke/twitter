@@ -67,9 +67,8 @@ section {
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
-  font-size: 0.9rem;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1;
   color: #212529;
   text-align: left;
   background-color: #f8fafc;
@@ -8663,7 +8662,7 @@ button.bg-dark:focus {
 
 .pt-4,
 .py-4 {
-  padding-top: 1.5rem !important;
+  /*padding-top: 1.5rem !important;//*/
 }
 
 .pr-4,
@@ -8673,7 +8672,7 @@ button.bg-dark:focus {
 
 .pb-4,
 .py-4 {
-  padding-bottom: 1.5rem !important;
+  /*padding-bottom: 1.5rem !important;/*/
 }
 
 .pl-4,

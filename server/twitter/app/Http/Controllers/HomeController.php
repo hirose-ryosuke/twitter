@@ -5,6 +5,7 @@ use Auth;
 use App\Twitter;
 use App\User;
 use App\Follow;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -45,8 +46,9 @@ class HomeController extends Controller
         $is_followed = $login_user->isFollowed($login_user->id);
         $follow_count = $follow->getFollowCount($login_user->id);
         $follower_count = $follow->getFollowerCount($login_user->id);
+
         
-        return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets"));
+        return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets","reply"));
     }
 
 };

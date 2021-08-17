@@ -18,11 +18,17 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
   Route::get('/', 'LinkController@index');
+  Route::get('/mail', 'MailSendController@send');
   Route::post('/create', 'LinkController@create');
   Route::post('/delete/{id}', 'LinkController@delete');
-  Route::post('/edit', 'UsersController@edit');
+  // いいねボタン
+Route::get('/reply/nice/{twitter}', 'NiceController@nice')->name('nice');
+Route::get('/reply/unnice/{twitter}', 'NiceController@unnice')->name('unnice');
   Route::get('/edit-page', 'UsersController@editPage');
+  Route::post('/edit', 'UsersController@edit');
   Route::post('/edit-page', 'UsersController@image');
+  Route::post('/edit-page', 'UsersController@userEmailChange')->name('email.change');
+  Route::get('/edit-page/userEmailUpdate/', 'UsersController@userEmailUpdate');
   Route::get('/users', 'UserFollowController@index');
   Route::get('/users-follow', 'UserFollowController@following');
   Route::get('/users-follower', 'UserFollowController@followering');

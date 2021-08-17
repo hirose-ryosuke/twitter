@@ -20,6 +20,14 @@ section{
   margin: 0 auto;
   box-sizing: border-box;
 }
+.error-text{
+  padding: 0 !important;
+  color: red !important;
+  margin: 8px 0 !important;
+}
+.pd-200{
+  padding-left: 200px !important;
+}
 /*//////////////////////////////////////
 
             共通
@@ -57,42 +65,133 @@ section{
   display: flex;
   position: relative;
   flex-direction: column;
-  width: 100%;
+  width: calc((100%-960)/2);
   height: 100%;
   padding: 0;
-  margin: 0 ;
+  margin: 0  auto;
 }
 .twitter_image{
   width: 60px;
   height: 60px;
   padding-top: 20px;
-  margin-left: 140px;
+  margin-left: 80px;
 }
 .twitter_logo{
   width: 100%;
   height: 100%;
   margin: 0;
 }
-.twitter_top_menu{
-  margin: 0 auto;
-  margin-left: 140px;
+/*ドロワーMENU*/
+.menu-checkbox {
+  display: none;
 }
-.twitter_top_menu-inner {
-  margin-top: 8px;
+/* メニューボタンの装飾 */
+.menu-button {
+  display: block;
+  position: fixed;
+  top: 12px;
+  left: 24px;
+  z-index: 200;
+  height: 24px;
+  width: 32px;
+  cursor: pointer;
+}
+.menu-button::before,
+.menu-button::after {
+  content: '';
+  transition: .3s;
+}
+.menu-button::before,
+.menu-button::after,
+.menu-button span {
+  display: block;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  margin-top: -.8px;
+  background-color: #9d9d9d;
+}
+.menu-button::before {
+  top: 0;
+}
+.menu-button::after {
+  bottom: 0;
+}
+.menu-button span {
+  top: 50%;
+}
+
+/* メニューボタンのアニメーション */
+.menu-checkbox:checked ~ .menu-button::before {
+  top: 50%;
+  transform: rotate(45deg);
+}
+.menu-checkbox:checked ~ .menu-button::after {
+  top: 50%;
+  transform: rotate(-45deg);
+}
+.menu-checkbox:checked ~ .menu-button span {
+  display: none;
+}
+.drawer-menu{
+  position: fixed;
+  top: 64px;
+  left: 0;
+  z-index: 200;
+  height: 100%;
+  width: 172px;
+  transform: translateX(-100%);
+  transition: .5s;
+  background: transparent;
+}
+.drawer-menu ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.drawer-menu li {
+  border-bottom: 1px dotted #ccc;
+}
+.drawer-menu a {
+  display: block;
+  padding: 15px;
+  color: #fff;
+  text-decoration: none;
+}
+.menu-checkbox:checked ~ .drawer-menu {
+  transform: translateX(25%);
+}
+.menu-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  cursor: pointer;
+}
+.menu-checkbox:checked ~ .menu-background {
+  display: block;
+}
+.twitter_top_menu-inner{
+
+  height: 40px;
 }
 .twitter_top_menu-inner a{
+  font-family: 'Oswald', sans-serif;
   display: block;
   font-size: 24px;
-  font-weight: bold;
   color: black;
   text-decoration: none;
   cursor: pointer;
-  padding: 5px;
   border: none;
 }
 .twitter_top_menu-image{
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 30px;
   margin-right: 16px;
 }
 .return_button{
@@ -126,18 +225,9 @@ section{
 }
 /*//////////////////////////
 
-      右ページ
+      tweets
 
 //////////////////////////*/
-.twitter_top_partition{
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0 auto;
-}
 .twitter_top_inwrapper{
   display: flex;
   flex-direction: column;
@@ -184,12 +274,26 @@ section{
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-right: 10px;
-  margin-bottom: 20px;
+  margin-right: 8px;
+  margin-bottom: 16px;
+}
+.tweet_area_under{
+  display: flex;
+  flex-direction: row;
+  padding-left: 72px;
+  margin-left: auto;
+  margin-bottom: 8px;
 }
 .tweet_text{
   border: none;
   width: 100%;
+  font-size: 20px;
+  outline: none;
+  resize: none;
+}
+.tweet_text2{
+  border: none;
+  width: calc(100%/2);
   font-size: 20px;
   outline: none;
   resize: none;
@@ -233,8 +337,7 @@ section{
   top: 0;
   left: 0;
 }
-.twitter_top_inbox,
-.following_inwrapper{
+.twitter_top_inbox{
   display: flex;
   width: 100%;
   height: 100%;
@@ -242,8 +345,7 @@ section{
   margin: 0;
   padding: 0;
 }
-.top_inbox_inner,
-.following_inwrapper_inner{
+.top_inbox_inner{
   display: flex;
   flex-wrap: wrap;
   padding: 20px 0 0 10px;
@@ -263,10 +365,9 @@ section{
   margin-left: 10px;
   color: lightslategrey;
 }
-.tweet_area_under,
-.following_inpartition{
-  padding-left: 72px;
-  margin-left: auto;
+.following_inpartition{ 
+  padding-bottom: 8px;
+  margin:0 auto;
 }
 .delete_button,
 .follow_button{
@@ -282,7 +383,7 @@ section{
   color:white;
   text-align: center;
   text-decoration: none;
-  background-color: deepskyblue ;
+  background-color: rgb(240, 124, 70) ;
   border-radius: 80px;
   border: none;
   cursor: pointer;
@@ -316,6 +417,7 @@ section{
   padding-left: 16px;
   font-size: 24px;
 }
+
 .profile_wrapper,
 .following_wrapper{
   display: flex;
@@ -324,25 +426,23 @@ section{
   height: 100%;
   margin: 0 auto;
   padding: 16px 0 0 0;
-  background-color: white;
+  background-color: #fff;
 }
-.profile_box,
-.following_box{
+.profile_box{
   display: flex;
   flex-direction: column;
   width: calc((100% - 160px)/2);
-  height: 90%;
+  height: 100%;
   margin: 0 auto;
   border: solid 2px ;
   background-color: rgb(105, 175, 233);
 }
-.profile_partition,
-.following_partition{
+.profile_partition{
   display: flex;
   flex-direction: column;
   width:90%;
-  height: 90%;
-  margin: auto;
+  height: 100%;
+  margin:24px auto;
 }
 /*/////////////////////
       Profile
@@ -350,7 +450,8 @@ section{
 .profile_partition p{
   display: block;
   color: white;
-  padding: 32px 0 0 0px;
+  padding: 24px 0 0 0px;
+  margin: 0;
 }
 .edit_button{
   font-size: 16px;
@@ -364,50 +465,111 @@ section{
 }
 
 .profile_images_size{
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 /*/////////////////////
       following:followering
 /////////////////////*/
+.following_box{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.following_partition{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  height: 100%;
+}
+.following_partition h2{
+  font-family: bebas-neue-pro, sans-serif;
+  font-size: 32px;
+  color:#000;
+  margin: auto;
+  margin-bottom: 16px;
+}
 .following_inwrapper{
-  background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #b3b2b2;
+  padding-top: 64px;
+  border-radius: 80px 80px 0 0 ;
 }
 .following_inwrapper_inner{
-  border-top:solid 1px;
+  display: flex;
+  flex-direction: column;
+  height: 256px;
+  width: calc((100%-8px*2)/4);
+  border: 1px solid gray;
+  border-radius: 24px ;
+  margin: 0 auto;
+  background-color: #fff;
+}
+.profile_container{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+.image_container{
+  margin: 8px;
 }
 .following-profile_image{
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 80px;
 }
 .following_inbox{
   display: flex;
   flex-direction: column;
+  height: auto;
 }
-.following_username{
+.following_username,
+.following_mention,
+.follow_button{
+  
+  color: #000000;
   margin-top: 16px;
 }
+.following_username,
 .following_mention{
-  margin-top: 8px;
-}
-.follow_button{
-padding-top: 16px;
+  max-width: 167px;
 }
 .follow_verification{
   display: flex;
-  margin-left: auto
+  margin-left: auto;
+  margin-top: 24px;
 }
 .verification_message{
   display: flex;
-  padding: 8px 24px;
+  padding: 8px 16px;
   font-size: 12px;
   color:rgba(255, 255, 255, 0.87);
   text-align: center;
   text-decoration: none;
   background-color: gray ;
-  border-radius: 8px;
+  border-radius: 16px;
   border: none;
-  cursor: pointer;
   margin: auto;
+  margin-right: 4px;
+}
+
+/*////////////////////////
+
+        HEADER
+
+////////////////////////*/
+.bg-self{
+  background-color: yellow !important;
+}
+.self-color{
+  color: #9d9d9d !important;
 }
