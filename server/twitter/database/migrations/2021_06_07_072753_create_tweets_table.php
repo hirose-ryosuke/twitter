@@ -14,14 +14,14 @@ class CreateTweetsTable extends Migration
     public function up()
     {
         Schema::create('tweets', function (Blueprint $table) {
-            $table->Increments('id');
+            $table->bigIncrements('id');
             $table->text('tweet');
             $table->timestamps();
             $table->bigInteger('user_id')->nullable()->unsigned();
             $table->foreign('user_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
-            $table->bigInteger('tweets_id')->nullable();
+            
         });
     }
 

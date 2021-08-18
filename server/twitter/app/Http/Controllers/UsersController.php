@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Twitter;
 use App\User;
 use App\Email;
+use App\Favorite;
 
 use Mail;
 use Auth;

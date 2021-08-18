@@ -12,7 +12,7 @@
         @include('nav')
             <div class="following_box">
                 <div class="following_partition">
-                    <h2>他のユーザー</h2>
+                    <h2 class="follow_h2 text-info">他のユーザー</h2>
                     <div class="following_inwrapper">
                         @foreach ($all_users as $user)
                         @csrf

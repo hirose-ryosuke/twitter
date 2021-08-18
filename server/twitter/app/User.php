@@ -56,7 +56,11 @@ class User extends Authenticatable
     public function nices() {
         return $this->hasMany('App\Nice');
     }
-
+    public function user()
+    {
+        return $this->belongsTo('App\Favorite');
+    }
+    //フォロー機能//
     public function followers()
     {
         return $this->belongsToMany(self::class, 'follows', 'followed_id', 'following_id');
@@ -86,6 +90,35 @@ class User extends Authenticatable
     {
         return (boolean) $this->followers()->where('following_id', $user_id)->exists();
     }
-    
-    
+    //いいね機能//
+    public function favorites()
+    {
+        return $this->belongsToMany(Twitter::class, 'favorites', 'user_id', 'tweets_id')->withTimestamps();
+    }
+    public function favorite($tweets_id)
+    {
+        $exist = $this->is_favorite($tweets_id);
+
+        if($exist){
+            return false;
+        }else{
+            $this->favorites()->attach($tweets_id);
+            return true;
+        }
+    }
+    public function unfavorite($tweets_id)
+    {
+        $exist = $this->is_favorite($tweets_id);
+
+        if($exist){
+            $this->favorites()->detach($tweets_id);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function is_favorite($tweets_id)
+    {
+        return $this->favorites()->where('tweets_id',$tweets_id)->exists();
+    }
 }

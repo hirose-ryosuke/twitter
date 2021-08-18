@@ -7028,7 +7028,7 @@ button.bg-success:focus {
 }
 
 .bg-info {
-  background-color: #6cb2eb !important;
+  background-color: #6cb2eb ;
 }
 
 a.bg-info:hover,
@@ -10754,7 +10754,7 @@ a.text-success:focus {
 }
 
 .text-info {
-  color: #6cb2eb !important;
+  color: #6cb2eb ;
 }
 
 a.text-info:hover,

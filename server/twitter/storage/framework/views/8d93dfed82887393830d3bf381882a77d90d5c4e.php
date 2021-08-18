@@ -58,7 +58,7 @@
                     <div class="tweet_area tweet_area_under">
                         <?php echo csrf_field(); ?>
                         <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly ><?php echo e($twitter->tweet); ?></div>
-
+                        
                         <!--投稿のidが自身の場合のみdeleteボタン表示-->
                         <?php if($twitter->user->id === $user_id): ?>
                         <div class="delete_button">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Twitter;
 use App\User;
 use App\Follow;
+use App\Favorite;
 use Auth;
 use Carbon\Carbon;
 

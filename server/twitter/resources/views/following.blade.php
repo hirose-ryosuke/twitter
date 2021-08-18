@@ -12,7 +12,7 @@
         @include('nav')
             <div class="following_box">
                 <div class="following_partition">
-                <h2>フォロー中</h2>
+                <h2 class="follow_h2 text-info">フォロー中</h2>
                     <div class="following_inwrapper">
                         @foreach (auth()->user()->follows as $user)
                         @csrf

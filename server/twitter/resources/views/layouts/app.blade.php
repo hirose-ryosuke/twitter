@@ -37,15 +37,15 @@
                 <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarExample01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 pd-200">
-                    <li class="nav-item active">
-                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 pd-200 ">
+                    <li class="nav-item active ">
+                    <a class="nav-link text-light" aria-current="page" href="/">Home</a>
                     </li>
-                    <li class="nav-item active">
-                    <a class="nav-link" aria-current="page" href="#">Follow</a>
+                    <li class="nav-item active ">
+                    <a class="nav-link text-light" aria-current="page" href="/users-follow">Follow</a>
                     </li>
-                    <li class="nav-item active">
-                    <a class="nav-link" aria-current="page" href="#">Follower</a>
+                    <li class="nav-item active ">
+                    <a class="nav-link text-light" aria-current="page" href="/users-follower">Follower</a>
                     </li>
                     
                 </ul>
@@ -64,7 +64,7 @@
                     @else
 
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle self-color" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 

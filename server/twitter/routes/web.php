@@ -36,4 +36,10 @@ Route::get('/reply/unnice/{twitter}', 'NiceController@unnice')->name('unnice');
     Route::post('follow', 'UserFollowController@store')->name('follow');
         Route::delete('unfollow', 'UserFollowController@destroy')->name('unfollow');
   });
+  Route::group(['middleware'=>'auth'],function(){
+    Route::group(['prefix'=>'tweets/{id}'],function(){
+      Route::post('favorite','FavoriteController@store')->name('favorites.favorite');
+      Route::delete('unfavorite','FavoriteController@destroy')->name('favorites.unfavorite');
+    });
+});
 });

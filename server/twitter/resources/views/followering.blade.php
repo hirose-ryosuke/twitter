@@ -12,7 +12,7 @@
                 @include('nav')
                 <div class="following_box">
                     <div class="following_partition">
-                    <h2>フォロワー</h2>
+                    <h2 class="follow_h2 text-info">フォロワー</h2>
                         <div class="following_inwrapper">
                             @foreach (auth()->user()->followers as $user)
                             @csrf

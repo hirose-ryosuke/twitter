@@ -13,8 +13,8 @@ class Twitter extends Model
     {
         return $this->belongsTo('App\User');
     }
-    public function nices() {
-        return $this->hasMany('App\Nice');
+    public function favorite() {
+        return $this->hasMany('App\Favorite');
     }
     public function getCreatedAtAttribute($value)
     {
@@ -22,5 +22,9 @@ class Twitter extends Model
         $carbon = new Carbon($value);
         return $carbon->isoFormat('YYYY年MM月DD日 H時m分s秒  ');
     }
-
+    //Favoriteへのリレーション//
+    public function favorite_users()
+    {
+            return $this->belongsToMany(User::class,'favorites','id','user_id')->withTimestamps();
+    }
 }
