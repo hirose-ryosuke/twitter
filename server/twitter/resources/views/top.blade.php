@@ -59,7 +59,28 @@
                     <div class="tweet_area tweet_area_under">
                         @csrf
                         <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >{{$twitter->tweet}}</div>
-                        
+                        <!--- いいねボタン切り替え--->
+                        @if (Auth::id() != $twitter->user->id)
+
+                            @if (Auth::user()->is_favorite($twitter->id))
+
+                                {!! Form::open(['route' => ['favorites.unfavorite', $twitter->id], 'method' => 'delete']) !!}
+                                    {!! Form::submit('いいね！を外す', ['class' => "button btn btn-warning"]) !!}
+                                {!! Form::close() !!}
+
+                            @else
+
+                                {!! Form::open(['route' => ['favorites.favorite', $twitter->id]]) !!}
+                                    {!! Form::submit('いいね！を付ける', ['class' => "button btn btn-success"]) !!}
+                                {!! Form::close() !!}
+
+                            @endif
+
+                        @endif
+                        <!--- いいね数 表示--->
+                        <div class="text-right mb-2">いいね！
+                            <span class="badge badge-pill badge-success">{{ $count_favorite_users }}</span>
+                        </div>
                         <!--投稿のidが自身の場合のみdeleteボタン表示-->
                         @if($twitter->user->id === $user_id)
                         <div class="delete_button">

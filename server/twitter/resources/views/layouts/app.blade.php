@@ -37,7 +37,7 @@
                 <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarExample01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 pd-200 ">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 pd-l ">
                     <li class="nav-item active ">
                     <a class="nav-link text-light" aria-current="page" href="/">Home</a>
                     </li>
@@ -50,7 +50,7 @@
                     
                 </ul>
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto pd-r">
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">

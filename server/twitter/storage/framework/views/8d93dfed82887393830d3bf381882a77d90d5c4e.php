@@ -58,7 +58,34 @@
                     <div class="tweet_area tweet_area_under">
                         <?php echo csrf_field(); ?>
                         <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly ><?php echo e($twitter->tweet); ?></div>
-                        
+                        <!--- いいねボタン切り替え--->
+                        <?php if(Auth::id() != $twitter->user->id): ?>
+
+                            <?php if(Auth::user()->is_favorite($twitter->id)): ?>
+
+                                <?php echo Form::open(['route' => ['favorites.unfavorite', $twitter->id], 'method' => 'delete']); ?>
+
+                                    <?php echo Form::submit('いいね！を外す', ['class' => "button btn btn-warning"]); ?>
+
+                                <?php echo Form::close(); ?>
+
+
+                            <?php else: ?>
+
+                                <?php echo Form::open(['route' => ['favorites.favorite', $twitter->id]]); ?>
+
+                                    <?php echo Form::submit('いいね！を付ける', ['class' => "button btn btn-success"]); ?>
+
+                                <?php echo Form::close(); ?>
+
+
+                            <?php endif; ?>
+
+                        <?php endif; ?>
+                        <!--- いいね数 表示--->
+                        <div class="text-right mb-2">いいね！
+                            <span class="badge badge-pill badge-success"><?php echo e($count_favorite_users); ?></span>
+                        </div>
                         <!--投稿のidが自身の場合のみdeleteボタン表示-->
                         <?php if($twitter->user->id === $user_id): ?>
                         <div class="delete_button">

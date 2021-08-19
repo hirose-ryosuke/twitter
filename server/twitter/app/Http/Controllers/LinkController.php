@@ -12,7 +12,18 @@ use Carbon\Carbon;
 
 class LinkController extends Controller
 {
-    public function index(Follow $follow,Twitter $twitter)
+    public function store(Request $request, $id)
+        {
+                \Auth::user()->favorite($id);
+                return back();
+        }
+
+        public function destroy($id)
+        {
+                \Auth::user()->unfavorite($id);
+                return back();
+        }
+    public function index(Follow $follow,Twitter $twitter,User $users)
     {
         $user_id = Auth::user()->id;
         $user = User::where('id', $user_id)->first();
@@ -31,13 +42,15 @@ class LinkController extends Controller
         $is_followed = $login_user->isFollowed($login_user->id);
         $follow_count = $follow->getFollowCount($login_user->id);
         $follower_count = $follow->getFollowerCount($login_user->id);
-
+        
+        //いいね数の数カウント//
+        $count_favorite_users = $twitter->favorite_users()->count();
 
         
         
 
 
-        return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets"));
+        return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets","count_favorite_users"));
     }
     public function create(Request $request)
     {

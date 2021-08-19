@@ -25,8 +25,11 @@ section{
   color: red !important;
   margin: 8px 0 !important;
 }
-.pd-200{
-  padding-left: 200px !important;
+.pd-l{
+  padding-left: 240px !important;
+}
+.pd-r{
+  padding-right: 280px !important;
 }
 
 /*//////////////////////////////////////
@@ -215,7 +218,7 @@ section{
   padding: 16px 24px;
   font-size: 14px;
   font-weight: bold;
-  color:white;
+  color:#f8fafc;
   text-align: center;
   text-decoration: none;
   background-color: deepskyblue ;
@@ -447,7 +450,7 @@ section{
   height: 100%;
   margin: 0 auto;
   border: solid 2px ;
-  background-color: rgb(105, 175, 233);
+  background-color: #00d5ff!important;
 }
 .profile_partition{
   display: flex;
@@ -468,7 +471,7 @@ section{
 .edit_button{
   font-size: 16px;
   padding: 8px 16px;
-  color: white;
+  color: #f8fafc;
   background-color: rgb(80, 220, 255);
   border: solid .5px;
   border-radius: 10px;

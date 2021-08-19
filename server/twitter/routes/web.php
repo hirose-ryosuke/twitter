@@ -22,8 +22,6 @@ Route::group(['middleware' => ['auth']], function () {
   Route::post('/create', 'LinkController@create');
   Route::post('/delete/{id}', 'LinkController@delete');
   // いいねボタン
-Route::get('/reply/nice/{twitter}', 'NiceController@nice')->name('nice');
-Route::get('/reply/unnice/{twitter}', 'NiceController@unnice')->name('unnice');
   Route::get('/edit-page', 'UsersController@editPage');
   Route::post('/edit', 'UsersController@edit');
   Route::post('/edit-page', 'UsersController@image');
@@ -36,10 +34,9 @@ Route::get('/reply/unnice/{twitter}', 'NiceController@unnice')->name('unnice');
     Route::post('follow', 'UserFollowController@store')->name('follow');
         Route::delete('unfollow', 'UserFollowController@destroy')->name('unfollow');
   });
-  Route::group(['middleware'=>'auth'],function(){
+  //いいね機能//
     Route::group(['prefix'=>'tweets/{id}'],function(){
       Route::post('favorite','FavoriteController@store')->name('favorites.favorite');
       Route::delete('unfavorite','FavoriteController@destroy')->name('favorites.unfavorite');
     });
-});
 });

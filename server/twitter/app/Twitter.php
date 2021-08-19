@@ -7,14 +7,18 @@ use Carbon\Carbon;
 
 class Twitter extends Model
 {
-    protected $guarded = ['id'];
+    protected $fillable = ['id'];
     protected $table = 'tweets';
     public function user()
     {
         return $this->belongsTo('App\User');
     }
+    public function FollowModel()
+    {
+        return $this->hasMany('App\Follow');
+    }
     public function favorite() {
-        return $this->hasMany('App\Favorite');
+        return $this->belongsTo('App\Favorite', 'foreign_key','id');
     }
     public function getCreatedAtAttribute($value)
     {
@@ -25,6 +29,6 @@ class Twitter extends Model
     //Favoriteへのリレーション//
     public function favorite_users()
     {
-            return $this->belongsToMany(User::class,'favorites','id','user_id')->withTimestamps();
+            return $this->belongsToMany(self::class,'favorites','id','user_id')->withTimestamps();
     }
 }
