@@ -6,6 +6,7 @@ use App\Twitter;
 use App\User;
 use App\Follow;
 use App\Favorite;
+use App\Like;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -47,13 +48,13 @@ class HomeController extends Controller
         $follow_count = $follow->getFollowCount($login_user->id);
         $follower_count = $follow->getFollowerCount($login_user->id);
 
-        $count_favorite_users = $twitter->favorite_users()->count();
+
 
         
         
 
 
-        return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets","count_favorite_users"));
+        return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets"));
     }
 
 };

@@ -14,7 +14,6 @@
                 <!--<span class="twitter_image"><a href="/">
                 <img class="twitter_logo" src="{{ asset('image/twitter_logo.svg') }}" alt="" ></a></span>-->
                 @include('nav')
-                <div class="card"></div>
                 <div class="twitter_top_inwrapper">
                     <div class="twitter_top_title">
                         <p>Tweets</p>
@@ -25,28 +24,27 @@
                                 <img class="twitter-profile_image2" src="{{asset('/storage/images/'.$user->product_image)}}" alt="">
                             </div>
                             <form method="POST" action="/create" class="tweet_area">
-                            @csrf
-                            <div class="tweet_area">
-                                <textarea class="tweet_text" id="tweet" name="tweet" placeholder="hello"></textarea>
-                            </div>
-                            <div class="follow">
-                                <div class="following">
-                                    <a href="/users-follow" name="follow_number" class="follow_number">{{ $follow_count }}</a>
-                                    <label for="follow_number" class="follow_label">フォロー中</label>
+                                @csrf
+                                <div class="tweet_area">
+                                    <textarea class="tweet_text" id="tweet" name="tweet" placeholder="hello"></textarea>
                                 </div>
-                                <div class="followering">
-                                    <a href="/users-follower" name="follower_number" class="follower_number">{{ $follower_count }}</a>
-                                    <label for="follower_number" class="follower_label">フォロワー</label>
+                                <div class="follow">
+                                    <div class="following">
+                                        <a href="/users-follow" name="follow_number" class="follow_number">{{ $follow_count }}</a>
+                                        <label for="follow_number" class="follow_label">フォロー中</label>
+                                    </div>
+                                    <div class="followering">
+                                        <a href="/users-follower" name="follower_number" class="follower_number">{{ $follower_count }}</a>
+                                        <label for="follower_number" class="follower_label">フォロワー</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="tweet_button-first">
-                                <button class="button_inner-first" type="submit">投稿</button>
-                            </div>
-                        </form>
+                                <div class="tweet_button-first">
+                                    <button class="button_inner-first" type="submit">投稿</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    
                 </div>
-            </div>
             <div class="space">.</div>
             <div class="twitter_top_inbox">
                 @foreach($following_tweets  as $twitter)
@@ -59,37 +57,17 @@
                     <div class="tweet_area tweet_area_under">
                         @csrf
                         <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >{{$twitter->tweet}}</div>
-                        <!--- いいねボタン切り替え--->
-                        @if (Auth::id() != $twitter->user->id)
-
-                            @if (Auth::user()->is_favorite($twitter->id))
-
-                                {!! Form::open(['route' => ['favorites.unfavorite', $twitter->id], 'method' => 'delete']) !!}
-                                    {!! Form::submit('いいね！を外す', ['class' => "button btn btn-warning"]) !!}
-                                {!! Form::close() !!}
-
-                            @else
-
-                                {!! Form::open(['route' => ['favorites.favorite', $twitter->id]]) !!}
-                                    {!! Form::submit('いいね！を付ける', ['class' => "button btn btn-success"]) !!}
-                                {!! Form::close() !!}
-
-                            @endif
-
-                        @endif
-                        <!--- いいね数 表示--->
-                        <div class="text-right mb-2">いいね！
-                            <span class="badge badge-pill badge-success">{{ $count_favorite_users }}</span>
-                        </div>
+                        
                         <!--投稿のidが自身の場合のみdeleteボタン表示-->
                         @if($twitter->user->id === $user_id)
-                        <div class="delete_button">
-                            <button class="delete_button_inner"  type="submit">削除</button>
-                        </div>
+                            <div class="delete_button">
+                                <button class="delete_button_inner"  type="submit">削除</button>
+                            </div>
                         @endif
+                </form>
+                        @include('favorite_button')
                     </div>
                 </div>
-                </form>
                 @endforeach
             </div>
         </div>

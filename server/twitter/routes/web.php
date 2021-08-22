@@ -32,11 +32,10 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/users-follower', 'UserFollowController@followering');
   Route::group(['prefix' => 'users/{id}'], function () {
     Route::post('follow', 'UserFollowController@store')->name('follow');
-        Route::delete('unfollow', 'UserFollowController@destroy')->name('unfollow');
+    Route::delete('unfollow', 'UserFollowController@destroy')->name('unfollow');
   });
-  //いいね機能//
-    Route::group(['prefix'=>'tweets/{id}'],function(){
-      Route::post('favorite','FavoriteController@store')->name('favorites.favorite');
-      Route::delete('unfavorite','FavoriteController@destroy')->name('favorites.unfavorite');
-    });
+//いいね機能//
+    Route::get('/twitter/like/{id}', 'LinkController@like')->name('twitter.like');
+    Route::get('/twitter/unlike/{id}', 'LinkController@unlike')->name('twitter.unlike');
+    Route::get('/favorite', 'LinkController@favorite');
 });

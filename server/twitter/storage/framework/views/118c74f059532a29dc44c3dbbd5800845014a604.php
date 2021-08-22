@@ -36,29 +36,43 @@
                 >
                 <i class="fas fa-bars"></i>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarExample01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 pd-l ">
-                    <li class="nav-item active ">
-                    <a class="nav-link text-light" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item active ">
-                    <a class="nav-link text-light" aria-current="page" href="/users-follow">Follow</a>
-                    </li>
-                    <li class="nav-item active ">
-                    <a class="nav-link text-light" aria-current="page" href="/users-follower">Follower</a>
-                    </li>
-                    
+                <?php if(Auth::check()): ?>
+
+                    <?php if(Auth::id() == $user->id): ?>
+                        <div class="collapse navbar-collapse" id="navbarExample01">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 pd-l ">
+                            <li class="nav-item active ">
+                            <a class="nav-link text-light" aria-current="page" href="/">Home</a>
+                            </li>
+                            <li class="nav-item active ">
+                            <a class="nav-link text-light" aria-current="page" href="/edit-page">Profile</a>
+                            </li>
+                            <li class="nav-item active ">
+                            <a class="nav-link text-light" aria-current="page" href="/users-follow">Follow</a>
+                            </li>
+                            <li class="nav-item active ">
+                            <a class="nav-link text-light" aria-current="page" href="/users-follower">Follower</a>
+                            </li>
+                            <li class="nav-item active ">
+                            <a class="nav-link text-light" aria-current="page" href="/users">Users</a>
+                            </li>
+                            <li class="nav-item active ">
+                            <a class="nav-link text-light" aria-current="page" href="/favorite">Favorite</a>
+                            </li>
+                    <?php endif; ?>
+
+                <?php endif; ?>   
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto pd-r">
                     <!-- Authentication Links -->
                     <?php if(auth()->guard()->guest()): ?>
-                        <li class="nav-item">
-                            <a class="nav-link self-color" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
+                        <li class="nav-item ">
+                            <a class="nav-link self-color text-light " href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
                         </li>
                         <?php if(Route::has('register')): ?>
-                            <li class="nav-item">
-                                <a class="nav-link self-color" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
+                            <li class="nav-item ">
+                                <a class="nav-link self-color text-light " href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
                             </li>
                         <?php endif; ?>
                     <?php else: ?>

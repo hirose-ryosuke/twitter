@@ -53,10 +53,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Email');
     }
-    public function Favorites_table()
-    {
-        return $this->hasMany('App\Favorite');
-    }
+    
     //フォロー機能//
     public function followers()
     {
@@ -89,22 +86,5 @@ class User extends Authenticatable
     }
 
 
-    //いいね機能//
-    public function favorites()
-    {
-        return $this->belongsToMany(self::class, 'favorites', 'user_id', 'user_id')->withTimestamps();
-    }
-    public function favorite($tweets_id)
-    {
-        return $this->favorites()->attach($tweets_id);
-    }
-    public function unfavorite($tweets_id)
-    {   
-            $this->favorites()->detach($tweets_id);
-    }
-    public function is_favorite($tweets_id)
-    {   
-        
-        return (boolean) $this->favorites()->where('tweets_id',$tweets_id)->exists();
-    }
+
 }

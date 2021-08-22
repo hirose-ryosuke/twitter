@@ -6,23 +6,47 @@ use Illuminate\Http\Request;
 use App\Twitter;
 use App\User;
 use App\Follow;
-use App\Favorite;
+use App\Like;
+
 use Auth;
 use Carbon\Carbon;
 
 class LinkController extends Controller
 {
-    public function store(Request $request, $id)
-        {
-                \Auth::user()->favorite($id);
-                return back();
-        }
+        /**
+     * 引数のIDに紐づくリプライにLIKEする
+    *
+    * @param $id リプライID
+    * @return \Illuminate\Http\RedirectResponse
+    */
+    public function like($id)
+    {
+        Like::create([
+        'reply_id' => $id,
+        'user_id' => Auth::id(),
+        ]);
 
-        public function destroy($id)
-        {
-                \Auth::user()->unfavorite($id);
-                return back();
-        }
+        session()->flash('success', 'You Liked the Reply.');
+
+        return redirect()->back();
+    }
+
+    /**
+     * 引数のIDに紐づくリプライにUNLIKEする
+     *
+     * @param $id リプライID
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function unlike($id)
+    {
+        $like = Like::where('reply_id', $id)->where('user_id', Auth::id())->first();
+        $like->delete();
+
+        session()->flash('success', 'You Unliked the Reply.');
+
+        return redirect()->back();
+    }
+
     public function index(Follow $follow,Twitter $twitter,User $users)
     {
         $user_id = Auth::user()->id;
@@ -43,14 +67,18 @@ class LinkController extends Controller
         $follow_count = $follow->getFollowCount($login_user->id);
         $follower_count = $follow->getFollowerCount($login_user->id);
         
-        //いいね数の数カウント//
-        $count_favorite_users = $twitter->favorite_users()->count();
+        return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets"));
+    }
+    public function favorite(Request $request,Follow $follow,Twitter $twitter,User $users,Like $like)
+    {
+        $user_id = Auth::user()->id;
+        $user = User::where('id', $user_id)->first();
 
-        
-        
+        //お気に入りしている投稿のみ表示//
+        $likes = Like::where('user_id',$user_id)->select('reply_id')->get();
+        $like_tweet = Twitter::whereIn('id',$likes)->orderBy('created_at','desc')->get();
 
-
-        return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets","count_favorite_users"));
+        return view('favorite_tweet', compact("user_id","user","likes","like_tweet"));
     }
     public function create(Request $request)
     {
@@ -69,4 +97,5 @@ class LinkController extends Controller
         $twitter = Twitter::find($request->id)->delete();
         return redirect('/');
     }
+    
 }

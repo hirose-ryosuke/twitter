@@ -123,7 +123,7 @@ class UsersController extends Controller
         
         // 変更前後でメールアドレスが同じか確認
         $email_check = true;
-        if ($change_email == $new_email) {
+        if ($user_email == $new_email) {
             $email_check = false;}
             
         // メールアドレスが変更されていない時にエラーとして処理をかえす
@@ -137,8 +137,8 @@ class UsersController extends Controller
 
         // !!!!一時保存DBのデータを引き渡してメールをおくる
         Mail::send('emails.changeEmail', ['url' =>
-        "{$domain}/edit-page/userEmailUpdate/?token={$update_token}"],function ($message) use ($change_email) {
-            $message->to($change_email)->subject('メールアドレス確認');
+        "{$domain}/edit-page/userEmailUpdate/?token={$update_token}"],function ($message) use ($new_email) {
+            $message->to($new_email)->subject('メールアドレス確認');
         });
         //確認メールの送信のお知らせ//
         return redirect('/edit-page')->with('flash_message', '確認メールを送信しました。');
@@ -163,8 +163,7 @@ class UsersController extends Controller
         ->where('update_token', '=', $token)
         ->delete();
         // 変更完了通知
-        // (----あとで作成----)
         // リダイレクト
-        return redirect('/edit-page');
+        return redirect('/edit-page')->with('flash_message', 'メールアドレスが変更されました。');
     }
 };
