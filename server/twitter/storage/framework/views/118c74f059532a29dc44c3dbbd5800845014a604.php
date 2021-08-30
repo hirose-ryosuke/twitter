@@ -38,7 +38,7 @@
                 </button>
                 <?php if(Auth::check()): ?>
 
-                    <?php if(Auth::id() == $user->id): ?>
+                    <?php if(auth()->user()): ?>
                         <div class="collapse navbar-collapse" id="navbarExample01">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 pd-l ">
                             <li class="nav-item active ">

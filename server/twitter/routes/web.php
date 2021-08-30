@@ -14,6 +14,7 @@ use App\Http\Controllers\UsersController;
 */
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
@@ -38,4 +39,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/twitter/like/{id}', 'LinkController@like')->name('twitter.like');
     Route::get('/twitter/unlike/{id}', 'LinkController@unlike')->name('twitter.unlike');
     Route::get('/favorite', 'LinkController@favorite');
+    Route::get('/todos', 'TodosController@index');
+
+
+
 });
+
