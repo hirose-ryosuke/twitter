@@ -39,8 +39,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/twitter/like/{id}', 'LinkController@like')->name('twitter.like');
     Route::get('/twitter/unlike/{id}', 'LinkController@unlike')->name('twitter.unlike');
     Route::get('/favorite', 'LinkController@favorite');
-    Route::get('/todos', 'TodosController@index');
 
+
+    Route::get('/todos', 'TodosController@index');
+    Route::resource('todos','TodosController');
+    Route::get('/getdata','TodosController@data');
+    Route::get('/addData','TodosController@addData');
 
 
 });
