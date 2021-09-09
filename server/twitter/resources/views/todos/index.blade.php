@@ -7,7 +7,6 @@
     <label >やることを追加してください</label>
     <input type="text" name="body"class="form-control" placeholder="todo list" style="max-width:1000px;" v-model="newBody">
   </div>
-
   <button type="submit" class="btn btn-primary" @click="addData">追加する</button>
   <!-- <div>@{{id}}</div>
   <button @click="onClick">button</button>
@@ -24,11 +23,13 @@
           <tr>
             <td>@{{todo.body}}</td>
             <td>
-                <button type="submit" class="btn btn-primary">編集</button>
-            </td>
+                <button type="submit" class="btn btn-primary" @click="showEditTask">編集</button></td>
+            <td><input type="text" v-model="editBody" v-show="showEdit"></td>
+            <td><button @click="editData(todo)" v-show="showEdit">完了</button></td>
+            
             <td>
             <!-- 削除ボタン -->
-                <button type="submit" class="btn btn-danger">削除</button>
+                <button type="submit" class="btn btn-danger" @click="deleteData(todo)">削除</button>
             </td>
           </tr>
         </table>

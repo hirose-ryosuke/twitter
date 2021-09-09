@@ -2109,11 +2109,9 @@ new Vue({
   data: {
     id: 1,
     todos: [],
-    newBody: ''
-  },
-  mounted: function mounted() {
-    console.log('mounted');
-    this.getData();
+    newBody: [],
+    showEdit: false,
+    editBody: ''
   },
   methods: {
     onClick: function onClick() {
@@ -2128,10 +2126,59 @@ new Vue({
       });
     },
     addData: function addData() {
+      var _this2 = this;
+
+      //追加ボタンでtodosに仮でコメントを追加//
       this.todos.push({
         body: this.newBody
+      }); //上と同じものをルーティングでTodosController.addDataへ//
+      //TodosController.addDataでtodosTableへ新規データとして登録する//
+
+      Axios.post('/addData', {
+        body: this.newBody
+      }) //TodosController.addDataの処理が終わり、ログへ書き込まれる//
+      .then(function (response) {
+        console.log(response);
+        _this2.newBody = '';
       });
+    },
+    deleteData: function deleteData(todo) {
+      var _this3 = this;
+
+      //削除ボタンで削除したい投稿のID取得//
+      //取得したIDをURLに載せてTodosController.deleteDataへ送りtodosTableから削除//
+      Axios.post('/deleteData/' + todo.id).then(function (res) {
+        _this3.todos.splice(_this3.todos.indexOf(todo), 1);
+      });
+    },
+    showEditTask: function showEditTask() {
+      // タスク編集欄が非表示なら表示させる
+      if (this.showEdit === false) {
+        this.showEdit = true; // タスク編集欄が表示中なら非表示にする
+      } else if (this.showEdit === true) {
+        this.showEdit = false;
+      }
+    },
+    // タスク編集メソッド
+    editData: function editData(todo) {
+      var _this4 = this;
+
+      if (this.editBody === '') {
+        alert('タスクを入力してください');
+        return;
+      } // どのテーブルを編集するか絞り込む
+
+
+      Axios.post('/editData/' + todo.id).then(function (res) {
+        _this4.todos(_this4.todos.indexOf(todo), 1);
+      }); // タスク入力後、inputを空にする
+
+      this.editBody = '';
     }
+  },
+  mounted: function mounted() {
+    console.log('mounted');
+    this.getData();
   }
 });
 

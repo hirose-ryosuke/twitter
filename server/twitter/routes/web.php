@@ -44,7 +44,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/todos', 'TodosController@index');
     Route::resource('todos','TodosController');
     Route::get('/getdata','TodosController@data');
-    Route::get('/addData','TodosController@addData');
+    Route::post('/addData','TodosController@addData');
+    Route::post('/deleteData/{id}','TodosController@deleteData');
+    Route::post('/editData/{id}','TodosController@editData');
 
 
 });

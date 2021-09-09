@@ -12,25 +12,32 @@ class TodosController extends Controller
         $todos = Todo::all();
         return view('todos.index',compact('todos'));
     }
+
     public function addData(Request $request) {
-    
         $todo = new Todo();
-        $todo->body = $request->body;
+        $todo->body = $request->body ;
         $todo->save();
         return response()->json($todo);
     }
-    public function destroy(todo $todo) {
-        $todo->delete();
-        return redirect('/todos');
+
+    public function deleteData($id,todo $todo) {
+        $todo = Todo::find($id)->delete();
+        return response()->json($todo);
     }
-    public function edit(todo $todo) {
-        return view('todos.index2')->with('todo',$todo);
+
+    public function editData($id,todo $todo) {
+        Todo::find($id)->update([
+            'body' => $request->body
+        ]);
+        return response()->json($todo);
     }
+
     public function update(Request $request,todo $todo) {
         $todo->body = $request->body;
         $todo->save();
         return redirect('/todos');
     }
+    
     public function data() {
         $data = todo::all();
 
