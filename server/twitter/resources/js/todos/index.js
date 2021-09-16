@@ -3,26 +3,28 @@ const { default: Axios } = require("axios");
 new Vue({
   el: '#todo_list',
   data:{
-    id:1,
+    id:'',
     todos:[],
     newBody:[],
-    showEdit: false,
-    editBody: ''
+    updateBody: '',
+    updateId:'',
+
   },
   methods:{
     onClick(){
       this.id += 1;
     },
     getData(){
-      Axios.get('/getdata').then((res)=>{
-        console.log(res.data);
+      Axios.get('/getData').then((res)=>{
+        // console.log(res.data);
         this.todos = res.data;
+        console.log(this.todos);
       })
     },
     addData(){
       //追加ボタンでtodosに仮でコメントを追加//
       this.todos.push({
-        body:this.newBody
+        body:this.newBody,
       })
       //上と同じものをルーティングでTodosController.addDataへ//
       //TodosController.addDataでtodosTableへ新規データとして登録する//
@@ -43,31 +45,18 @@ new Vue({
         this.todos.splice(this.todos.indexOf(todo), 1);
       })
     },
-    showEditTask() {
-      // タスク編集欄が非表示なら表示させる
-      if (this.showEdit === false) {
-        this.showEdit = true;
-      // タスク編集欄が表示中なら非表示にする
-      } else if (this.showEdit === true) {
-        this.showEdit = false;
-      }
-    },
-    // タスク編集メソッド
-    editData(todo) {
-      if (this.editBody === '') {
-        alert('タスクを入力してください');
-        return
-      }
-      // どのテーブルを編集するか絞り込む
-      Axios.put('/editData/'+todo.id).then((res)=>{
-        this.todos.update(this.todos.indexOf(todo), 1);
+    updateData(todo,index){
+      Axios.post('/editData/'+todo.id,{
+        body:this.updateBody
+      }).then((res)=>{
+        this.getData();
+        this.updateBody=''
       })
-      // タスク入力後、inputを空にする
-      this.editBody = '';
     }
+    
   },
   mounted(){
-    console.log('mounted')
+    console.log();
     this.getData()
   }
 });

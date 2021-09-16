@@ -2107,11 +2107,11 @@ var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 new Vue({
   el: '#todo_list',
   data: {
-    id: 1,
+    id: '',
     todos: [],
     newBody: [],
-    showEdit: false,
-    editBody: ''
+    updateBody: '',
+    updateId: ''
   },
   methods: {
     onClick: function onClick() {
@@ -2120,9 +2120,10 @@ new Vue({
     getData: function getData() {
       var _this = this;
 
-      Axios.get('/getdata').then(function (res) {
-        console.log(res.data);
+      Axios.get('/getData').then(function (res) {
+        // console.log(res.data);
         _this.todos = res.data;
+        console.log(_this.todos);
       });
     },
     addData: function addData() {
@@ -2151,33 +2152,20 @@ new Vue({
         _this3.todos.splice(_this3.todos.indexOf(todo), 1);
       });
     },
-    showEditTask: function showEditTask() {
-      // タスク編集欄が非表示なら表示させる
-      if (this.showEdit === false) {
-        this.showEdit = true; // タスク編集欄が表示中なら非表示にする
-      } else if (this.showEdit === true) {
-        this.showEdit = false;
-      }
-    },
-    // タスク編集メソッド
-    editData: function editData(todo) {
+    updateData: function updateData(todo, index) {
       var _this4 = this;
 
-      if (this.editBody === '') {
-        alert('タスクを入力してください');
-        return;
-      } // どのテーブルを編集するか絞り込む
+      Axios.post('/editData/' + todo.id, {
+        body: this.updateBody
+      }).then(function (res) {
+        _this4.getData();
 
-
-      Axios.post('/editData/' + todo.id).then(function (res) {
-        _this4.todos(_this4.todos.indexOf(todo), 1);
-      }); // タスク入力後、inputを空にする
-
-      this.editBody = '';
+        _this4.updateBody = '';
+      });
     }
   },
   mounted: function mounted() {
-    console.log('mounted');
+    console.log();
     this.getData();
   }
 });

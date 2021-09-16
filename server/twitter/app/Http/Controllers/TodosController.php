@@ -25,11 +25,11 @@ class TodosController extends Controller
         return response()->json($todo);
     }
 
-    public function editData($id,todo $todo) {
-        Todo::find($id)->update([
-            'body' => $request->body
+    public function editData(Request $request,$id) {
+        $update = Todo::where('id', $request->id)->update([
+            'body' => $request->body,
         ]);
-        return response()->json($todo);
+        return response()->json($update);
     }
 
     public function update(Request $request,todo $todo) {
@@ -39,9 +39,9 @@ class TodosController extends Controller
     }
     
     public function data() {
-        $data = todo::all();
-
-        return response()->json($data);
+        $todo = Todo::all();
+        
+        return response()->json($todo);
     }
 
     
