@@ -53,7 +53,7 @@ class LinkController extends Controller
         $user = User::where('id', $user_id)->first();
         $follower = Follow::with('user')->where('id',$user_id)->get();
         //自身の投稿取得//
-        $tweets = Twitter::with('user')->where('user_id',$user_id)->orderBy('created_at','desc')->get();
+        // $tweets = Twitter::with('user')->where('user_id',$user_id)->orderBy('created_at','desc')->get();
         //フォローしているユーザid取得//
         $follow_ids= Follow::where('following_id',$user_id)->select('followed_id')->get();
 
@@ -67,7 +67,7 @@ class LinkController extends Controller
         $follow_count = $follow->getFollowCount($login_user->id);
         $follower_count = $follow->getFollowerCount($login_user->id);
         
-        return view('top', compact("tweets","user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets"));
+        return view('top', compact("user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets"));
     }
     public function favorite(Request $request,Follow $follow,Twitter $twitter,User $users,Like $like)
     {
@@ -97,5 +97,38 @@ class LinkController extends Controller
         $twitter = Twitter::find($request->id)->delete();
         return redirect('/');
     }
+
+
+    //vue
+    public function getData(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $follow_ids= Follow::where('following_id',$user_id)->select('followed_id')->get();
+        $following_tweets = Twitter::with('user')->whereIn('user_id', $follow_ids)->orWhere('user_id',$user_id)->orderBy('created_at','desc')->get();
+
+        return response()->json($following_tweets);
+    }
     
+    public function addData(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $tweets = new Twitter();
+        $tweets->tweet = $request->tweet;
+        $tweets->user_id = $user_id;
+        $tweets->save();
+
+        return response()->json($tweets);
+    }
+    public function deleteData(Request $request)
+    {
+        $tweets = Twitter::where('id',$request->id)->delete();
+
+        return response()->json($tweets);
+    }
+    public function onButton(Request $request)
+    {
+        $user_id = Auth::user()->id;
+
+        return response()->json($user_id);
+    }
 }

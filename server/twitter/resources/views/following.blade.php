@@ -1,11 +1,8 @@
 @extends('layouts.app')
-<!DOCTYPE html>
-<html lang="ja">
 <head>
 @include('head')   
     <title>Follow List</title>
 </head>
-<body>
 @section('content')
     <section class="section_following">
         <div class="following_wrapper">
@@ -44,5 +41,3 @@
         </div>
     </section>
 @endsection
-</body>
-</html>

@@ -104,11 +104,11 @@
         </header>
             <!-- Navbar -->
 
+    </div>
         <main class="py-4">
             <?php echo $__env->yieldContent('content'); ?>
             <?php echo $__env->yieldContent('top'); ?>
         </main>
-    </div>
 </body>
 </html>
 <?php /**PATH /var/www/twitter/resources/views/layouts/app.blade.php ENDPATH**/ ?>

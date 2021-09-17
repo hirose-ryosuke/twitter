@@ -35,7 +35,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('unfollow', 'UserFollowController@destroy')->name('unfollow');
   });
 //いいね機能//
-    Route::get('/twitter/like/{id}', 'LinkController@like')->name('twitter.like');
-    Route::get('/twitter/unlike/{id}', 'LinkController@unlike')->name('twitter.unlike');
-    Route::get('/favorite', 'LinkController@favorite');
+  Route::get('/twitter/like/{id}', 'LinkController@like')->name('twitter.like');
+  Route::get('/twitter/unlike/{id}', 'LinkController@unlike')->name('twitter.unlike');
+  Route::get('/favorite', 'LinkController@favorite');
+
+  Route::get('/getData', 'LinkController@getData');
+  Route::post('/addData', 'LinkController@addData');
+  Route::post('/deleteData/{id}', 'LinkController@deleteData');
+  Route::get('/onButton', 'LinkController@onButton');
+
 });

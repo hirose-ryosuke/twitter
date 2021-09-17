@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 class Twitter extends Model
 {
     protected $fillable = ['id'];
+    //TOPの削除ボタン表示切り替えよう//
+    protected $appends = ['isActive'];
+
+    public function getIsActiveAttribute()
+    {
+        return false;
+    }
 
     public function user()
     {
