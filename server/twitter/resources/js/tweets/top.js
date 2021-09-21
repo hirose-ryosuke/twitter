@@ -26,10 +26,14 @@ new Vue({
       })
     },
     onButton(tweet){
-      Axios.get('/onButton').then((res)=>{
-        if(tweet.user_id === res.data){
-          return tweet.isActive = !tweet.isActive
-        }
+      // console.log(tweet.user_id);
+      // console.log(user_id);
+      // console.log(tweet.isActive);
+
+      Axios.post('/onButton').then((res)=>{
+        if(tweet.user_id == user_id){
+          return tweet.isActive = true
+        };
       })
     },
     deleteData(tweet){
@@ -41,6 +45,6 @@ new Vue({
   mounted(){
     console.log();
     this.getData();
-    this.onButton();
+    
   }
 });

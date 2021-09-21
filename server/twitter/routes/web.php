@@ -42,6 +42,6 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/getData', 'LinkController@getData');
   Route::post('/addData', 'LinkController@addData');
   Route::post('/deleteData/{id}', 'LinkController@deleteData');
-  Route::get('/onButton', 'LinkController@onButton');
+  Route::post('/onButton', 'LinkController@onButton');
 
 });

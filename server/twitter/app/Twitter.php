@@ -12,7 +12,7 @@ use App\Favorite;
 use Illuminate\Http\Request;
 class Twitter extends Model
 {
-    protected $fillable = ['id'];
+    protected $fillable = ['id','user_id'];
     //TOPの削除ボタン表示切り替えよう//
     protected $appends = ['isActive'];
 

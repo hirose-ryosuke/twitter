@@ -37,9 +37,9 @@
                 </div>
             <div class="space">.</div>
             <div class="twitter_top_inbox">
-                <div v-for="tweet in tweets" >
+                <div v-for="tweet in tweets" key="tweet.id" >
                     <div class="top_inbox_inner">
-                        <!-- <img class="twitter-profile_image2" "alt=""> -->
+                    <img class="twitter_top_menu-image twitter-profile_image " src="{{asset('/storage/images/'.$user->product_image)}}" alt="">
                         <p class="twitter_username">@{{tweet.user.name}}</p>
                         <p class="mention" >@{{tweet.user.mention}}</p>
                         <p class="tweet_date" >@{{tweet.updated_at}}</p>
@@ -48,16 +48,19 @@
                             <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >@{{tweet.tweet}}</div>
                             
                             <!--投稿のidが自身の場合のみdeleteボタン表示-->
-                            
-                                <div class="delete_button"v-show="tweet.isActive">
+                                <div class="delete_button"v-show="tweet.isActive = true" >
                                     <button class="delete_button_inner"  type="submit" @click="deleteData(tweet)">削除</button>
                                 </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <script>
+    const user_id = @json($user_id);
+    const following_tweets_id = @json($following_tweets_id);
+    
+    </script>
     <script src="{{ asset('js/top.js') }}" defer></script>
 @endsection
