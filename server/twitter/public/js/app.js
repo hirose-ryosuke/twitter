@@ -50267,14 +50267,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/scss/main.scss":
+/*!**********************************!*\
+  !*** ./resources/scss/main.scss ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!***********************************!*\
-  !*** multi ./resources/js/app.js ***!
-  \***********************************/
+/*!**************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/scss/main.scss ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/twitter/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /var/www/twitter/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/twitter/resources/scss/main.scss */"./resources/scss/main.scss");
 
 
 /***/ })

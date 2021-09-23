@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
 <head>
 <?php echo $__env->make('head', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   
     <title>Twitter Profile</title>
 </head>
-<body>
 <?php $__env->startSection('content'); ?>
     <section class="section_profile">
         <div class="profile_wrapper">
@@ -102,7 +99,4 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </section>
 <?php $__env->stopSection(); ?>
-        
-</body>
-</html>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/twitter/resources/views/profile.blade.php ENDPATH**/ ?>

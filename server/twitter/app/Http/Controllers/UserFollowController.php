@@ -64,7 +64,7 @@ class UserFollowController extends Controller
         return view("/following",compact("all_users","user_id","users","user","follow","follow_count","follower_count","login_user","following_user"));
     }
     //フォロワーページ//
-    public function followering(User $user,Request $request,Follow $follow){
+    public function follower(User $user,Request $request,Follow $follow){
         $user_id = Auth::user()->id;
         $all_users = User::where('id','!=',$user_id)->get();
         $user = User::where('id',$user_id)->first();
@@ -75,7 +75,7 @@ class UserFollowController extends Controller
         $follow_count = $follow->getFollowCount($login_user->id);
         $follower_count = $follow->getFollowerCount($login_user->id);
 
-        return view('/followering',compact("all_users","user_id","users","user","follow","follow_count","follower_count","login_user"));
+        return view('/follower',compact("all_users","user_id","users","user","follow","follow_count","follower_count","login_user"));
     }
     //フォローしているユーザーのID取得//
     public function followingIds(Int $user_id)

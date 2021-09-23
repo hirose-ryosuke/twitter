@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/main.css')); ?>" rel="stylesheet">
 </head>
 <body>
     <div id="app">

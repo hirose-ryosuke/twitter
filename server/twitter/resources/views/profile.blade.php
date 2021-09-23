@@ -1,11 +1,8 @@
 @extends('layouts.app')
-<!DOCTYPE html>
-<html lang="ja">
 <head>
 @include('head')   
     <title>Twitter Profile</title>
 </head>
-<body>
 @section('content')
     <section class="section_profile">
         <div class="profile_wrapper">
@@ -81,6 +78,3 @@
         </div>
     </section>
 @endsection
-        
-</body>
-</html>
