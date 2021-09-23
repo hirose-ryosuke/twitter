@@ -1,0 +1,59 @@
+@charset "utf-8";
+//
+// Css Name: lc-flex-box ver.1.0.0
+// Author: HARUHARA
+// Author URI: http://launchcraft.jp
+//
+.flex{// デフォルト - 全て等間隔に並べ、高さは一番高い要素に揃う
+	display:-webkit-box;
+	display:-moz-box;
+	display:-ms-box;
+	display:-webkit-flexbox;
+	display:-moz-flexbox;
+	display:-ms-flexbox;
+	display:-webkit-flex;
+	display:-moz-flex;
+	display:-ms-flex;
+	display:flex;
+	-webkit-box-lines:multiple;
+	-moz-box-lines:multiple;
+	-webkit-flex-wrap:wrap;
+	-moz-flex-wrap:wrap;
+	-ms-flex-wrap:wrap;
+	flex-wrap:wrap;
+	-webkit-justify-content: space-around; // Safari
+	justify-content: space-around;
+}
+.flex.left{// 左詰め
+	-webkit-justify-content: flex-start !important;
+	justify-content: flex-start !important;
+}
+.flex.right {// 右詰め
+	-webkit-justify-content: flex-end !important;
+	justify-content: flex-end !important;
+}
+.flex.left-right {// 最初と最後のアイテムは端に、残りは等間隔
+	-webkit-justify-content: space-between !important;
+	justify-content: space-between !important;
+}
+.flex.center {// 中央寄せ
+	-webkit-align-items: center !important;
+	align-items: center !important;
+}
+.flex.bottom {// 下部合わせ
+	-webkit-align-items: flex-end !important; // Safari
+	align-items: flex-end !important;
+}
+.flex.top {// 上部合わせ
+	-webkit-align-items: flex-start !important; // Safari
+	align-items: flex-start !important;
+}
+
+@media only screen and (max-width: 768px) {
+	.flex.reve{// 768px以下の表示でカラム順を左右逆に
+		-webkit-flex-wrap: wrap-reverse !important;
+		-moz-flex-wrap: wrap-reverse !important;
+		-ms-flex-wrap: wrap-reverse !important;
+		flex-wrap: wrap-reverse !important;
+	}
+}
