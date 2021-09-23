@@ -2414,16 +2414,18 @@ new Vue({
       });
     },
     onButton: function onButton(tweet) {
-      // console.log(tweet.user_id);
-      // console.log(user_id);
-      // console.log(tweet.isActive);
-      Axios.post('/onButton').then(function (res) {
-        if (tweet.user_id == user_id) {
-          return tweet.isActive = true;
-        }
+      if (tweet.user_id == user_id) {
+        return true;
+      }
 
-        ;
-      });
+      ;
+    },
+    onLikeButton: function onLikeButton(tweet) {
+      if (tweet.user_id != user_id) {
+        return true;
+      }
+
+      ;
     },
     deleteData: function deleteData(tweet) {
       var _this3 = this;

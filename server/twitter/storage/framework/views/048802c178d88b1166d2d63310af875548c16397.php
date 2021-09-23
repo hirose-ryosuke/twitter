@@ -11,7 +11,7 @@
         <?php echo $__env->make('nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <div class="profile_box">
                 <div class="profile_partition">
-                    <form route="image_route "method="POST"  enctype="multipart/form-data" accept="image/png, image/jpeg,image/jpg">
+                    <form action="/edit-page/image"method="POST"  enctype="multipart/form-data" accept="image/png, image/jpeg,image/jpg">
                     <?php echo csrf_field(); ?>
                     <img class="profile_images_size twitter_top_menu-image twitter-profile_image " src="<?php echo e(asset('/storage/images/'.$user->product_image)); ?>" alt="">
                         <p> 
@@ -19,7 +19,7 @@
                             <input type="file" name="image" class="input-file"
                             id="image">
                         </p>
-                        <input type="submit" name="edit" value="変更" class="edit_button">
+                        <input type="submit" name="edit" value="変更" class="edit_button" for="image">
                     </form>
 
                     <form action="/edit" method="POST">

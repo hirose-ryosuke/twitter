@@ -24,8 +24,8 @@ Route::group(['middleware' => ['auth']], function () {
   // いいねボタン
   Route::get('/edit-page', 'UsersController@editPage');
   Route::post('/edit', 'UsersController@edit');
-  Route::post('/edit-page', 'UsersController@image');
-  Route::post('/edit-page', 'UsersController@userEmailChange')->name('email.change');
+  Route::post('/edit-page/image', 'UsersController@image')->name('image_route');
+  Route::post('/edit-page/email', 'UsersController@userEmailChange')->name('email.change');
   Route::get('/edit-page/userEmailUpdate/', 'UsersController@userEmailUpdate');
   Route::get('/users', 'UserFollowController@index');
   Route::get('/users-follow', 'UserFollowController@following');
@@ -42,6 +42,5 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/getData', 'LinkController@getData');
   Route::post('/addData', 'LinkController@addData');
   Route::post('/deleteData/{id}', 'LinkController@deleteData');
-  Route::post('/onButton', 'LinkController@onButton');
 
 });

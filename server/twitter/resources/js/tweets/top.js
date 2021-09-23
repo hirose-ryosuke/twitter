@@ -26,15 +26,14 @@ new Vue({
       })
     },
     onButton(tweet){
-      // console.log(tweet.user_id);
-      // console.log(user_id);
-      // console.log(tweet.isActive);
-
-      Axios.post('/onButton').then((res)=>{
         if(tweet.user_id == user_id){
-          return tweet.isActive = true
+          return true
         };
-      })
+    },
+    onLikeButton(tweet){
+        if(tweet.user_id != user_id){
+          return true
+        };
     },
     deleteData(tweet){
       Axios.post('/deleteData/'+tweet.id).then((res)=>{

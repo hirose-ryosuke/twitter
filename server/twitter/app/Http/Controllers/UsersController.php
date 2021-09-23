@@ -62,6 +62,7 @@ class UsersController extends Controller
         //ユーザーIDから削除する画像選択//
         $delImageName = User::find($user_id)->product_image;
         //
+        
         if ($delImageName != 'default_image.png') {
             //元画像データ削除//
             Storage::delete('public/images' . $user->product_image);
