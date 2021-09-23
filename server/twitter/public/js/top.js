@@ -2413,19 +2413,8 @@ new Vue({
         _this2.newTweet = '';
       });
     },
-    onButton: function onButton(tweet) {
-      if (tweet.user_id == user_id) {
-        return true;
-      }
-
-      ;
-    },
-    onLikeButton: function onLikeButton(tweet) {
-      if (tweet.user_id != user_id) {
-        return true;
-      }
-
-      ;
+    authCheck: function authCheck(tweet) {
+      return tweet.user_id == user_id ? true : false;
     },
     deleteData: function deleteData(tweet) {
       var _this3 = this;
