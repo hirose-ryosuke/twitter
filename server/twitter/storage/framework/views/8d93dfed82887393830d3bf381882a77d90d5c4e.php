@@ -36,22 +36,18 @@
                 </div>
             <div class="space">.</div>
             <div class="twitter_top_inbox">
-                <div v-for="tweet in tweets" key="tweet.id" >
+                <div v-for="tweet in tweets" :key="tweet.id" >
                     <div class="top_inbox_inner">
-                    <img class="twitter_top_menu-image twitter-profile_image " :src="'storage/images/' + tweet.user.product_image"  alt="">
+                    <img class="twitter_top_menu-image twitter-profile_image" :src="'storage/images/' + tweet.user.product_image"  alt="">
                         <p class="twitter_username">{{tweet.user.name}}</p>
                         <p class="mention" >{{tweet.user.mention}}</p>
                         <p class="tweet_date" >{{tweet.updated_at}}</p>
                         <div class="tweet_area tweet_area_under">
-                            <?php echo csrf_field(); ?>
                             <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >{{tweet.tweet}}</div>
-                            
                             <!--投稿のidが自身の場合のみdeleteボタン表示-->
-                            <div class="delete_button"v-show="onButton(tweet)" >
+                            <div class="delete_button" v-show="authCheck(tweet)" >
                                 <button class="delete_button_inner"  type="submit" @click="deleteData(tweet)">削除</button>
                             </div>
-
-                            
                         </div>
                     </div>
                 </div>
@@ -59,8 +55,7 @@
         </div>
     </section>
     <script>
-    const user_id = <?php echo json_encode($user_id, 15, 512) ?>;
-    
+        const user_id = <?php echo json_encode($user_id, 15, 512) ?>;
     </script>
     <script src="<?php echo e(asset('js/top.js')); ?>" defer></script>
 <?php $__env->stopSection(); ?>
