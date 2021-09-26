@@ -2,6 +2,7 @@
 <head>
     @include('head')   
     <title>TOP</title>
+
 </head>
 @section('content')
     <section class="section_wrapper" >
@@ -45,12 +46,22 @@
                         <img class="twitter_top_menu-image twitter-profile_image" :src="'storage/images/' + tweet.user.product_image"  alt="">
                         <p class="twitter_username">@{{tweet.user.name}}</p>
                         <p class="mention" >@{{tweet.user.mention}}</p>
-                        <p class="tweet_date" >@{{tweet.updated_at}}</p>
+                        <p class="tweet_date" >@{{tweet.updated_at | moment }}</p>
                         <div class="tweet_area_under">
                             <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >@{{tweet.tweet}}</div>
                             <!--投稿のidが自身の場合のみdeleteボタン表示-->
                             <div class="delete_button" v-show="authCheck(tweet)" >
                                 <button class="delete_button_inner"  type="submit" @click="deleteData(tweet)">削除</button>
+                            </div>
+
+                            <!-- いいねボタン -->
+                            <div class="like_btn" v-show="!authCheck(tweet)">
+                                <button class="like_icon"
+                                @click="onLikeClick(tweet)"
+                                :class="{ 'heart-animation': tweet.liked_by_user }"
+                                >☆
+                                    <span class="like_btn__text">@{{ tweet.likes_count }}</span>
+                                </button>
                             </div>
                         </div>
                     </div>

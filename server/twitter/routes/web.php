@@ -43,4 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/addData', 'LinkController@addData');
     Route::post('/deleteData/{id}', 'LinkController@deleteData');
 
+    Route::put('/api/like/{id}', 'LinkController@like');
+    Route::delete('/api/unlike', 'LinkController@like');
+
 });

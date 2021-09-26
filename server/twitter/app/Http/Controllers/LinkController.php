@@ -19,16 +19,27 @@ class LinkController extends Controller
     * @param $id リプライID
     * @return \Illuminate\Http\RedirectResponse
     */
-    public function like($id)
-    {
-        Like::create([
-        'reply_id' => $id,
-        'user_id' => Auth::id(),
-        ]);
+    // public function like($id)
+    // {
+    //     Like::create([
+    //     'reply_id' => $id,
+    //     'user_id' => Auth::id(),
+    //     ]);
 
-        session()->flash('success', 'You Liked the Reply.');
+    //     session()->flash('success', 'You Liked the Reply.');
 
-        return redirect()->back();
+    //     return redirect()->back();
+    // }
+    
+    //いいねボタン//
+    public function like(User $user, Twitter $tweet,Request $request,$id)
+    {        
+        $update = Twitter::where('id', $id)->first();
+        //いいねは１回しか押させない
+        $tweet = $update->liked($id)->detach($user->id);
+        $tweet = $update->liked($id)->attach($user->id);
+
+        return response()->json($tweet);
     }
 
     /**

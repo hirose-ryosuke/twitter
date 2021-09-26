@@ -2385,6 +2385,21 @@ var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 
 new Vue({
   el: '#tweet_top',
+  filters: {
+    moment: function (_moment) {
+      function moment(_x) {
+        return _moment.apply(this, arguments);
+      }
+
+      moment.toString = function () {
+        return _moment.toString();
+      };
+
+      return moment;
+    }(function (date) {
+      return moment(date).format('YYYY/MM/DD HH:mm:ss ');
+    })
+  },
   data: {
     tweets: [],
     newTweet: '',
@@ -2416,11 +2431,38 @@ new Vue({
     authCheck: function authCheck(tweet) {
       return tweet.user_id == user_id ? true : false;
     },
-    deleteData: function deleteData(tweet) {
+    onLikeClick: function onLikeClick(tweet) {
+      if (tweet.liked_by_user) {
+        this.unlike(tweet);
+      } else {
+        this.like(tweet);
+      }
+    },
+    //いいねボタン//
+    like: function like(tweet) {
       var _this3 = this;
 
+      tweet.likes_count += 1;
+      tweet.liked_by_user = true;
+      Axios.put('/api/like/' + tweet.id).then(function (res) {
+        _this3.getData();
+      });
+    },
+    unlike: function unlike(tweet) {
+      var _this4 = this;
+
+      Axios["delete"]('/api/unlike').then(function (res) {
+        tweet.likes_count -= 1;
+        tweet.liked_by_user = false;
+
+        _this4.getData();
+      });
+    },
+    deleteData: function deleteData(tweet) {
+      var _this5 = this;
+
       Axios.post('/deleteData/' + tweet.id).then(function (res) {
-        _this3.tweets.splice(_this3.tweets.indexOf(tweet), 1);
+        _this5.tweets.splice(_this5.tweets.indexOf(tweet), 1);
       });
     }
   },
