@@ -9,6 +9,7 @@ new Vue({
 	},
 	data:{
 		tweets:[],
+		favorites:[],
 		newTweet:'',
 		tweet_id:'',
 	},
@@ -17,6 +18,12 @@ new Vue({
 			Axios.get('/getData').then((res)=>{
 				this.tweets = res.data;
 				console.log(this.tweets);
+			})
+		},
+		favoriteData(){
+			Axios.get('/favoriteData').then((res)=>{
+				this.favorites = res.data;
+				console.log(this.favorites);
 			})
 		},
 		addData(){
@@ -33,6 +40,7 @@ new Vue({
 		authCheck(tweet){
 			return tweet.user_id == user_id ? true : false;
 		},
+		//お気に入りボタン//
 		onLikeClick(tweet) {
 			if(tweet.liked_by_user) {
 				this.unlike(tweet)
@@ -41,19 +49,16 @@ new Vue({
 				this.like(tweet)
 			}
 		},
-		//いいねボタン//
+		//お気に入り付与//
 		like(tweet) {
-			tweet.likes_count += 1
-			tweet.liked_by_user = true
 			Axios.put('/api/like/'+tweet.id).then((res)=>{
-				this.getData();
+				tweet.likes_count += 1
 			})
 	},
+	//お気に入り削除//
 		unlike(tweet) {
-			Axios.delete('/api/unlike').then((res)=>{
+			Axios.delete('/api/unlike/'+tweet.id).then((res)=>{
 				tweet.likes_count -= 1
-				tweet.liked_by_user = false
-				this.getData();
 			})
 	},
 		deleteData(tweet){
@@ -65,6 +70,7 @@ new Vue({
 	mounted(){
 		console.log();
 		this.getData();
+		this.favoriteData();
 	}
 });
 

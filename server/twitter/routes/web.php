@@ -40,10 +40,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/favorite', 'LinkController@favorite');
 
     Route::get('/getData', 'LinkController@getData');
+    Route::get('/favoriteData', 'LinkController@favoriteData');
     Route::post('/addData', 'LinkController@addData');
     Route::post('/deleteData/{id}', 'LinkController@deleteData');
 
     Route::put('/api/like/{id}', 'LinkController@like');
-    Route::delete('/api/unlike', 'LinkController@like');
+    Route::delete('/api/unlike/{id}', 'LinkController@unlike');
 
 });

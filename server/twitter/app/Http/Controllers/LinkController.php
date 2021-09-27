@@ -13,6 +13,17 @@ use Carbon\Carbon;
 
 class LinkController extends Controller
 {
+     //いいねボタン//
+    public function like(User $user,Request $request,$id)
+    {        
+        $tweet = Like::create([
+                'reply_id' => $id,
+                'user_id' => Auth::id(),
+                ]);
+
+        return response()->json($tweet);
+    }
+
         /**
      * 引数のIDに紐づくリプライにLIKEする
     *
@@ -26,21 +37,9 @@ class LinkController extends Controller
     //     'user_id' => Auth::id(),
     //     ]);
 
-    //     session()->flash('success', 'You Liked the Reply.');
-
     //     return redirect()->back();
     // }
     
-    //いいねボタン//
-    public function like(User $user, Twitter $tweet,Request $request,$id)
-    {        
-        $update = Twitter::where('id', $id)->first();
-        //いいねは１回しか押させない
-        $tweet = $update->liked($id)->detach($user->id);
-        $tweet = $update->liked($id)->attach($user->id);
-
-        return response()->json($tweet);
-    }
 
     /**
      * 引数のIDに紐づくリプライにUNLIKEする
@@ -53,9 +52,7 @@ class LinkController extends Controller
         $like = Like::where('reply_id', $id)->where('user_id', Auth::id())->first();
         $like->delete();
 
-        session()->flash('success', 'You Unliked the Reply.');
-
-        return redirect()->back();
+        return response()->json($like);
     }
 
     public function index(Follow $follow,Twitter $twitter,User $users)
@@ -69,9 +66,6 @@ class LinkController extends Controller
         $follow_ids= Follow::where('following_id',$user_id)->select('followed_id')->get();
         //フォローしているユーザーと自身の投稿取得//
         $following_tweets = Twitter::with('user')->whereIn('user_id', $follow_ids)->orWhere('user_id',$user_id)->orderBy('created_at','desc')->get();
-
-        
-
         //ログインしているユーザのフォロー数、フォロワー数をカウント//
         $login_user = auth()->user();
         $is_following = $login_user->isFollowing($login_user->id);
@@ -136,5 +130,16 @@ class LinkController extends Controller
         $tweets = Twitter::where('id',$request->id)->delete();
 
         return response()->json($tweets);
+    }
+    public function favoriteData(Request $request,Follow $follow,Twitter $twitter,User $users,Like $like)
+    {
+        $user_id = Auth::user()->id;
+        $user = User::where('id', $user_id)->first();
+
+        //お気に入りしている投稿のみ表示//
+        $likes = Like::where('user_id',$user_id)->select('reply_id')->get();
+        $favorites = User::with('twitter')->whereIn('id',$likes)->orderBy('created_at','desc')->get();
+
+        return response()->json($favorites);
     }
 }

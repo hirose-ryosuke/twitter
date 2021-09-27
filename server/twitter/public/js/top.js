@@ -2402,6 +2402,7 @@ new Vue({
   },
   data: {
     tweets: [],
+    favorites: [],
     newTweet: '',
     tweet_id: ''
   },
@@ -2414,8 +2415,16 @@ new Vue({
         console.log(_this.tweets);
       });
     },
-    addData: function addData() {
+    favoriteData: function favoriteData() {
       var _this2 = this;
+
+      Axios.get('/favoriteData').then(function (res) {
+        _this2.favorites = res.data;
+        console.log(_this2.favorites);
+      });
+    },
+    addData: function addData() {
+      var _this3 = this;
 
       this.tweets.push({
         tweet: this.newTweet
@@ -2423,14 +2432,15 @@ new Vue({
       Axios.post('/addData', {
         tweet: this.newTweet
       }).then(function (res) {
-        _this2.getData();
+        _this3.getData();
 
-        _this2.newTweet = '';
+        _this3.newTweet = '';
       });
     },
     authCheck: function authCheck(tweet) {
       return tweet.user_id == user_id ? true : false;
     },
+    //お気に入りボタン//
     onLikeClick: function onLikeClick(tweet) {
       if (tweet.liked_by_user) {
         this.unlike(tweet);
@@ -2438,37 +2448,30 @@ new Vue({
         this.like(tweet);
       }
     },
-    //いいねボタン//
+    //お気に入り付与//
     like: function like(tweet) {
-      var _this3 = this;
-
-      tweet.likes_count += 1;
-      tweet.liked_by_user = true;
       Axios.put('/api/like/' + tweet.id).then(function (res) {
-        _this3.getData();
+        tweet.likes_count += 1;
       });
     },
+    //お気に入り削除//
     unlike: function unlike(tweet) {
-      var _this4 = this;
-
-      Axios["delete"]('/api/unlike').then(function (res) {
+      Axios["delete"]('/api/unlike/' + tweet.id).then(function (res) {
         tweet.likes_count -= 1;
-        tweet.liked_by_user = false;
-
-        _this4.getData();
       });
     },
     deleteData: function deleteData(tweet) {
-      var _this5 = this;
+      var _this4 = this;
 
       Axios.post('/deleteData/' + tweet.id).then(function (res) {
-        _this5.tweets.splice(_this5.tweets.indexOf(tweet), 1);
+        _this4.tweets.splice(_this4.tweets.indexOf(tweet), 1);
       });
     }
   },
   mounted: function mounted() {
     console.log();
     this.getData();
+    this.favoriteData();
   }
 });
 

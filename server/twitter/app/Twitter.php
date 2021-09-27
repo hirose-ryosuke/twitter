@@ -16,6 +16,7 @@ class Twitter extends Model
     
     protected $appends = ['isActive','likes_count','liked_by_user'];
 
+    /**いいねの数をカウント */
     public function getLikesCountAttribute()
     {
         return $this->likes->count();
@@ -28,19 +29,18 @@ class Twitter extends Model
      */
     public function getLikedByUserAttribute()
     {
+        
         if (Auth::guest()) {
             return false;
         }
-        return $this->likes->contains(function ($user) {
-            return $user->id === Auth::user()->id;
+        return $this->likes->contains(function ($likes) {
+            return $likes->user_id === Auth::user()->id;
         });
     }
-
     public function getIsActiveAttribute()
     {
         return false;
     }
-
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -49,35 +49,15 @@ class Twitter extends Model
     {
         return $this->hasMany('App\Follow');
     }
-    /**
-     * リレーションシップ - usersテーブル
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
-     */
-
-
-
-    
-    //いいねボタン//
-    public function liked()
-    {
-        return $this->belongsToMany('App\User', 'likes','id')->withTimestamps();
-    }
-
-
-
-
-
-
-
     public function likes()
     {
         return $this->hasMany(Like::class, 'reply_id');
     }
-    // public function getCreatedAtAttribute($value)
-    // {
-    //     $carbon = new Carbon($value);
-    //     return $carbon->isoFormat('YYYY年MM月DD日 H時m分s秒  ');
-    // }
+    public function getCreatedAtAttribute($value)
+    {
+        $carbon = new Carbon($value);
+        return $carbon->isoFormat('YYYY年MM月DD日 H時m分s秒  ');
+    }
         /**
      * リプライにLIKEを付いているかの判定
     *

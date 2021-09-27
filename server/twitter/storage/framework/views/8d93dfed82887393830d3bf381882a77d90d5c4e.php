@@ -1,7 +1,6 @@
 <head>
     <?php echo $__env->make('head', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>   
     <title>TOP</title>
-
 </head>
 <?php $__env->startSection('content'); ?>
     <section class="section_wrapper" >
@@ -55,11 +54,10 @@
 
                             <!-- いいねボタン -->
                             <div class="like_btn" v-show="!authCheck(tweet)">
-                                <button class="like_icon"
+                                <button class="btn btn-warning btn-sm text-danger"
                                 @click="onLikeClick(tweet)"
-                                :class="{ 'heart-animation': tweet.liked_by_user }"
                                 >☆
-                                    <span class="like_btn__text">{{ tweet.likes_count }}</span>
+                                    <span class="like_btn__text ">{{ tweet.likes_count }}</span>
                                 </button>
                             </div>
                         </div>
