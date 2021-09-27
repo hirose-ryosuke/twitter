@@ -22,7 +22,7 @@
             <div class="twitter_top_inbox">
                 @foreach($like_tweet  as $twitter)
                 <div class="top_inbox_inner">
-                    <img class="twitter-profile_image2" src="{{asset('/storage/images/'.$twitter->user->product_image)}}"alt="">
+                    <img class="twitter-profile_image" src="{{asset('/storage/images/'.$twitter->user->product_image)}}"alt="">
                     <p class="twitter_username" >{{$twitter->user->name}}</p>
                     <p class="mention" >{{'@'.$twitter->user->mention}}</p>
                     <p class="tweet_date" >{{$twitter->created_at}}</p>

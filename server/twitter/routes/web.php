@@ -46,4 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/api/like/{id}', 'LinkController@like');
     Route::delete('/api/unlike', 'LinkController@like');
 
+
+
+    Route::get('/weather', 'WeatherAPIController@weatherData'); 
 });
