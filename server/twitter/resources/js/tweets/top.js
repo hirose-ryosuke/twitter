@@ -69,6 +69,7 @@ new Vue({
 			Axios.delete('/api/unlike2/'+favorite.id).then((res)=>{
 				favorite.likes_count -= 1
 				this.favoriteData();
+
 			})
 	},
 		deleteData(tweet){
