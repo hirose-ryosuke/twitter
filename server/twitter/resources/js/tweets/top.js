@@ -53,12 +53,22 @@ new Vue({
 		like(tweet) {
 			Axios.put('/api/like/'+tweet.id).then((res)=>{
 				tweet.likes_count += 1
+				this.getData();
 			})
 	},
-	//お気に入り削除//
+	//topPage:お気に入り削除//
 		unlike(tweet) {
 			Axios.delete('/api/unlike/'+tweet.id).then((res)=>{
 				tweet.likes_count -= 1
+				this.getData();
+			})
+	},
+
+	//favoritePage:お気に入り削除//
+		unlike2(favorite) {
+			Axios.delete('/api/unlike2/'+favorite.id).then((res)=>{
+				favorite.likes_count -= 1
+				this.favoriteData();
 			})
 	},
 		deleteData(tweet){

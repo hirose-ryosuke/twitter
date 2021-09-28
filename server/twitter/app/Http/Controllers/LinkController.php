@@ -23,6 +23,20 @@ class LinkController extends Controller
 
         return response()->json($tweet);
     }
+    public function unlike($id)
+    {
+        $like = Like::where('reply_id', $id)->where('user_id', Auth::id())->first();
+        $like->delete();
+
+        return response()->json($like);
+    }
+    public function unlike2($id)
+    {
+        $like = Like::where('reply_id', $id)->where('user_id', Auth::id())->first();
+        $like->delete();
+        return response()->json($like);
+        return redirect("/favorite");
+    }
 
         /**
      * 引数のIDに紐づくリプライにLIKEする
@@ -40,20 +54,6 @@ class LinkController extends Controller
     //     return redirect()->back();
     // }
     
-
-    /**
-     * 引数のIDに紐づくリプライにUNLIKEする
-     *
-     * @param $id リプライID
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function unlike($id)
-    {
-        $like = Like::where('reply_id', $id)->where('user_id', Auth::id())->first();
-        $like->delete();
-
-        return response()->json($like);
-    }
 
     public function index(Follow $follow,Twitter $twitter,User $users)
     {
@@ -134,11 +134,10 @@ class LinkController extends Controller
     public function favoriteData(Request $request,Follow $follow,Twitter $twitter,User $users,Like $like)
     {
         $user_id = Auth::user()->id;
-        $user = User::where('id', $user_id)->first();
 
         //お気に入りしている投稿のみ表示//
         $likes = Like::where('user_id',$user_id)->select('reply_id')->get();
-        $favorites = User::with('twitter')->whereIn('id',$likes)->orderBy('created_at','desc')->get();
+        $favorites = Twitter::with('user')->whereIn('id',$likes)->orderBy('created_at','desc')->get();
 
         return response()->json($favorites);
     }
