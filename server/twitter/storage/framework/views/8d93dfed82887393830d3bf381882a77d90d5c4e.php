@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="space">.</div>
+            <div class="space"></div>
             <div class="twitter_top_inbox">
                 <div v-for="tweet in tweets" :key="tweet.id" >
                     <div class="top_inbox_inner">
@@ -53,11 +53,9 @@
                             </div>
 
                             <!-- いいねボタン -->
-                            <div class="like_btn" v-show="!authCheck(tweet)">
-                                <button class="btn btn-warning btn-sm text-danger"
-                                @click="onLikeClick(tweet)"
-                                >☆
-                                    <span class="like_btn__text ">{{ tweet.likes_count }}</span>
+                            <div class="favorite_button" v-show="!authCheck(tweet)">
+                                <button class="btn-warning favorite_button_inner" @click="onLikeClick(tweet)">
+                                    <span class="text-danger">☆ {{ tweet.likes_count }}</span>
                                 </button>
                             </div>
                         </div>

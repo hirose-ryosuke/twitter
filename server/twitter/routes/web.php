@@ -46,5 +46,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::put('/api/like/{id}', 'LinkController@like');
     Route::delete('/api/unlike/{id}', 'LinkController@unlike');
+    Route::delete('/api/unlike2/{id}', 'LinkController@unlike2');
 
 });

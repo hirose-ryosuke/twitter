@@ -7,7 +7,7 @@
 </head>
 @section('content')
     <section class="section_wrapper">
-        <div class="twitter_top_wrapper">
+        <div class="twitter_top_wrapper"id="tweet_top">
             <div class="twitter_top_box" >
                 @include('nav')
                 <div class="twitter_top_inwrapper">
@@ -15,21 +15,23 @@
                         <p>Favorite Tweets</p>
                     </div>
                 </div>
-                <div class="space">.</div>
                 <div class="twitter_top_inbox">
-                    @foreach($like_tweet  as $twitter)
-                    <div class="top_inbox_inner">
-                        <img class="twitter-profile_image2" src="{{asset('/storage/images/'.$twitter->user->product_image)}}"alt="">
-                        <p class="twitter_username" >{{$twitter->user->name}}</p>
-                        <p class="mention" >{{'@'.$twitter->user->mention}}</p>
-                        <p class="tweet_date" >{{$twitter->created_at}}</p>
-                        <div class="tweet_area tweet_area_under">
-                            @csrf
-                            <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >{{$twitter->tweet}}</div>
-                            @include('favorite_button')
+                    <div v-for="favorite in favorites" :key="favorite.id">
+                        <div class="top_inbox_inner">
+                            <img class="twitter_top_menu-image twitter-profile_image" :src="'storage/images/' + favorite.user.product_image"  alt="">
+                            <p class="twitter_username" >@{{favorite.user.name}}</p>
+                            <p class="mention" >@{{favorite.user.mention}}</p>
+                            <p class="tweet_date" >@{{favorite.updated_at | moment }}</p>
+                            <div class="tweet_area tweet_area_under">
+                                <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >@{{favorite.tweet }}</div>
+                                <div class="favorite_button">
+                                    <button class="btn-warning favorite_button_inner" @click="onLikeClick(tweet)">
+                                        <span class="text-danger">☆ @{{ favorite.likes_count }}</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    @endforeach
                 </div>
             </div>
         </div>
