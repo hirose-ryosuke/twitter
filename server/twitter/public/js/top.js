@@ -2450,39 +2450,21 @@ new Vue({
     },
     //お気に入り付与//
     like: function like(tweet) {
-      var _this4 = this;
-
       Axios.put('/api/like/' + tweet.id).then(function (res) {
         tweet.likes_count += 1;
-
-        _this4.getData();
       });
     },
-    //topPage:お気に入り削除//
+    //お気に入り削除//
     unlike: function unlike(tweet) {
-      var _this5 = this;
-
       Axios["delete"]('/api/unlike/' + tweet.id).then(function (res) {
         tweet.likes_count -= 1;
-
-        _this5.getData();
-      });
-    },
-    //favoritePage:お気に入り削除//
-    unlike2: function unlike2(favorite) {
-      var _this6 = this;
-
-      Axios["delete"]('/api/unlike2/' + favorite.id).then(function (res) {
-        favorite.likes_count -= 1;
-
-        _this6.favoriteData();
       });
     },
     deleteData: function deleteData(tweet) {
-      var _this7 = this;
+      var _this4 = this;
 
       Axios.post('/deleteData/' + tweet.id).then(function (res) {
-        _this7.tweets.splice(_this7.tweets.indexOf(tweet), 1);
+        _this4.tweets.splice(_this4.tweets.indexOf(tweet), 1);
       });
     }
   },

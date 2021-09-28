@@ -122,25 +122,6 @@ section {
   margin-left: auto;
 }
 
-.favorite_button {
-  display: flex;
-  margin-left: auto;
-}
-
-.favorite_button_inner {
-  display: flex;
-  padding: 16px 24px;
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 80px;
-  border: none;
-  cursor: pointer;
-  margin-left: auto;
-}
-
 /*ドロワーMENU(nav)*/
 
 .menu-checkbox {

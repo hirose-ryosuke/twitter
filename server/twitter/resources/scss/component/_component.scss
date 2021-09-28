@@ -68,7 +68,7 @@ section{
 #sex{
     display: flex;
 }
-//tweetボタン//
+//tweet削除ボタン//
 .delete_button,
 .follow_button{
     display: flex;
@@ -84,24 +84,6 @@ section{
     text-align: center;
     text-decoration: none;
     background-color: #eb3547!important;
-    border-radius: 80px;
-    border: none;
-    cursor: pointer;
-    margin-left: auto;
-}
-//tweetボタン//
-.favorite_button{
-    display: flex;
-    margin-left: auto;
-}
-.favorite_button_inner{
-    display: flex;
-    padding: 16px 24px;
-    font-size: 14px;
-    font-weight: bold;
-    color:white;
-    text-align: center;
-    text-decoration: none;
     border-radius: 80px;
     border: none;
     cursor: pointer;
