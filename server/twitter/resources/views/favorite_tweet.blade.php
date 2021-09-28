@@ -25,7 +25,7 @@
                             <div class="tweet_area tweet_area_under">
                                 <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >@{{favorite.tweet }}</div>
                                 <div class="favorite_button">
-                                    <button class="btn-warning favorite_button_inner" @click="onLikeClick(tweet)">
+                                    <button class="btn-warning favorite_button_inner" @click="onLikeClick(favorite)">
                                         <span class="text-danger">☆ @{{ favorite.likes_count }}</span>
                                     </button>
                                 </div>

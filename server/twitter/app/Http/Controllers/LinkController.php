@@ -114,7 +114,6 @@ class LinkController extends Controller
 
         return response()->json($following_tweets);
     }
-    
     public function addData(Request $request)
     {
         $user_id = Auth::user()->id;
@@ -134,11 +133,10 @@ class LinkController extends Controller
     public function favoriteData(Request $request,Follow $follow,Twitter $twitter,User $users,Like $like)
     {
         $user_id = Auth::user()->id;
-
         //お気に入りしている投稿のみ表示//
         $likes = Like::where('user_id',$user_id)->select('reply_id')->get();
         $favorites = Twitter::with('user')->whereIn('id',$likes)->orderBy('created_at','desc')->get();
-
+        
         return response()->json($favorites);
     }
 }

@@ -83,6 +83,7 @@ section {
   display: flex;
 }
 
+.favorite_button,
 .delete_button,
 .follow_button {
   display: flex;
@@ -102,11 +103,6 @@ section {
   border-radius: 80px;
   border: none;
   cursor: pointer;
-  margin-left: auto;
-}
-
-.favorite_button {
-  display: flex;
   margin-left: auto;
 }
 
