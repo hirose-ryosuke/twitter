@@ -82,5 +82,53 @@ class UserFollowController extends Controller
     {
         return $this->where('following_id', $user_id)->get('followed_id');
     }
-    
+
+    //vue
+    //UsersPage
+    public function usersData(User $user,Follow $follow){
+        $user_id = Auth::user()->id;
+        $all_users = User::with('follows')->where('id','!=',$user_id)->get();
+        
+        $login_user = auth()->user();
+        $is_following = $user->isFollowing($login_user->id);
+        $is_followed = $user->isFollowed($login_user->id);
+        $follow_count = $follow->getFollowCount($login_user->id);
+        $follower_count = $follow->getFollowerCount($login_user->id);
+
+        return response()->json($all_users);
+    }
+    //follow機能
+    public function follow(User $user,$id) {
+        $user_id = Auth::user()->id;
+        $follow = new Follow();
+        $follow->following_id = $user_id;
+        $follow->followed_id = $id;
+        $follow->timestamps = false;
+        $follow->save();
+        
+        $followCount = count(Follow::where('followed_id', $id)->get());
+
+        return response()->json($followCount);
+    }
+    //フォロー解除機能
+    public function unfollow(User $user,$id) {
+        $follow = Follow::where('following_id', \Auth::user()->id)->where('followed_id', $id)->first();
+        $follow->delete();
+
+        $followCount = count(Follow::where('followed_id', $id)->get());
+
+        return response()->json($followCount);
+    }
+    public function follows()
+    {
+        return $this->belongsToMany(self::class, 'follows', 'following_id', 'followed_id');
+    }
+    public function isFollowing($id)
+    {
+        $follow = Follow::where('followed_id', $id)->exists();
+
+        \Log::debug($follow);
+        return response()->json($follow);
+    }
+
 }

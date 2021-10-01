@@ -106,7 +106,7 @@ class LinkController extends Controller
 
 
     //vue
-    public function getData(Request $request)
+    public function getData(Request $request,Follow $follows)
     {
         $user_id = Auth::user()->id;
         $follow_ids= Follow::where('following_id',$user_id)->select('followed_id')->get();

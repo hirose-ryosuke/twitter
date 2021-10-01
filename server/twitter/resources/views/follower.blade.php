@@ -21,11 +21,9 @@
                                     <div class="following_inbox">
                                         <p class="following_username" >{{ $user->name }}</p>
                                         <p class="following_mention" >{{ '@'.$user->mention }}</p>
-                                    @if (auth()->user()->isFollowed($user->id))
-                                        <div class="follow_verification">
+                                        <div class="follow_verification" v-if="onLikeClick(user)">
                                             <span class="verification_message">フォローされています</span>
                                         </div>
-                                    @endif
                                     </div>
                                 </div>
                                 <div class="following_inpartition">

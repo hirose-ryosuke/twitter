@@ -19,7 +19,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password','age','sex','mention','product_image','following_user_id','user_id'
     ];
-
+    protected $appends = ['isActive'];
+    public function getIsActiveAttribute()
+    {
+        return false;
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

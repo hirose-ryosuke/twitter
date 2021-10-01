@@ -4,7 +4,7 @@ new Vue({
 	el: '#tweet_top',
 	filters: {
 		moment: function (date) {
-		return moment(date).format('YYYY/MM/DD HH:mm:ss ')
+		    return moment(date).format('YYYY/MM/DD HH:mm:ss ')
 		}
 	},
 	data:{
@@ -26,6 +26,11 @@ new Vue({
 				console.log(this.favorites);
 			})
 		},
+		//tweetが自身のものか判断
+		authCheck(tweet){
+			return tweet.user_id == user_id ? true : false;
+		},
+		//tweet投稿
 		addData(){
 			this.tweets.push({
 				tweet:this.newTweet
@@ -37,8 +42,12 @@ new Vue({
 				this.newTweet = '';
 			})
 		},
-		authCheck(tweet){
-			return tweet.user_id == user_id ? true : false;
+		//tweet削除
+		deleteData(tweet){
+			Axios.post('/deleteData/'+tweet.id).then((res)=>{
+				this.tweets.splice(this.tweets.indexOf(tweet),1);
+				this.getData();
+			})
 		},
 		//お気に入りボタン//
 		onLikeClick(tweet) {
@@ -55,28 +64,22 @@ new Vue({
 				tweet.likes_count += 1
 				this.getData();
 			})
-	},
-	//topPage:お気に入り削除//
-		unlike(tweet) {
-			Axios.delete('/api/unlike/'+tweet.id).then((res)=>{
-				tweet.likes_count -= 1
-				this.getData();
-			})
-	},
-
-	//favoritePage:お気に入り削除//
-		unlike2(favorite) {
-			Axios.delete('/api/unlike2/'+favorite.id).then((res)=>{
-				favorite.likes_count -= 1
-				this.favoriteData();
-
-			})
-	},
-		deleteData(tweet){
-			Axios.post('/deleteData/'+tweet.id).then((res)=>{
-				this.tweets.splice(this.tweets.indexOf(tweet),1);
-			})
 		},
+		//topPage:お気に入り削除//
+        unlike(tweet) {
+            Axios.delete('/api/unlike/'+tweet.id).then((res)=>{
+                tweet.likes_count -= 1
+                this.getData();
+            })
+		},
+		//favoritePage:お気に入り削除//
+        unlike2(favorite) {
+            Axios.delete('/api/unlike2/'+favorite.id).then((res)=>{
+                favorite.likes_count -= 1
+                this.favoriteData();
+            })
+		},
+		
 	},
 	mounted(){
 		console.log();

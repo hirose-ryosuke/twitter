@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2373,10 +2373,10 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./resources/js/tweets/top.js":
-/*!************************************!*\
-  !*** ./resources/js/tweets/top.js ***!
-  \************************************/
+/***/ "./resources/js/tweets/users.js":
+/*!**************************************!*\
+  !*** ./resources/js/tweets/users.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2384,7 +2384,7 @@ var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
     Axios = _require["default"];
 
 new Vue({
-  el: '#tweet_top',
+  el: '#users',
   filters: {
     moment: function (_moment) {
       function moment(_x) {
@@ -2401,113 +2401,60 @@ new Vue({
     })
   },
   data: {
-    tweets: [],
-    favorites: [],
-    newTweet: '',
-    tweet_id: ''
+    users: [],
+    followCount: ''
   },
   methods: {
-    getData: function getData() {
+    usersData: function usersData() {
       var _this = this;
 
-      Axios.get('/getData').then(function (res) {
-        _this.tweets = res.data;
-        console.log(_this.tweets);
+      Axios.get('/usersData').then(function (res) {
+        _this.users = res.data;
+        console.log(_this.users);
       });
     },
-    favoriteData: function favoriteData() {
+    showButton: function showButton(user) {
+      Axios.get('/usersIsFollow/' + user.id).then(function (res) {
+        if (res.data == false) {
+          return user.isActive == true;
+        }
+      });
+    },
+    usersFollow: function usersFollow(user) {
       var _this2 = this;
 
-      Axios.get('/favoriteData').then(function (res) {
-        _this2.favorites = res.data;
-        console.log(_this2.favorites);
+      Axios.post('/usersFollow/' + user.id).then(function (res) {
+        _this2.usersData();
+
+        return user.isActive = true;
       });
     },
-    //tweetが自身のものか判断
-    authCheck: function authCheck(tweet) {
-      return tweet.user_id == user_id ? true : false;
-    },
-    //tweet投稿
-    addData: function addData() {
+    usersUnFollow: function usersUnFollow(user) {
       var _this3 = this;
 
-      this.tweets.push({
-        tweet: this.newTweet
-      });
-      Axios.post('/addData', {
-        tweet: this.newTweet
-      }).then(function (res) {
-        _this3.getData();
+      Axios["delete"]('/usersUnFollow/' + user.id).then(function (res) {
+        _this3.usersData();
 
-        _this3.newTweet = '';
-      });
-    },
-    //tweet削除
-    deleteData: function deleteData(tweet) {
-      var _this4 = this;
-
-      Axios.post('/deleteData/' + tweet.id).then(function (res) {
-        _this4.tweets.splice(_this4.tweets.indexOf(tweet), 1);
-
-        _this4.getData();
-      });
-    },
-    //お気に入りボタン//
-    onLikeClick: function onLikeClick(tweet) {
-      if (tweet.liked_by_user) {
-        this.unlike(tweet);
-      } else {
-        this.like(tweet);
-      }
-    },
-    //お気に入り付与//
-    like: function like(tweet) {
-      var _this5 = this;
-
-      Axios.put('/api/like/' + tweet.id).then(function (res) {
-        tweet.likes_count += 1;
-
-        _this5.getData();
-      });
-    },
-    //topPage:お気に入り削除//
-    unlike: function unlike(tweet) {
-      var _this6 = this;
-
-      Axios["delete"]('/api/unlike/' + tweet.id).then(function (res) {
-        tweet.likes_count -= 1;
-
-        _this6.getData();
-      });
-    },
-    //favoritePage:お気に入り削除//
-    unlike2: function unlike2(favorite) {
-      var _this7 = this;
-
-      Axios["delete"]('/api/unlike2/' + favorite.id).then(function (res) {
-        favorite.likes_count -= 1;
-
-        _this7.favoriteData();
+        return false;
       });
     }
   },
   mounted: function mounted() {
     console.log();
-    this.getData();
-    this.favoriteData();
+    this.usersData();
   }
 });
 
 /***/ }),
 
-/***/ 1:
-/*!******************************************!*\
-  !*** multi ./resources/js/tweets/top.js ***!
-  \******************************************/
+/***/ 2:
+/*!********************************************!*\
+  !*** multi ./resources/js/tweets/users.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/twitter/resources/js/tweets/top.js */"./resources/js/tweets/top.js");
+module.exports = __webpack_require__(/*! /var/www/twitter/resources/js/tweets/users.js */"./resources/js/tweets/users.js");
 
 
 /***/ })
