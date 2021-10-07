@@ -4,7 +4,7 @@ new Vue({
 	el: '#users',
 	filters: {
 		moment: function (date) {
-		    return moment(date).format('YYYY/MM/DD HH:mm:ss ')
+            return moment(date).format('YYYY/MM/DD HH:mm:ss')
 		}
 	},
 	data:{
@@ -19,13 +19,6 @@ new Vue({
 				console.log(this.users);
 			})
 		},
-        showButton(user){
-            Axios.get('/usersIsFollow/'+user.id).then((res)=>{
-                this.res_follow = res.data;
-                console.log(this.res_follow );
-			})
-            
-        },
 		usersFollow(user){
 			Axios.post('/usersFollow/'+user.id).then((res)=>{
 				this.usersData()

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 <head>
-@include('head')   
+@include('head')
     <title>Users List</title>
 </head>
 @section('content')
@@ -24,10 +24,12 @@
                                     </div> -->
                                 </div>
                             </div>
-                            <div class="following_inpartition" >
-                                <div class="follow_button follow_button2">
-                                    <button class="follow_button_inner"@click="usersUnFollow(user)" v-show="res_follow">フォローをやめる</button>
-                                    <button class="follow_button_inner"@click="usersFollow(user)" v-show="res_follow">フォローする</button>
+                            <div class="following_inpartition">
+                                <div class="follow_button follow_button2" v-if="user.isFollow">
+                                    <button class="follow_button_inner" @click="usersUnFollow(user)">フォローをやめる</button>
+                                </div>
+                                <div class="follow_button follow_button2" v-else>
+                                    <button class="follow_button_inner" @click="usersFollow(user)">フォローする</button>
                                 </div>
                             </div>
                         </div>

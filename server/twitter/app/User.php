@@ -1,10 +1,9 @@
 <?php
 
 namespace App;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -16,9 +15,21 @@ class User extends Authenticatable
      * @var array
      */
     protected $table = 'users';
+
     protected $fillable = [
         'name', 'email', 'password','age','sex','mention','product_image','following_user_id','user_id'
     ];
+
+    protected $appends = ['isFollow'];
+
+    public function getIsFollowAttribute()
+    {
+        $user_id = Auth::user()->id;
+        // フォローされているuser_idを抽出
+        $followers_id = Follow::where('following_id', $user_id)->pluck('followed_id')->toArray();
+        return in_array($this->id, (array)$followers_id, true) ? true : false;
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -36,14 +47,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     public static $editEmailRules = array(
 
         'email' => 'required|email'
     );
+
     public function twitter()
     {
         return $this->hasMany('App\twitter');
     }
+
     public function FollowModel()
     {
         return $this->hasMany('App\Follow');
@@ -52,7 +66,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Email');
     }
-    
+
     //フォロー機能//
     public function followers()
     {
@@ -77,7 +91,7 @@ class User extends Authenticatable
     public function isFollowing($id)
     {
         $user = $this->follows()->where('followed_id', $id)->exists();
-        \Log::debug($user);
+
         return redirect();
     }
 
@@ -85,6 +99,4 @@ class User extends Authenticatable
     {
         return (boolean) $this->followers()->where('following_id', $user_id)->exists();
     }
-
-
 }

@@ -52,6 +52,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/usersData', 'UserFollowController@usersData');
     Route::post('/usersFollow/{id}', 'UserFollowController@follow');
     Route::delete('/usersUnFollow/{id}', 'UserFollowController@unfollow');
-    Route::get('/usersIsFollow/{id}', 'UserFollowController@isFollowing');
-
 });
