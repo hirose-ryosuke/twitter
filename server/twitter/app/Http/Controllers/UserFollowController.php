@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -123,12 +123,18 @@ class UserFollowController extends Controller
     {
         return $this->belongsToMany(self::class, 'follows', 'following_id', 'followed_id');
     }
+    ///usersIsFollow/
     public function isFollowing($id)
     {
-        $follow = Follow::where('followed_id', $id)->exists();
-
-        \Log::debug($follow);
-        return response()->json($follow);
+        $user_id = Auth::user()->id;
+        $follow =Follow::where('following_id',$user_id)->where('followed_id',$id)->first(); 
+        if($follow === null){
+            $follows = false;
+        }else{
+            $follows = true;
+        }
+        
+        return response()->json($follows);
     }
 
 }

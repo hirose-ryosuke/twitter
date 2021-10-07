@@ -2402,7 +2402,8 @@ new Vue({
   },
   data: {
     users: [],
-    followCount: ''
+    followCount: '',
+    res_follow: ''
   },
   methods: {
     usersData: function usersData() {
@@ -2414,28 +2415,25 @@ new Vue({
       });
     },
     showButton: function showButton(user) {
+      var _this2 = this;
+
       Axios.get('/usersIsFollow/' + user.id).then(function (res) {
-        if (res.data == false) {
-          return user.isActive == true;
-        }
+        _this2.res_follow = res.data;
+        console.log(_this2.res_follow);
       });
     },
     usersFollow: function usersFollow(user) {
-      var _this2 = this;
+      var _this3 = this;
 
       Axios.post('/usersFollow/' + user.id).then(function (res) {
-        _this2.usersData();
-
-        return user.isActive = true;
+        _this3.usersData();
       });
     },
     usersUnFollow: function usersUnFollow(user) {
-      var _this3 = this;
+      var _this4 = this;
 
       Axios["delete"]('/usersUnFollow/' + user.id).then(function (res) {
-        _this3.usersData();
-
-        return false;
+        _this4.usersData();
       });
     }
   },

@@ -10,6 +10,7 @@ new Vue({
 	data:{
         users:[],
         followCount:'',
+        res_follow:'',
 	},
 	methods:{
 		usersData(){
@@ -20,21 +21,19 @@ new Vue({
 		},
         showButton(user){
             Axios.get('/usersIsFollow/'+user.id).then((res)=>{
-                if(res.data == false){
-                    return user.isActive == true;
-                }
+                this.res_follow = res.data;
+                console.log(this.res_follow );
 			})
+            
         },
 		usersFollow(user){
 			Axios.post('/usersFollow/'+user.id).then((res)=>{
 				this.usersData()
-                return user.isActive=true
 			})
 		},
 		usersUnFollow(user){
 			Axios.delete('/usersUnFollow/'+user.id).then((res)=>{
                 this.usersData()
-                return false
 			})
 		},
 	},

@@ -26,8 +26,8 @@
                             </div>
                             <div class="following_inpartition" >
                                 <div class="follow_button follow_button2">
-                                    <button class="follow_button_inner"@click="usersUnFollow(user)" v-if="showButton(user)">フォローをやめる</button>
-                                <button class="follow_button_inner"@click="usersFollow(user)" v-else>フォローする</button>
+                                    <button class="follow_button_inner"@click="usersUnFollow(user)" v-show="res_follow">フォローをやめる</button>
+                                    <button class="follow_button_inner"@click="usersFollow(user)" v-show="res_follow">フォローする</button>
                                 </div>
                             </div>
                         </div>

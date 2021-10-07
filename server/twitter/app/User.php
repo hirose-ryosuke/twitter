@@ -19,11 +19,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password','age','sex','mention','product_image','following_user_id','user_id'
     ];
-    protected $appends = ['isActive'];
-    public function getIsActiveAttribute()
-    {
-        return false;
-    }
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -79,9 +74,11 @@ class User extends Authenticatable
         return $this->follows()->detach($user_id);
     }
 
-    public function isFollowing($user_id)
+    public function isFollowing($id)
     {
-        return (boolean) $this->follows()->where('followed_id', $user_id)->exists();
+        $user = $this->follows()->where('followed_id', $id)->exists();
+        \Log::debug($user);
+        return redirect();
     }
 
     public function isFollowed($user_id)
