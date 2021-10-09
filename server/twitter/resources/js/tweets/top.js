@@ -9,7 +9,6 @@ new Vue({
 	},
 	data:{
 		tweets:[],
-		favorites:[],
 		newTweet:'',
 		tweet_id:'',
 	},
@@ -18,12 +17,6 @@ new Vue({
 			Axios.get('/getData').then((res)=>{
 				this.tweets = res.data;
 				console.log(this.tweets);
-			})
-		},
-		favoriteData(){
-			Axios.get('/favoriteData').then((res)=>{
-				this.favorites = res.data;
-				console.log(this.favorites);
 			})
 		},
 		//tweetが自身のものか判断
@@ -66,25 +59,16 @@ new Vue({
 			})
 		},
 		//topPage:お気に入り削除//
-        unlike(tweet) {
-            Axios.delete('/api/unlike/'+tweet.id).then((res)=>{
-                tweet.likes_count -= 1
-                this.getData();
-            })
+		unlike(tweet) {
+			Axios.delete('/api/unlike/'+tweet.id).then((res)=>{
+				tweet.likes_count -= 1
+				this.getData();
+			})
 		},
-		//favoritePage:お気に入り削除//
-        unlike2(favorite) {
-            Axios.delete('/api/unlike2/'+favorite.id).then((res)=>{
-                favorite.likes_count -= 1
-                this.favoriteData();
-            })
-		},
-		
 	},
 	mounted(){
 		console.log();
 		this.getData();
-		this.favoriteData();
 	}
 });
 

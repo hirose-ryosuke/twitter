@@ -35,23 +35,28 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('unfollow', 'UserFollowController@destroy')->name('unfollow');
     });
     //vue
-    //いいね機能
+    //topPage
+    //tweet-favoriteButton
     Route::get('/twitter/like/{id}', 'LinkController@like')->name('twitter.like');
     Route::get('/twitter/unlike/{id}', 'LinkController@unlike')->name('twitter.unlike');
     Route::get('/favorite', 'LinkController@favorite');
-    //tweet
+    //top-tweet
     Route::get('/getData', 'LinkController@getData');
     Route::post('/addData', 'LinkController@addData');
     Route::post('/deleteData/{id}', 'LinkController@deleteData');
-    //favorite
-    Route::get('/favoriteData', 'LinkController@favoriteData');
+    //followButton
     Route::put('/api/like/{id}', 'LinkController@like');
     Route::delete('/api/unlike/{id}', 'LinkController@unlike');
-    Route::delete('/api/unlike2/{id}', 'LinkController@unlike2');
-    //users
+    //usersPage
     Route::get('/usersData', 'UserFollowController@usersData');
+    //favoritePage
+    Route::get('/favoriteData', 'LinkController@favoriteData');
+    //followingPage
+    Route::get('/followsData', 'UserFollowController@followsData');
+    //followerPage
+    Route::get('/followerData', 'UserFollowController@followerData');
+    //followButton
     Route::post('/usersFollow/{id}', 'UserFollowController@follow');
     Route::delete('/usersUnFollow/{id}', 'UserFollowController@unfollow');
-    Route::get('/usersIsFollow/{id}', 'UserFollowController@isFollowing');
 
 });

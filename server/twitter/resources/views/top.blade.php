@@ -47,13 +47,14 @@
                         <p class="mention" >@{{tweet.user.mention}}</p>
                         <p class="tweet_date" >@{{tweet.updated_at | moment }}</p>
                         <div class="tweet_area_under">
-                            <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >@{{tweet.tweet}}</div>
+                            <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >@{{tweet.tweet}}
+                            </div>
                             <!--投稿のidが自身の場合のみdeleteボタン表示-->
                             <div class="delete_button" v-show="authCheck(tweet)" >
-                                <button class="delete_button_inner"  type="submit" @click="deleteData(tweet)">削除</button>
+                                <button class="delete_button_inner"  type="submit" @click="deleteData(tweet)">削除
+                                </button>
                             </div>
-
-                            <!-- いいねボタン -->
+                            <!-- favoriteボタン -->
                             <div class="favorite_button" v-show="!authCheck(tweet)">
                                 <button class="btn-warning favorite_button_inner" @click="onLikeClick(tweet)">
                                     <span class="text-danger">☆ @{{ tweet.likes_count }}</span>

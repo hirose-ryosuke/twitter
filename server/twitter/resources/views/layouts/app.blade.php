@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-            <header>
+        <header>
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-info">
             <div class="container-fluid">
@@ -102,11 +102,10 @@
             </nav>
         </header>
             <!-- Navbar -->
-
+            <main class="py-4">
+                @yield('content')
+                @yield('top')
+            </main>
     </div>
-        <main class="py-4">
-            @yield('content')
-            @yield('top')
-        </main>
 </body>
 </html>

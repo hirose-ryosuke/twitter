@@ -24,6 +24,4 @@ class Follow extends Model
     {
         return $this->where('followed_id',  $user_id)->count();
     }
-    // //vue
-    
 }

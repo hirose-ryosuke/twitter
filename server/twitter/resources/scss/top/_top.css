@@ -5,7 +5,8 @@
   max-width: 1920px;
 }
 
-.section_wrapper .twitter_top_wrapper {
+.section_wrapper .twitter_top_wrapper,
+.section_wrapper .favorite_top_wrapper {
   position: relative;
   display: flex;
   width: 100%;
@@ -14,7 +15,8 @@
   padding: 0;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box {
+.section_wrapper .twitter_top_wrapper .twitter_top_box,
+.section_wrapper .favorite_top_wrapper .twitter_top_box {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -24,7 +26,8 @@
   margin: 0  auto;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -33,7 +36,8 @@
   border: 1px solid gray;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_title {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_title,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_title {
   display: flex;
   width: 100%;
   height: 100%;
@@ -42,14 +46,16 @@
   border-bottom: 1px solid gray;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_title p {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_title p,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_title p {
   font-size: 24px;
   font-weight: bold;
   padding-left: 16px;
   margin: auto 0;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -57,22 +63,26 @@
   margin: 0 auto;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top {
   display: flex;
   padding: 20px 0 0 10px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_profile {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_profile,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_profile {
   padding-right: 10px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_profile .twitter-profile_image2 {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_profile .twitter-profile_image2,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_profile .twitter-profile_image2 {
   width: 48px;
   height: 48px;
   border-radius: 80px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area {
   width: 100%;
   height: auto;
   display: flex;
@@ -81,7 +91,8 @@
   margin-bottom: 8px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .tweet_text {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .tweet_text,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .tweet_text {
   border: none;
   width: 100%;
   font-size: 20px;
@@ -89,15 +100,18 @@
   resize: none;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow {
   display: flex;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow .following {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow .following,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow .following {
   display: flex;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow .following .follow_number {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow .following .follow_number,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow .following .follow_number {
   font-size: 16px;
   font-weight: bold;
   border: none;
@@ -107,16 +121,19 @@
   margin-right: 8px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow .following .follow_number .follow_label {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow .following .follow_number .follow_label,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follow .following .follow_number .follow_label {
   font-weight: bold;
   margin-right: 16px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follower {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follower,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follower {
   display: flex;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follower .follower_number {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follower .follower_number,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follower .follower_number {
   font-size: 16px;
   font-weight: bold;
   border: none;
@@ -126,16 +143,19 @@
   margin-right: 8px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follower .follower_number .follower_label {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follower .follower_number .follower_label,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .follower .follower_number .follower_label {
   font-weight: bold;
   margin-right: 16px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .tweet_button-first {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .tweet_button-first,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .tweet_button-first {
   margin-left: 100px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .tweet_button-first .button_inner-first {
+.section_wrapper .twitter_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .tweet_button-first .button_inner-first,
+.section_wrapper .favorite_top_wrapper .twitter_top_box .twitter_top_inwrapper .twitter_top_input-field .twitter_top_input-field-top .tweet_area .tweet_button-first .button_inner-first {
   display: flex;
   padding: 16px 24px;
   font-size: 14px;
@@ -150,7 +170,8 @@
   margin-left: auto;
 }
 
-.section_wrapper .twitter_top_wrapper .space {
+.section_wrapper .twitter_top_wrapper .space,
+.section_wrapper .favorite_top_wrapper .space {
   position: relative;
   width: 100%;
   height: 20px;
@@ -159,7 +180,8 @@
   border-bottom: none;
 }
 
-.section_wrapper .twitter_top_wrapper .space::before {
+.section_wrapper .twitter_top_wrapper .space::before,
+.section_wrapper .favorite_top_wrapper .space::before {
   position: absolute;
   content: "";
   background-color: lightgray;
@@ -171,7 +193,8 @@
   left: 0;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_inbox {
+.section_wrapper .twitter_top_wrapper .twitter_top_inbox,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox {
   display: flex;
   width: 100%;
   height: 100%;
@@ -180,7 +203,8 @@
   padding: 0;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner {
+.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox .top_inbox_inner {
   display: flex;
   flex-wrap: wrap;
   padding: 20px 0 0 10px;
@@ -188,7 +212,8 @@
   border-top: none;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .twitter_username {
+.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .twitter_username,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox .top_inbox_inner .twitter_username {
   font-size: 18px;
   font-weight: bold;
   margin-left: 16px;
@@ -196,19 +221,25 @@
 
 .section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .twitter_username,
 .section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .mention,
-.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_date {
+.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_date,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox .top_inbox_inner .twitter_username,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox .top_inbox_inner .mention,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_date {
   height: auto;
   margin-bottom: 0 !important;
 }
 
 .section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .mention,
-.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_date {
+.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_date,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox .top_inbox_inner .mention,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_date {
   font-size: 18px;
   margin-left: 10px;
   color: lightslategrey;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_area_under {
+.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_area_under,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_area_under {
   width: 100%;
   height: auto;
   display: flex;
@@ -219,7 +250,8 @@
   margin-bottom: 8px;
 }
 
-.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_area_under .tweet_text2 {
+.section_wrapper .twitter_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_area_under .tweet_text2,
+.section_wrapper .favorite_top_wrapper .twitter_top_inbox .top_inbox_inner .tweet_area_under .tweet_text2 {
   border: none;
   width: calc(100%/2);
   height: 100%;

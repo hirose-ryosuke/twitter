@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2373,10 +2373,10 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./resources/js/tweets/top.js":
-/*!************************************!*\
-  !*** ./resources/js/tweets/top.js ***!
-  \************************************/
+/***/ "./resources/js/tweets/follower.js":
+/*!*****************************************!*\
+  !*** ./resources/js/tweets/follower.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2384,7 +2384,7 @@ var _require = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
     Axios = _require["default"];
 
 new Vue({
-  el: '#tweet_top',
+  el: '#follower',
   filters: {
     moment: function (_moment) {
       function moment(_x) {
@@ -2401,93 +2401,48 @@ new Vue({
     })
   },
   data: {
-    tweets: [],
-    newTweet: '',
-    tweet_id: ''
+    followed: []
   },
   methods: {
-    getData: function getData() {
+    followerData: function followerData() {
       var _this = this;
 
-      Axios.get('/getData').then(function (res) {
-        _this.tweets = res.data;
-        console.log(_this.tweets);
+      Axios.get('/followerData').then(function (res) {
+        _this.followed = res.data;
+        console.log(_this.followed);
       });
     },
-    //tweetが自身のものか判断
-    authCheck: function authCheck(tweet) {
-      return tweet.user_id == user_id ? true : false;
-    },
-    //tweet投稿
-    addData: function addData() {
+    usersFollow: function usersFollow(follower) {
       var _this2 = this;
 
-      this.tweets.push({
-        tweet: this.newTweet
-      });
-      Axios.post('/addData', {
-        tweet: this.newTweet
-      }).then(function (res) {
-        _this2.getData();
-
-        _this2.newTweet = '';
+      Axios.post('/usersFollow/' + follower.id).then(function (res) {
+        _this2.followerData();
       });
     },
-    //tweet削除
-    deleteData: function deleteData(tweet) {
+    usersUnFollow: function usersUnFollow(follower) {
       var _this3 = this;
 
-      Axios.post('/deleteData/' + tweet.id).then(function (res) {
-        _this3.tweets.splice(_this3.tweets.indexOf(tweet), 1);
-
-        _this3.getData();
-      });
-    },
-    //お気に入りボタン//
-    onLikeClick: function onLikeClick(tweet) {
-      if (tweet.liked_by_user) {
-        this.unlike(tweet);
-      } else {
-        this.like(tweet);
-      }
-    },
-    //お気に入り付与//
-    like: function like(tweet) {
-      var _this4 = this;
-
-      Axios.put('/api/like/' + tweet.id).then(function (res) {
-        tweet.likes_count += 1;
-
-        _this4.getData();
-      });
-    },
-    //topPage:お気に入り削除//
-    unlike: function unlike(tweet) {
-      var _this5 = this;
-
-      Axios["delete"]('/api/unlike/' + tweet.id).then(function (res) {
-        tweet.likes_count -= 1;
-
-        _this5.getData();
+      Axios["delete"]('/usersUnFollow/' + follower.id).then(function (res) {
+        _this3.followerData();
       });
     }
   },
   mounted: function mounted() {
     console.log();
-    this.getData();
+    this.followerData();
   }
 });
 
 /***/ }),
 
-/***/ 1:
-/*!******************************************!*\
-  !*** multi ./resources/js/tweets/top.js ***!
-  \******************************************/
+/***/ 5:
+/*!***********************************************!*\
+  !*** multi ./resources/js/tweets/follower.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/twitter/resources/js/tweets/top.js */"./resources/js/tweets/top.js");
+module.exports = __webpack_require__(/*! /var/www/twitter/resources/js/tweets/follower.js */"./resources/js/tweets/follower.js");
 
 
 /***/ })

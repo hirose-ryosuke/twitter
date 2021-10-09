@@ -1,10 +1,10 @@
 <?php
 
 namespace App;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -16,30 +16,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $table = 'users';
+
+    protected $appends = ['isFollow'];
+
+    public function getIsFollowAttribute()
+    {
+        $user_id = Auth::user()->id;
+        // フォローされているuser_idを抽出
+        $followers_id = Follow::where('following_id', $user_id)->pluck('followed_id')->toArray();
+        return in_array($this->id, (array)$followers_id, true) ? true : false;
+    }
+
     protected $fillable = [
         'name', 'email', 'password','age','sex','mention','product_image','following_user_id','user_id'
     ];
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-    public static $editEmailRules = array(
-
-        'email' => 'required|email'
-    );
     public function twitter()
     {
         return $this->hasMany('App\twitter');

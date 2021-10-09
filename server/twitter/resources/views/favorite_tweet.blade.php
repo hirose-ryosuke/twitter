@@ -1,13 +1,11 @@
 @extends('layouts.app')
-<!DOCTYPE html>
-<html lang="ja">
 <head>
 @include('head')   
     <title>Favorite</title>
 </head>
 @section('content')
     <section class="section_wrapper">
-        <div class="twitter_top_wrapper"id="tweet_top">
+        <div class="favorite_top_wrapper" id="favorite">
             <div class="twitter_top_box" >
                 @include('nav')
                 <div class="twitter_top_inwrapper">
@@ -25,8 +23,9 @@
                             <div class="tweet_area tweet_area_under">
                                 <div class="tweet_text2"  placeholder="hello" id="tweet2" readonly >@{{favorite.tweet }}</div>
                                 <div class="favorite_button">
-                                    <button class="btn-warning favorite_button_inner" @click="unlike2(favorite)">
-                                        <span class="text-danger">☆ @{{ favorite.likes_count }}</span>
+                                    <button class="btn-warning favorite_button_inner" @click="unlike(favorite)">
+                                        <span class="text-danger">☆ @{{ favorite.likes_count }}
+                                        </span>
                                     </button>
                                 </div>
                             </div>
@@ -39,5 +38,5 @@
     <script>
         const user_id = @json($user_id);
     </script>
-    <script src="{{ asset('js/top.js') }}" defer></script>
+    <script src="{{ asset('js/favorite.js') }}" defer></script>
 @endsection

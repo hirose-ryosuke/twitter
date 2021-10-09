@@ -9,8 +9,6 @@ new Vue({
 	},
 	data:{
         users:[],
-        followCount:'',
-        res_follow:'',
 	},
 	methods:{
 		usersData(){
@@ -19,13 +17,6 @@ new Vue({
 				console.log(this.users);
 			})
 		},
-        showButton(user){
-            Axios.get('/usersIsFollow/'+user.id).then((res)=>{
-                this.res_follow = res.data;
-                console.log(this.res_follow );
-			})
-            
-        },
 		usersFollow(user){
 			Axios.post('/usersFollow/'+user.id).then((res)=>{
 				this.usersData()

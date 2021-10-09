@@ -5,7 +5,9 @@
   left: 0;
 }
 
-.section_following .following_wrapper {
+.section_following .following_wrapper,
+.section_following .users_list_wrapper,
+.section_following .follower_wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -15,69 +17,87 @@
   background-color: #f8fafc;
 }
 
-.section_following .following_wrapper .following_box {
+.section_following .following_wrapper .following_box,
+.section_following .users_list_wrapper .following_box,
+.section_following .follower_wrapper .following_box {
   display: flex;
   flex-direction: column;
   width: 90%;
   height: 100%;
-  max-width: 960px;
   margin: 0 auto;
 }
 
-.section_following .following_wrapper .following_box .following_partition {
+.section_following .following_wrapper .following_box .following_partition,
+.section_following .users_list_wrapper .following_box .following_partition,
+.section_following .follower_wrapper .following_box .following_partition {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-}
-
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper {
-  display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  flex-direction: row;
   width: 100%;
   height: 100%;
-  margin: 0 auto;
   background-color: #00d5ff !important;
-  padding-top: 64px;
   border-radius: 8px 8px 0 0;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 240px;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 64px;
+}
+
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner {
   display: flex;
   flex-direction: column;
   height: 256px;
-  width: calc((100%-8px*2)/4);
+  width: 100%;
   border: 1px solid gray;
   border-radius: 24px;
   margin: 0 auto;
   background-color: #fff;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container {
   display: flex;
   width: 100%;
   height: 100%;
   margin: 0 auto;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .image_container {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .image_container,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .image_container,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .image_container {
   margin: 8px;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .image_container .following-profile_image {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .image_container .following-profile_image,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .image_container .following-profile_image,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .image_container .following-profile_image {
   width: 80px;
   height: 80px;
   border-radius: 80px;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox {
   display: flex;
   flex-direction: column;
   height: auto;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .following_username {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .following_username,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .following_username,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .following_username {
   color: #000000;
   margin-top: 16px;
   font-size: 18px;
@@ -86,7 +106,9 @@
   max-width: 167px;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .following_mention {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .following_mention,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .following_mention,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .following_mention {
   color: #000000;
   margin-top: 16px;
   font-size: 18px;
@@ -95,13 +117,17 @@
   max-width: 167px;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .follow_verification {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .follow_verification,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .follow_verification,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .follow_verification {
   display: flex;
   margin-left: auto;
   margin-top: 24px;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .follow_verification .verification_message {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .follow_verification .verification_message,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .follow_verification .verification_message,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .profile_container .following_inbox .follow_verification .verification_message {
   display: flex;
   padding: 8px 16px;
   font-size: 12px;
@@ -115,17 +141,23 @@
   margin-right: 4px;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .following_inpartition {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .following_inpartition,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .following_inpartition,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .following_inpartition {
   padding-bottom: 8px;
   margin: 0 auto;
 }
 
-.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .following_inpartition .follow_button {
+.section_following .following_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .following_inpartition .follow_button,
+.section_following .users_list_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .following_inpartition .follow_button,
+.section_following .follower_wrapper .following_box .following_partition .following_inwrapper .following_inwrapper_inner .following_inpartition .follow_button {
   color: #000000;
   margin-top: 16px;
 }
 
-.section_following .following_wrapper .following_box h2 {
+.section_following .following_wrapper .following_box h2,
+.section_following .users_list_wrapper .following_box h2,
+.section_following .follower_wrapper .following_box h2 {
   font-family: bebas-neue-pro, sans-serif;
   font-size: 32px !important;
   margin: 0 auto;

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2401,9 +2401,7 @@ new Vue({
     })
   },
   data: {
-    users: [],
-    followCount: '',
-    res_follow: ''
+    users: []
   },
   methods: {
     usersData: function usersData() {
@@ -2414,26 +2412,18 @@ new Vue({
         console.log(_this.users);
       });
     },
-    showButton: function showButton(user) {
+    usersFollow: function usersFollow(user) {
       var _this2 = this;
 
-      Axios.get('/usersIsFollow/' + user.id).then(function (res) {
-        _this2.res_follow = res.data;
-        console.log(_this2.res_follow);
-      });
-    },
-    usersFollow: function usersFollow(user) {
-      var _this3 = this;
-
       Axios.post('/usersFollow/' + user.id).then(function (res) {
-        _this3.usersData();
+        _this2.usersData();
       });
     },
     usersUnFollow: function usersUnFollow(user) {
-      var _this4 = this;
+      var _this3 = this;
 
       Axios["delete"]('/usersUnFollow/' + user.id).then(function (res) {
-        _this4.usersData();
+        _this3.usersData();
       });
     }
   },
@@ -2445,7 +2435,7 @@ new Vue({
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!********************************************!*\
   !*** multi ./resources/js/tweets/users.js ***!
   \********************************************/
