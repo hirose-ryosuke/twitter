@@ -21,7 +21,7 @@
     <link href="<?php echo e(asset('css/main.css')); ?>" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div>
         <header>
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-info">
@@ -103,11 +103,11 @@
             </div>
             </nav>
         </header>
-            <!-- Navbar -->
-            <main class="py-4">
-                <?php echo $__env->yieldContent('content'); ?>
-                <?php echo $__env->yieldContent('top'); ?>
-            </main>
+        <!-- Navbar -->
+        <main class="py-4">
+            <?php echo $__env->yieldContent('content'); ?>
+            <?php echo $__env->yieldContent('top'); ?>
+        </main>
     </div>
 </body>
 </html>
