@@ -34,10 +34,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\twitter');
     }
+
     public function FollowModel()
     {
         return $this->hasMany('App\Follow');
     }
+    
     public function Email()
     {
         return $this->hasMany('App\Email');
@@ -67,7 +69,6 @@ class User extends Authenticatable
     public function isFollowing($id)
     {
         $user = $this->follows()->where('followed_id', $id)->exists();
-        \Log::debug($user);
         return redirect();
     }
 

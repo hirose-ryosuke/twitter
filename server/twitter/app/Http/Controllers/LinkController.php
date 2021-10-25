@@ -29,23 +29,7 @@ class LinkController extends Controller
 
         return response()->json($like);
     }
-        /**
-     * 引数のIDに紐づくリプライにLIKEする
-    *
-    * @param $id リプライID
-    * @return \Illuminate\Http\RedirectResponse
-    */
-    // public function like($id)
-    // {
-    //     Like::create([
-    //     'reply_id' => $id,
-    //     'user_id' => Auth::id(),
-    //     ]);
-
-    //     return redirect()->back();
-    // }
     
-
     public function index(Follow $follow,Twitter $twitter,User $users)
     {
         $user_id = Auth::user()->id;
@@ -66,6 +50,7 @@ class LinkController extends Controller
         
         return view('top', compact("user_id","user","follow","follow_count","follower_count","login_user","timeLine","follow_ids","following_tweets"));
     }
+    
     public function favorite(Request $request,Follow $follow,Twitter $twitter,User $users,Like $like)
     {
         $user_id = Auth::user()->id;
@@ -77,6 +62,7 @@ class LinkController extends Controller
 
         return view('favorite_tweet', compact("user_id","user","likes","like_tweet"));
     }
+
     public function create(Request $request)
     {
         $user_id = Auth::user()->id;
@@ -88,11 +74,13 @@ class LinkController extends Controller
 
         return redirect('/');
     }
+
     public function delete(Request $request)
     {
         $twitter = Twitter::find($request->id)->delete();
         return redirect('/');
     }
+
     //vue
     //TopPage
     public function getData(Request $request,Follow $follows)
@@ -103,6 +91,7 @@ class LinkController extends Controller
 
         return response()->json($following_tweets);
     }
+    
     //tweet投稿
     public function addData(Request $request)
     {
@@ -114,6 +103,7 @@ class LinkController extends Controller
 
         return response()->json($tweets);
     }
+
     //tweet削除
     public function deleteData(Request $request)
     {
@@ -121,6 +111,7 @@ class LinkController extends Controller
 
         return response()->json($tweets);
     }
+
     //favoritePage
     public function favoriteData(Request $request,Follow $follow,Twitter $twitter,User $users,Like $like)
     {
