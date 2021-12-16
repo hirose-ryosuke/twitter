@@ -30,14 +30,14 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password','age','sex','mention','product_image','following_user_id','user_id'
     ];
-    
+
         /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
 
     /**
@@ -46,12 +46,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime'
     ];
-    public static $editEmailRules = array(
 
+    public static $editEmailRules = [
         'email' => 'required|email'
-    );
+    ];
 
     public function twitter()
     {
@@ -91,7 +91,7 @@ class User extends Authenticatable
 
     public function isFollowing($id)
     {
-        $user = $this->follows()->where('followed_id', $id)->exists();
+        $this->follows()->where('followed_id', $id)->exists();
         return redirect();
     }
 
@@ -99,6 +99,4 @@ class User extends Authenticatable
     {
         return (boolean) $this->followers()->where('following_id', $user_id)->exists();
     }
-
-
 }

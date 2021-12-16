@@ -23,14 +23,4 @@ class CreateTwittersTable extends Migration
             ->onDelete('cascade');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-
-    }
 }

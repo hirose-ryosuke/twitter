@@ -14,13 +14,16 @@ class Email extends Model
     {
         return $this->belongsTo('App\User');
     }
+
     protected $table = 'change_email';
+
     protected $fillable = [
         'id',
         'user_id',
         'new_email',
         'update_token',
     ];
+
     /**
      * メールアドレス確定メールを送信
      *
